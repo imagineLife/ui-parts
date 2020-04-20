@@ -10,8 +10,8 @@ const Sidebar = () => {
   let {url} = useRouteMatch();
   return(
     <main>
-      <div className="sidebar">
-        <NavLink to={`${url}/responsive`} activeClassName="active">Responsive</NavLink>
+      <div className={`sidebar side-to-top`}>
+        <NavLink to={`${url}`} activeClassName="active">Responsive</NavLink>
         <NavLink to={`${url}/responsiveBurger`}>News</NavLink>
         <NavLink to={`${url}/responsiveThree`}>Contact</NavLink>
         <NavLink to={`${url}/responsiveFour`}>About</NavLink>
