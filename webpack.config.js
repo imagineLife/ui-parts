@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const MiniCss = require("mini-css-extract-plugin");
 
 module.exports = {
   module: {
@@ -17,6 +18,12 @@ module.exports = {
             loader: "html-loader"
           }
         ]
+      },
+      // https://github.com/webpack-contrib/css-loader
+      // The css-loader interprets @import and url() like import/require() and will resolve them.
+      {
+        test: /\.css$/,
+        use: [MiniCss.loader, "css-loader"]
       }
     ]
   },
@@ -24,6 +31,10 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
+    }),
+    new MiniCss({
+      filename: '[name].css',
+      chunkFilename: '[id].css'
     })
   ],
   devServer: {
