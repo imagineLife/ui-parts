@@ -6,6 +6,8 @@ import {
   Link
 } from "react-router-dom";
 
+import Sidebars from './../Routes/Sidebar';
+
 export default function App() {
   return (
     <Router>
@@ -19,11 +21,11 @@ export default function App() {
           <Route path="/users">
             <Users />
           </Route>
-          <Route path="/">
-            <Home />
-          </Route>
           <Route path="/sidebars">
             <Sidebars />
+          </Route>
+          <Route path="/">
+            <Home />
           </Route>
         </Switch>
       </div>
@@ -56,8 +58,4 @@ function About() {
 
 function Users() {
   return <h2>Users</h2>;
-}
-
-function Sidebars() {
-  return <h2>Sidebars</h2>;
 }
