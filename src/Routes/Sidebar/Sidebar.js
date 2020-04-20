@@ -13,8 +13,8 @@ const sidebarTypes = [
     txt: 'Responsive'
   },
   {
-    t: 'hamburger',
-    txt: 'Hamburger'
+    t: 'topnav',
+    txt: 'Topnav'
   },
   {
     t: 'top-nav',
@@ -33,7 +33,7 @@ const Sidebar = () => {
   
   return(
     <main>
-      <ul className={`sidebar ${sidebarType}`}>
+      <ul className={sidebarType}>
         {sidebarTypes.map(itm => (
           <li 
             key={`sidebar-${itm.t}`} 
@@ -41,6 +41,16 @@ const Sidebar = () => {
             onClick={() => setSidebarType(itm.t)}
           >{itm.txt}</li>
         ))}
+
+        {/*TopNav-only optional hamburger*/}
+        {sidebarType === 'topnav' && 
+          <li className="icon" onClick={() => {
+            if(!sidebarType.includes('responsive')) setSidebarType('topnav responsive')
+              setSidebarType('topnav')
+          }}>
+            <i class="fa fa-bars"></i>
+          </li>
+        }
       </ul>
 
       <div className="content">
