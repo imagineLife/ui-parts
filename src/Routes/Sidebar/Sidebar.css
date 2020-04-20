@@ -8,19 +8,19 @@
   overflow: auto;
 }
 
-.sidebar a {
+.sidebar li {
   display: block;
   color: black;
   padding: 16px;
   text-decoration: none;
 }
  
-.sidebar a.active {
+.sidebar li.active {
   background-color: #4CAF50;
   color: white;
 }
 
-.sidebar a:hover:not(.active) {
+.sidebar li:hover:not(.active) {
   background-color: #555;
   color: white;
 }

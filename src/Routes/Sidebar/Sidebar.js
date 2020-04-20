@@ -1,21 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Sidebar.css';
 
 import {
   NavLink,
-  useRouteMatch
+  useRouteMatch,
+  useParams
 } from "react-router-dom";
+
+const sidebarTypes = [
+  {
+    t: 'side-to-top',
+    txt: 'Responsive'
+  },
+  {
+    t: 'hamburger',
+    txt: 'Hamburger'
+  },
+  {
+    t: 'top-nav',
+    txt: 'Top Nav'
+  },
+  {
+    t: 'expand-collapse',
+    txt: 'Expand / Collapse'
+  }
+]
 
 const Sidebar = () => {
   let {url} = useRouteMatch();
+  let params = useParams()
+  let [sidebarType, setSidebarType] = useState('side-to-top')
+  
   return(
     <main>
-      <div className={`sidebar side-to-top`}>
-        <NavLink to={`${url}`} activeClassName="active">Responsive</NavLink>
-        <NavLink to={`${url}/responsiveBurger`}>News</NavLink>
-        <NavLink to={`${url}/responsiveThree`}>Contact</NavLink>
-        <NavLink to={`${url}/responsiveFour`}>About</NavLink>
-      </div>
+      <ul className={`sidebar ${sidebarType}`}>
+        {sidebarTypes.map(itm => (
+          <li 
+            key={`sidebar-${itm.t}`} 
+            className={sidebarType === itm.t ? 'active': null}
+            onClick={() => setSidebarType(itm.t)}
+          >{itm.txt}</li>
+        ))}
+      </ul>
 
       <div className="content">
         <h2>Responsive Sidebar Example</h2>
@@ -24,6 +50,8 @@ const Sidebar = () => {
         <h3>Resize the browser window to see the effect.</h3>
       </div>
   </main>
+
+
 )};
 
 export default Sidebar;
