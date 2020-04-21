@@ -34,13 +34,17 @@ const Sidebar = () => {
   return(
     <main>
       <ul className={sidebarType}>
-        {sidebarTypes.map(itm => (
-          <li 
-            key={`sidebar-${itm.t}`} 
-            className={sidebarType === itm.t ? 'active': null}
-            onClick={() => setSidebarType(itm.t)}
-          >{itm.txt}</li>
-        ))}
+        {sidebarTypes.map((itm, idx) => {
+            const hoverExpandClass = sidebarType === 'hover-expand' ? `h-e-${idx}` : ''
+            const className = hoverExpandClass ? hoverExpandClass : null
+            return(
+              <li 
+                key={`sidebar-${itm.t}`} 
+                className={sidebarType === itm.t ? ` ${className} active`: className}
+                onClick={() => setSidebarType(itm.t)}
+              >{itm.txt}</li>
+            ) 
+        })}
 
         {/*TopNav-only optional hamburger*/}
         {sidebarType === 'topnav' && 
