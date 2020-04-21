@@ -38,9 +38,10 @@ const Sidebar = () => {
             const hoverExpandClass = sidebarType === 'hover-expand' ? `h-e-${idx}` : ''
             const optHoverClass = hoverExpandClass ? hoverExpandClass : null
             const finalClass = sidebarType === itm.t ? `${optHoverClass} active`: optHoverClass
+            const k = `sidebar-${itm.t}`
             return(
               <li 
-                key={`sidebar-${itm.t}`} 
+                key={k} 
                 className={finalClass}
                 onClick={() => setSidebarType(itm.t)}
               >{itm.txt}</li>
