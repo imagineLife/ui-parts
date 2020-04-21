@@ -1,3 +1,5 @@
+
+
 /*
 
 
@@ -161,4 +163,43 @@ div.content {
 
 .hover-expand li.h-e-3{
   top: 375px;
+}
+
+/*
+
+    slide-in
+
+*/
+.slide-in {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding: 60px 0 0 0;
+}
+
+.slide-in li.slide-in.closed {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.slide-in.open{
+  width: 250px;
+}
+
+ul.slide-in.open li{
+  color: gray;
+}
+
+ul.slide-in.open li:hover{
+  color: white;
 }
