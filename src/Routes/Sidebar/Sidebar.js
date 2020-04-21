@@ -31,10 +31,12 @@ const Sidebar = () => {
   let params = useParams()
   let [sidebarType, setSidebarType] = useState('side-to-top')
   const [sideOpen, setSideOpen] = useState(false);
+  const mainClass = `${sidebarType}-wrapper${sideOpen === true ? ' open' : ''}`
+  const listClass = `${sidebarType}${sideOpen ? ' open' : sidebarType && sideOpen ? ' closed' : ''}`
 
   return(
-    <main className={`${sidebarType}-wrapper${sideOpen === true ? ' open' : ''}`}>
-      <ul className={`${sidebarType}${sideOpen ? ' open' : sidebarType && sideOpen ? ' closed' : ''}`}>
+    <main className={mainClass}>
+      <ul className={listClass}>
         {sidebarTypes.map((itm, idx) => {
             const hoverExpandClass = sidebarType === 'hover-expand' ? `h-e-${idx}` : ''
             const optHoverClass = hoverExpandClass ? hoverExpandClass : null
