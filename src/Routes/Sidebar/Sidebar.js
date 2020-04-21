@@ -30,11 +30,11 @@ const Sidebar = () => {
   let {url} = useRouteMatch();
   let params = useParams()
   let [sidebarType, setSidebarType] = useState('side-to-top')
-  const [sidebarOpen, setSidebarOpen] = useState('false');
-  
+  const [sideOpen, setSideOpen] = useState(false);
+
   return(
-    <main className={`${sidebarType}-wrapper${sidebarType === 'slide-in' ? '-open' : ''}`}>
-      <ul className={sidebarType}>
+    <main className={`${sidebarType}-wrapper${sideOpen === true ? ' open' : ''}`}>
+      <ul className={`${sidebarType}${sideOpen ? ' open' : sidebarType && sideOpen ? ' closed' : ''}`}>
         {sidebarTypes.map((itm, idx) => {
             const hoverExpandClass = sidebarType === 'hover-expand' ? `h-e-${idx}` : ''
             const optHoverClass = hoverExpandClass ? hoverExpandClass : null
@@ -44,7 +44,10 @@ const Sidebar = () => {
               <li 
                 key={k} 
                 className={finalClass}
-                onClick={() => setSidebarType(itm.t)}
+                onClick={() => {
+                  setSideOpen(false)
+                  setSidebarType(itm.t)
+                }}
               >{itm.txt}</li>
             ) 
         })}
@@ -67,7 +70,7 @@ const Sidebar = () => {
         {/* slide-in only button */}
         {
           sidebarType === 'slide-in' && 
-          <button onClick={() => setSideOpen(!sidebarOpen)}>Show/Hide Sidebar</button>
+          <button onClick={() => setSideOpen(!sideOpen)}>Show/Hide Sidebar</button>
         }
       </div>
   </main>
