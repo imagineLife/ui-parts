@@ -127,7 +127,7 @@ div.content {
 
 */
 
-/*.hover-expand li {
+.hover-expand li {
   position: absolute;
   left: -80px;
   transition: 0.3s;
@@ -145,4 +145,20 @@ div.content {
 
 .hover-expand li:hover {
   left: 0;
-}*/
+}
+
+.hover-expand li.h-e-0{
+  top: 75px;
+}
+
+.hover-expand li.h-e-1{
+  top: 175px;
+}
+
+.hover-expand li.h-e-2{
+  top: 275px;
+}
+
+.hover-expand li.h-e-3{
+  top: 375px;
+}
