@@ -17,8 +17,8 @@ const sidebarTypes = [
     txt: 'Topnav'
   },
   {
-    t: 'top-nav',
-    txt: 'Top Nav'
+    t: 'hover-expand',
+    txt: 'Hover-Expand'
   },
   {
     t: 'expand-collapse',
@@ -46,9 +46,9 @@ const Sidebar = () => {
         {sidebarType === 'topnav' && 
           <li className="icon" onClick={() => {
             if(!sidebarType.includes('responsive')) setSidebarType('topnav responsive')
-              setSidebarType('topnav')
+              else{setSidebarType('topnav')}
           }}>
-            <i class="fa fa-bars"></i>
+            <i className="fa fa-bars"></i>
           </li>
         }
       </ul>
