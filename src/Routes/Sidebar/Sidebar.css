@@ -36,7 +36,7 @@
 div.content {
   margin-left: 200px;
   padding: 1px 16px;
-  height: 1000px;
+  /*height: 1000px;*/
 }
 
 @media screen and (max-width: 700px) {
@@ -68,6 +68,8 @@ div.content {
 .topnav {
   overflow: hidden;
   background-color: #333;
+  margin: 0;
+  padding: 0;
 }
 
 .topnav li {
@@ -109,9 +111,38 @@ div.content {
     right: 0;
     top: 0;
   }
-  .topnav.responsive a {
+  .topnav.responsive li {
     float: none;
     display: block;
     text-align: left;
   }
 }
+
+
+/*
+
+
+  Hover Full-Screen-only
+
+
+*/
+
+/*.hover-expand li {
+  position: absolute;
+  left: -80px;
+  transition: 0.3s;
+  padding: 15px;
+  width: 100px;
+  text-decoration: none;
+  font-size: 20px;
+  color: white;
+  border-radius: 0 5px 5px 0;
+}
+
+.hover-expand li{
+  background-color: steelblue;
+}
+
+.hover-expand li:hover {
+  left: 0;
+}*/
