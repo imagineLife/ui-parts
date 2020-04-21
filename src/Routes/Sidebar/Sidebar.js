@@ -36,11 +36,12 @@ const Sidebar = () => {
       <ul className={sidebarType}>
         {sidebarTypes.map((itm, idx) => {
             const hoverExpandClass = sidebarType === 'hover-expand' ? `h-e-${idx}` : ''
-            const className = hoverExpandClass ? hoverExpandClass : null
+            const optHoverClass = hoverExpandClass ? hoverExpandClass : null
+            const finalClass = sidebarType === itm.t ? `${optHoverClass} active`: optHoverClass
             return(
               <li 
                 key={`sidebar-${itm.t}`} 
-                className={sidebarType === itm.t ? ` ${className} active`: className}
+                className={finalClass}
                 onClick={() => setSidebarType(itm.t)}
               >{itm.txt}</li>
             ) 
