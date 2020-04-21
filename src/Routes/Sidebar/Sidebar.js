@@ -21,8 +21,8 @@ const sidebarTypes = [
     txt: 'Hover-Expand'
   },
   {
-    t: 'expand-collapse',
-    txt: 'Expand / Collapse'
+    t: 'slide-in',
+    txt: 'Slide-In'
   }
 ]
 
@@ -30,9 +30,10 @@ const Sidebar = () => {
   let {url} = useRouteMatch();
   let params = useParams()
   let [sidebarType, setSidebarType] = useState('side-to-top')
+  const [sidebarOpen, setSidebarOpen] = useState('false');
   
   return(
-    <main>
+    <main className={`${sidebarType}-wrapper${sidebarType === 'slide-in' ? '-open' : ''}`}>
       <ul className={sidebarType}>
         {sidebarTypes.map((itm, idx) => {
             const hoverExpandClass = sidebarType === 'hover-expand' ? `h-e-${idx}` : ''
@@ -61,9 +62,13 @@ const Sidebar = () => {
 
       <div className="content">
         <h2>Responsive Sidebar Example</h2>
-        <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
-        <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
-        <h3>Resize the browser window to see the effect.</h3>
+        <p>A few examples of navigation && a sidebar.</p>
+
+        {/* slide-in only button */}
+        {
+          sidebarType === 'slide-in' && 
+          <button onClick={() => setSideOpen(!sidebarOpen)}>Show/Hide Sidebar</button>
+        }
       </div>
   </main>
 
