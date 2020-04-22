@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import './Sidebar.css';
 
 import {
@@ -23,6 +23,10 @@ const sidebarTypes = [
   {
     t: 'slide-in',
     txt: 'Slide-In'
+  },
+  {
+    t: 'hide-on-scroll',
+    txt: 'ScrollHide'
   }
 ]
 
@@ -34,6 +38,13 @@ const Sidebar = () => {
   const mainClass = `${sidebarType}-wrapper${sideOpen === true ? ' open' : ''}`
   const listClass = `${sidebarType}${sideOpen ? ' open' : sidebarType && sideOpen ? ' closed' : ''}`
 
+  const handleScroll = () => {
+    console.log('Scrolling!');
+  }
+
+  console.log('sidebarType')
+  console.log(sidebarType)
+  
   return(
     <main className={mainClass}>
       <ul className={listClass}>
@@ -65,9 +76,91 @@ const Sidebar = () => {
         }
       </ul>
 
-      <div className="content">
+      <div className="content" onScroll={() => {
+        if(sidebarType === 'hide-on-scroll'){
+          handleScroll()
+        }
+      }}>
         <h2>Responsive Sidebar Example</h2>
         <p>A few examples of navigation && a sidebar.</p>
+        {
+          sidebarType === 'hide-on-scroll' && 
+          <Fragment>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          <p>
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+            A few examples of navigation && a sidebar.
+          </p>
+          </Fragment>
+
+        }
 
         {/* slide-in only button */}
         {
