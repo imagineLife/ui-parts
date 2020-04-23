@@ -35,6 +35,8 @@ export default function App() {
   return (
     <Router>
         <Switch>
+
+          {/* Loop through above array && render Routes from each */}
           {
             RoutesLookup.map((r,idx) => {
               const ThisRoute = r.component
