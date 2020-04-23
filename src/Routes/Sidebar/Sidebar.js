@@ -41,13 +41,10 @@ const Sidebar = () => {
   const handleScroll = () => {
     console.log('Scrolling!');
   }
-
-  console.log('sidebarType')
-  console.log(sidebarType)
   
   return(
     <main className={mainClass}>
-      <ul className={listClass}>
+      <ul className={listClass} id="navbar">
         {sidebarTypes.map((itm, idx) => {
             const hoverExpandClass = sidebarType === 'hover-expand' ? `h-e-${idx}` : ''
             const optHoverClass = hoverExpandClass ? hoverExpandClass : null
