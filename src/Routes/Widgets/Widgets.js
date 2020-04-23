@@ -1,6 +1,10 @@
 import React from 'react';
 import GridLayout from 'react-grid-layout';
 
+//r-g-l styles
+import './../../../node_modules/react-grid-layout/css/styles.css'
+import './../../../node_modules/react-resizable/css/styles.css'
+
 const Widgets = () => {
   // layout is an array of objects, see the demo for more complete usage
   const layout = [
