@@ -1,4 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react';
+import {fileOnLoader, fileOnError} from './helpers'
 
 // HTML5 File api
 // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
@@ -8,21 +9,13 @@ const DataLoader = () => {
 	const [tableData, setTableData] = useState(null)
 	const [thisReader] = useState(new FileReader())
 	const [setupReader, setSetupReader] = useState(false)
-
-	const fileOnLoader = (e) => {
-		console.log('onLoad!');
-	}
-
-	const fileOnError = (e) => {
-		console.log('E');
-		console.log(e);
-	}
+	const [error, setError] = useState(null);
 
 	//setup reader methods in this effect
 	useEffect(() => {
 		if(!setupReader){
-			thisReader.onload = fileOnLoader;
-			thisReader.onerror = fileOnError;
+			thisReader.onload = e => fileOnLoader(e, setTableData);
+			thisReader.onerror = e => fileOnError(e, setError);
 			setSetupReader(true)
 		}
 	}, [setupReader])
@@ -31,6 +24,9 @@ const DataLoader = () => {
 		let thisFile = e.target.files[0];
 		thisReader.readAsText(thisFile)
 	}
+	
+	console.log('tableData')
+	console.log(tableData)
 	
 	return(
 		<Fragment>
@@ -42,18 +38,3 @@ const DataLoader = () => {
 };
 
 export default DataLoader;
-
-
-
-/*
-	handleFiles
-		getAsText(files[0])
-			var reader = new FileReader();
-      
-      // Read file into memory as UTF-8      
-      reader.readAsText(fileToRead);
-      
-      // Handle errors load
-      reader.onload = loadHandler;
-      reader.onerror = errorHandler;
-*/
