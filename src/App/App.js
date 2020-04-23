@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 
 import Sidebars from './../Routes/Sidebar';
+import Widgets from './../Routes/Widgets';
 
 export default function App() {
   return (
@@ -23,6 +24,9 @@ export default function App() {
           </Route>
           <Route path="/sidebars">
             <Sidebars />
+          </Route>
+          <Route path="/widgets">
+            <Widgets />
           </Route>
           <Route path="/">
             <Home />
@@ -47,6 +51,9 @@ const Home = () => (
       </li>
       <li>
         <Link to="/sidebars">Sidebars</Link>
+      </li>
+      <li>
+        <Link to="/widgets">Widgets</Link>
       </li>
     </ul>
   </nav>
