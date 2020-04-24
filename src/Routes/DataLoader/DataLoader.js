@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import {fileOnLoader, fileOnError} from './helpers'
+import DataTable from './../../Components/DataTable'
 
 // HTML5 File api
 // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
@@ -10,6 +11,7 @@ const DataLoader = () => {
 	const [thisReader] = useState(new FileReader())
 	const [setupReader, setSetupReader] = useState(false)
 	const [error, setError] = useState(null);
+	const [rowCount, setRowCount] = useState(5)
 
 	//setup reader methods in this effect
 	useEffect(() => {
@@ -25,14 +27,11 @@ const DataLoader = () => {
 		thisReader.readAsText(thisFile)
 	}
 	
-	console.log('tableData')
-	console.log(tableData)
-	
 	return(
 		<Fragment>
 			<p>DataLoader</p>
-			<input type="file" id="data-loader" onChange={onUpload}/>
-			{fileData && <p>IS fileData!</p>}
+			{!tableData && <input type="file" id="data-loader" onChange={onUpload}/>}
+			{tableData && <DataTable rowCount={rows} data={tableData} />}
 		</Fragment>
 	)
 };
