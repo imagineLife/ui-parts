@@ -23,20 +23,14 @@ const DataLoader = () => {
 	const [error, setError] = useState(null);
 	const [rowCount, setRowCount] = useState(5)
 
+	//callback on reader.onload
 	const prepTableData = data => {
 		/*
 			https://react-table.js.org/quickstart
-			
-			headers 
-			&&
-			columns
 		*/
 		const headers = prepHeaders(data[0])
 		const rows = prepRows(data)
-		console.log('rows')
-		console.log(rows)
-		
-		setTableData(data)
+		setTableData({headers, rows})
 	}
 	//setup reader methods in this effect
 	useEffect(() => {
