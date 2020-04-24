@@ -1,5 +1,15 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import {fileOnLoader, fileOnError} from './helpers'
+import React, { 
+	Fragment, 
+	useState, 
+	useEffect, 
+	useMemo 
+} from 'react';
+import {
+	fileOnLoader, 
+	fileOnError, 
+	prepHeaders,
+	prepRows
+} from './helpers';
 import DataTable from './../../Components/DataTable'
 
 // HTML5 File api
@@ -13,10 +23,25 @@ const DataLoader = () => {
 	const [error, setError] = useState(null);
 	const [rowCount, setRowCount] = useState(5)
 
+	const prepTableData = data => {
+		/*
+			https://react-table.js.org/quickstart
+			
+			headers 
+			&&
+			columns
+		*/
+		const headers = prepHeaders(data[0])
+		const rows = prepRows(data)
+		console.log('rows')
+		console.log(rows)
+		
+		setTableData(data)
+	}
 	//setup reader methods in this effect
 	useEffect(() => {
 		if(!setupReader){
-			thisReader.onload = e => fileOnLoader(e, setTableData);
+			thisReader.onload = e => fileOnLoader(e, prepTableData);
 			thisReader.onerror = e => fileOnError(e, setError);
 			setSetupReader(true)
 		}
@@ -31,7 +56,7 @@ const DataLoader = () => {
 		<Fragment>
 			<p>DataLoader</p>
 			{!tableData && <input type="file" id="data-loader" onChange={onUpload}/>}
-			{tableData && <DataTable rowCount={rows} data={tableData} />}
+			{tableData && <DataTable />}
 		</Fragment>
 	)
 };
