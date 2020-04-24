@@ -1,5 +1,7 @@
 import React from 'react';
 
-const DataTable = () => (<p>DataTable</p>);
+const DataTable = () => {
+	return(<p>DataTable</p>)
+};
 
 export default DataTable;
