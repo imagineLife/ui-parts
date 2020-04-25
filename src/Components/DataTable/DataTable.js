@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-
+import './DataTable.css'
 import { useTable } from 'react-table'
 
 const DataTable = ({tableData, rowCount, filteredColumns}) => {
@@ -31,6 +31,7 @@ const DataTable = ({tableData, rowCount, filteredColumns}) => {
 				
 	// Render the UI for your table
   return (
+  	<div className="data-table">
     <table {...getTableProps()}>
       <thead>
         {headerGroups.map(headerGroup => (
@@ -54,6 +55,7 @@ const DataTable = ({tableData, rowCount, filteredColumns}) => {
         })}
       </tbody>
     </table>
+    </div>
   )
 };
 
