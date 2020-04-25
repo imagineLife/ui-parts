@@ -50,7 +50,7 @@ const DataLoader = () => {
 		<Fragment>
 			<p>DataLoader</p>
 			{!tableData && <input type="file" id="data-loader" onChange={onUpload}/>}
-			{tableData && <DataTable tableData={tableData}/>}
+			{tableData && <DataTable tableData={tableData} rowCount={rowCount}/>}
 		</Fragment>
 	)
 };
