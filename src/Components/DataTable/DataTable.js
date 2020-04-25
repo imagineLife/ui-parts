@@ -2,9 +2,25 @@ import React, { useMemo } from 'react';
 
 import { useTable } from 'react-table'
 
-const DataTable = ({tableData}) => {
-	const colDefs = useMemo(() => tableData.headers)
-	const rowDefs = useMemo(() => tableData.rows)
+const DataTable = ({tableData, rowCount, filteredColumns}) => {
+	
+	let hs = tableData.headers;
+	let rs = tableData.rows
+
+	//rowCount filter
+	if(rowCount){
+		rs = rs.filter((h, idx) => idx < (rowCount - 1))
+	}
+
+	//column filter
+	if(filteredColumns){
+
+	}
+
+	//"Default" table data config
+	const colDefs = useMemo(() => hs)
+	const rowDefs = useMemo(() => rs)
+
 	const {
   getTableProps,
   getTableBodyProps,
