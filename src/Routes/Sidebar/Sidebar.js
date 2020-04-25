@@ -1,12 +1,6 @@
 import React, { useState, Fragment } from 'react';
 import './Sidebar.css';
 
-import {
-  NavLink,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
-
 const sidebarTypes = [
   {
     t: 'side-to-top',
@@ -31,8 +25,6 @@ const sidebarTypes = [
 ]
 
 const Sidebar = () => {
-  let {url} = useRouteMatch();
-  let params = useParams()
   let [sidebarType, setSidebarType] = useState('side-to-top')
   const [sideOpen, setSideOpen] = useState(false);
   const mainClass = `${sidebarType}-wrapper${sideOpen === true ? ' open' : ''}`
