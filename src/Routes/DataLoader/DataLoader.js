@@ -4,12 +4,19 @@ import React, {
 	useEffect, 
 	useMemo 
 } from 'react';
+
 import {
 	fileOnLoader, 
 	fileOnError, 
 	prepHeaders,
 	prepRows
 } from './helpers';
+
+import {
+	useRouteMatch,
+	NavLink
+} from 'react-router-dom';
+
 import DataTable from './../../Components/DataTable'
 
 // HTML5 File api
@@ -45,9 +52,37 @@ const DataLoader = () => {
 		let thisFile = e.target.files[0];
 		thisReader.readAsText(thisFile)
 	}
+
+	const r = useRouteMatch()
+	console.log('r')
+	console.log(r)
+
+	const optLinks = [
+		{
+			route: `${r.url}`,
+			str: "Table"
+		},
+		{
+			route: `${r.url}/colStats`,
+			str: "Column Stats"
+		},
+		{
+			route: `${r.url}/scatter`,
+			str: "Scatterplot"
+		}
+	]
+	
 	
 	return(
 		<Fragment>
+			{/* Conditional Nav */}
+			{tableData && 
+				<nav className="data-nav">
+					{optLinks.map((l,idx) => (
+						<NavLink key={`data-link-${idx}`} to={l.route}>{l.str}</NavLink>
+					))}
+					}
+				</nav>}
 			<p>DataLoader</p>
 			{!tableData && <input type="file" id="data-loader" onChange={onUpload}/>}
 			{tableData && <DataTable tableData={tableData} rowCount={rowCount}/>}
