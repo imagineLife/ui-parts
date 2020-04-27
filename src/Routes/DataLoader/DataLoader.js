@@ -14,13 +14,24 @@ import {
 
 import {
 	useRouteMatch,
-	NavLink
+	NavLink,
+	Route,
+	Router,
+	Switch
 } from 'react-router-dom';
 
 import DataTable from './../../Components/DataTable'
 
 // HTML5 File api
 // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
+
+const Table = () => (<p>Table</p>)
+const ColStats = () => (<p>ColStats</p>)
+const Scatterplot = () => (<p>Scatterpot</p>)
+
+
+const DataInspector = (props) => (<p>Data Inspector Here...</p>)
+
 
 const DataLoader = () => {
 	const [fileData, setFileData] = useState(null)
@@ -54,40 +65,45 @@ const DataLoader = () => {
 	}
 
 	const r = useRouteMatch()
-	console.log('r')
-	console.log(r)
 
-	const optLinks = [
+	const RoutesLookup = [
 		{
 			route: `${r.url}`,
-			str: "Table"
+			str: "Table",
+			component: Table
 		},
 		{
 			route: `${r.url}/colStats`,
-			str: "Column Stats"
+			str: "Column Stats",
+			component: ColStats
 		},
 		{
 			route: `${r.url}/scatter`,
-			str: "Scatterplot"
+			str: "Scatterplot",
+			component: Scatterplot
 		}
 	]
-	
-	
+
 	return(
 		<Fragment>
 			{/* Conditional Nav */}
-			{tableData && 
-				<nav className="data-nav">
-					{optLinks.map((l,idx) => (
-						<NavLink key={`data-link-${idx}`} to={l.route}>{l.str}</NavLink>
-					))}
-					}
-				</nav>}
-			<p>DataLoader</p>
 			{!tableData && <input type="file" id="data-loader" onChange={onUpload}/>}
-			{tableData && <DataTable tableData={tableData} rowCount={rowCount}/>}
+
+			{tableData &&
+				<Fragment>
+					<nav className="data-nav">
+						{RoutesLookup.map((l,idx) => (
+							<NavLink key={`data-link-${idx}`} to={l.route}>{l.str}</NavLink>
+						))}
+					</nav>
+					<Route exact path={`${r.url}`} render={() => <DataInspector data={tableData} />} />
+					<Route exact path={`${r.url}/colStats`} render={() => <ColStats data={tableData} />} />
+					<Route exact path={`${r.url}/scatterplot`} render={() => <Scatterplot data={tableData} />} />
+				</Fragment>
+			}
+
 		</Fragment>
 	)
 };
 
-export default DataLoader;
+export default DataLoader; 
