@@ -96,7 +96,7 @@ const DataLoader = () => {
 							<NavLink key={`data-link-${idx}`} to={l.route}>{l.str}</NavLink>
 						))}
 					</nav>
-					<Route exact path={`${r.url}`} render={() => <DataInspector data={tableData} />} />
+					<Route exact path={`${r.url}`} render={() => <DataTable tableData={tableData} />} />
 					<Route exact path={`${r.url}/colStats`} render={() => <ColStats data={tableData} />} />
 					<Route exact path={`${r.url}/scatterplot`} render={() => <Scatterplot data={tableData} />} />
 				</Fragment>
