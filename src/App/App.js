@@ -9,7 +9,9 @@ import Sidebars from './../Routes/Sidebar';
 import Widgets from './../Routes/Widgets';
 import Home from './../Routes/Home'
 import DataLoader from './../Routes/DataLoader'
-
+import Scatter     from './../Routes/Scatter';
+import percBelow from './../mockData/percBelowPov.json'
+import percBelowMale from './../mockData/percBelowPovMale.json'
 //single-source of routes && Components to Lookup
 const RoutesLookup = [
   {
@@ -23,6 +25,14 @@ const RoutesLookup = [
   {
     component: DataLoader,
     path: '/csvLoader'
+  },
+  {
+    component: Scatter,
+    path: '/scatter',
+    props: {
+      x: percBelow,
+      y: percBelowMale
+    }
   },
   {
     component: Home,
