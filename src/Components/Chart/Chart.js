@@ -3,7 +3,7 @@ import { makeScaleType } from './../../helpers'
 import useDimensions from './../../Hooks/useDimensions'
 import AxesAndMath from './../AxesAndMath'
 import * as d3Shape from 'd3-shape'
-// import { makeLollipops, makeRect, makeCircle, makePath } from './lib'
+import { makeLollipops, makeRect, makeCircle, makePath } from './lib'
 
 const xByType = (xVal, xType, xScale) => {
 	if(xType == 'string'){
@@ -106,8 +106,6 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints}) => {
 			  }).filter(d => d)
 		  }
 
-
-
 		 //line object
 		 if(['line', 'area'].includes(chartType)){
 	 		let calcFill = (chartType !== 'area') ? 'none' : 'steelblue'
@@ -118,6 +116,7 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints}) => {
 		 	
 
 		 	optExtraPoints = showPoints ? data.map((d, ind) => {
+		 		
 		 		if(d.x === ""){
 		 			return null
 		 		}
@@ -139,9 +138,11 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints}) => {
 	  		let calcRadius = xType == 'string' ? xScale.bandwidth() * .25 : 5
 	  		let calcCX = xByType(d.x, xType, xScale)
 	  		let calcCY = yScale(d.y)
+	  		
 	  		return makeCircle(xScale, yScale, d, ind, xVal, calcRadius, 'black', .02, 'darkgray',1,'.75')
 	 
 	  	})
+	  	
 	  }
 
 	  let svgDimensions = {
