@@ -27,19 +27,29 @@ const Scatter = ({x, y}) => {
 		})
 	})
 
-	console.log('resData')
-	console.log(resData)
-	console.log('xStats')
-	console.log(xStats)
-	console.log('yStats')
-	console.log(yStats)
-	
 	//merge both sets with keys x && y
 	// get linear scales of both x && y
 	// get min && max of both x & y
 	
-
-	return(<p>Scatter</p>)
+	if(resData.length < 1){
+		return <p>loading...</p>
+	}
+	return(<Chart
+	    	axis={{
+	    		x: {
+						key: 'x',
+						type: 'number'
+					},
+					y: {
+						key: 'y',
+						type: 'number'
+					}
+	    	}} 
+	    	data={resData}
+	    	w={'95%'} 
+	    	h={550}
+	    	chartType={'scatterplot'}
+	    />)
 };
 
 export default Scatter;
