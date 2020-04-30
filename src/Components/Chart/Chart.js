@@ -4,6 +4,7 @@ import useDimensions from './../../Hooks/useDimensions'
 import AxesAndMath from './../AxesAndMath'
 import * as d3Shape from 'd3-shape'
 import { makeLollipops, makeRect, makeCircle, makePath } from './lib'
+import Circle from './../Circle'
 import "./Chart.css"
 
 const xByType = (xVal, xType, xScale) => {
@@ -140,7 +141,7 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints, labels}) => {
 	  		let calcCX = xByType(d.x, xType, xScale)
 	  		let calcCY = yScale(d.y)
 	  		
-	  		return <circle 
+	  		return <Circle 
 					key={xVal ? `${ind}-${xVal}` : ind}
 					cx={xScale(d.x)}
 					cy={yScale(d.y)}
