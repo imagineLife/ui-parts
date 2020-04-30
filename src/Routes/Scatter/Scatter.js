@@ -49,6 +49,12 @@ const Scatter = ({x, y}) => {
 	    	w={'95%'} 
 	    	h={550}
 	    	chartType={'scatterplot'}
+	    	labels={
+	    		{
+	    			x: "Percent Below Poverty",
+	    			y: "Percent Below Poverty: Male"
+	    		}
+	    	}
 	    />)
 };
 
