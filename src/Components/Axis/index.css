@@ -1,6 +1,7 @@
 .Axis path,
 .Axis line {
-  stroke: rgb(235,235,235);
+  stroke: rgb(225,225,225);
+  stroke-dasharray: 3 10;
 }
 
 .Axis text, .Axis-Bottom text {
