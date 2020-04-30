@@ -1,0 +1,9 @@
+.axis-label{
+	font-family: sans-serif;
+	fill: rgb(150,150,150)
+}
+
+path.domain{
+	fill: none;
+	stroke: none;
+}

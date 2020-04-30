@@ -4,6 +4,7 @@ import useDimensions from './../../Hooks/useDimensions'
 import AxesAndMath from './../AxesAndMath'
 import * as d3Shape from 'd3-shape'
 import { makeLollipops, makeRect, makeCircle, makePath } from './lib'
+import "./Chart.css"
 
 const xByType = (xVal, xType, xScale) => {
 	if(xType == 'string'){
@@ -12,7 +13,7 @@ const xByType = (xVal, xType, xScale) => {
 		return xScale(xVal)
 	}
 }
-const Chart = ({axis, data, w, h, chartType, groupedX, showPoints}) => {
+const Chart = ({axis, data, w, h, chartType, groupedX, showPoints, labels}) => {
 	// console.log('%c chartType', 'background-color: blue; color: white;')
 	// console.log(chartType);
 	
@@ -139,7 +140,20 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints}) => {
 	  		let calcCX = xByType(d.x, xType, xScale)
 	  		let calcCY = yScale(d.y)
 	  		
-	  		return makeCircle(xScale, yScale, d, ind, xVal, calcRadius, 'black', .02, 'darkgray',1,'.75')
+	  		return <circle 
+					key={xVal ? `${ind}-${xVal}` : ind}
+					cx={xScale(d.x)}
+					cy={yScale(d.y)}
+					r={calcRadius}
+					fill={'black'}
+					fillOpacity={.02}
+					stroke={'darkgray'}
+					onMouseOver={() => {
+						console.log('d')
+						console.log(d)
+					}}
+				  strokeWidth={1}
+				  strokeOpacity={'.75'}/>
 	 
 	  	})
 	  	
@@ -150,6 +164,19 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints}) => {
 	  	width: width - margins.l
 	  }
 	  
+	  //prep opt labels
+	  let xLabel = null, yLabel = null
+	  if(labels){
+	  	let xTrans = 
+	  	xLabel = <text 
+	  	className="axis-label x" 
+	  	transform={`translate(${width/2}, ${hLM + (margins.b / 2)})`} 
+	  	textAnchor="middle"
+	  	alignmentBaseline="hanging">
+	  		{labels.x}
+	  	</text>
+	  	yLabel = <text className="axis-label y">{labels.y}</text>
+	  }
 	  return (
 	  <div id="chartDiv" style={{height: h, width: w}} ref={ref}>
 	  	<svg className="barChart" width={width} height="100%" style={{border: "1px solid orange"}}>
@@ -163,6 +190,9 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints}) => {
 
 	  	  	{dataTypeShapes}
 	  	  	{optExtraPoints}
+
+	  	  	{xLabel && xLabel}
+	  	  	{yLabel && yLabel}
 	  	  </g>
 	  	</svg>
 	  </div>
