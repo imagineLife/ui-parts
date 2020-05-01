@@ -9,6 +9,7 @@ import Sidebars from './../Routes/Sidebar';
 import Widgets from './../Routes/Widgets';
 import Home from './../Routes/Home'
 import DataLoader from './../Routes/DataLoader'
+import CsvLoader from './../Routes/CsvLoader'
 import Scatter     from './../Routes/Scatter';
 import percBelow from './../mockData/percBelowPov.json'
 import percBelowMale from './../mockData/percBelowPovMale.json'
@@ -24,6 +25,10 @@ const RoutesLookup = [
   },
   {
     component: DataLoader,
+    path: '/tsvLoader'
+  },
+  {
+    component: CsvLoader,
     path: '/csvLoader'
   },
   {
