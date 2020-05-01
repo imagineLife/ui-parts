@@ -21,13 +21,14 @@ import {
 } from 'react-router-dom';
 
 import DataTable from './../../Components/DataTable'
+import ScatterWithDropdown from './../../Components/ScatterWithDropdown'
 
 // HTML5 File api
 // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
 
-const Table = () => (<p>Table</p>)
-const ColStats = () => (<p>ColStats</p>)
-const Scatterplot = () => (<p>Scatterpot</p>)
+
+const Table = () => <p>DemoTable</p>
+const ColStats = () => <p>DemoColStats</p>
 
 
 const DataInspector = (props) => (<p>Data Inspector Here...</p>)
@@ -80,7 +81,7 @@ const CsvLoader = () => {
 		{
 			route: `${r.url}/scatter`,
 			str: "Scatterplot",
-			component: Scatterplot
+			component: ScatterWithDropdown
 		}
 	]
 
@@ -98,7 +99,7 @@ const CsvLoader = () => {
 					</nav>
 					<Route exact path={`${r.url}`} render={() => <DataTable tableData={tableData} />} />
 					<Route exact path={`${r.url}/colStats`} render={() => <ColStats data={tableData} />} />
-					<Route exact path={`${r.url}/scatterplot`} render={() => <Scatterplot data={tableData} />} />
+					<Route exact path={`${r.url}/scatter`} render={() => <ScatterWithDropdown data={tableData}/>} />
 				</Fragment>
 			}
 

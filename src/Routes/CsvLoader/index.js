@@ -1,2 +1,2 @@
-import DataLoader from './DataLoader';
-export default DataLoader;
+import CsvLoader from './CsvLoader';
+export default CsvLoader;
