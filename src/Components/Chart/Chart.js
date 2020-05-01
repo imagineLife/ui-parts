@@ -179,10 +179,16 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints, labels}) => {
 	  	yLabel = <text className="axis-label y">{labels.y}</text>
 	  }
 	  return (
-	  <div id="chartDiv" style={{height: h, width: w}} ref={ref}>
-	  	<svg className="barChart" width={width} height="100%" style={{border: "1px solid orange"}}>
-	  	  <g transform={`translate(${margins.l}, ${margins.t})`}>
-	  	  	
+	  <div 
+	  	id="chartDiv" 
+	  	style={{height: h, width: w}} 
+	  	ref={ref}>
+	  	<svg 
+	  		width={width} 
+	  		height="100%" 
+	  		style={{border: "1px solid orange"}}>
+	  	  <g 
+	  	  	transform={`translate(${margins.l}, ${margins.t})`}>
 	  	  	<AxesAndMath
 	          scales={{ xScale, yScale }}
 	          margins={margins}
