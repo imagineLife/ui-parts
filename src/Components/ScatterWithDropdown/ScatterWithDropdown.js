@@ -16,44 +16,21 @@ const ScatterWithDropdown = ({data}) => {
 	let xAxisPicker;
 	if(!xAxisColumn){
 		xAxisPicker = (
-			<div className="dropdown">
-			  <button 
-			  	onClick={() => {
-			  		setShowXDD(!showXDD)
-			  	}} 
-			  	className="dropbtn">
-			  		X-Axis Value
-			  	</button>
-			  <ul id="myDropdown" className={`dropdown-content ${showXDD ? 'open': ''}`}>
-			  	<input onChange={e => {
-			  		setXSearchVal(e.target.value)
-			  	}} value={xSearchVal}/>
-			    {data.headers.map((h, hIdx) => {
-			    	let thisItem = <li
-			    		key={`x-data-${h.Header}`}
-			    		onClick={() => {
-			    			setXaxisColumn(h.Header)
-			    			setShowXDD(false)
-			    			setXData(data.rows.map((row,rIdx) => parseInt(row[`col${hIdx}`])))
-			    		}}
-			    	>
-			    		{h.Header}
-			    	</li>
-
-					  //if no searchItem
-					  if(xSearchVal.length == 0){
-					  	return thisItem;
-					  } 
-
-					  //if input txt includes search text
-			    	if(h.Header.includes(xSearchVal)){
-			    		return thisItem;
-			    	}else { 
-			    		return null 
-			    	}
-			    }).filter(d => d)}
-			  </ul>
-			</div>
+			<AxisPickerDD 
+				btnCB={() => setShowXDD(!showXDD)}
+				axisName="X"
+				show={showXDD}
+				inpChange={e => {
+		  		setXSearchVal(e.target.value)
+		  	}}
+		  	inputVal={xSearchVal}
+		  	ddData={data.headers}
+		  	ddItemClickCB={({columnTxt, selectedColIdx}) => {
+    			setXaxisColumn(columnTxt)
+    			setShowXDD(false)
+    			setXData(data.rows.map((row,rIdx) => parseInt(row[`col${selectedColIdx}`])))
+    		}}
+			/>
 		)
 	}
 
@@ -100,7 +77,11 @@ const ScatterWithDropdown = ({data}) => {
 				yAxisColumn && 
 				xData && 
 				yData && 
-				<Scatter x={xData} y={yData} />
+				<Scatter 
+					x={xData} 
+					y={yData} 
+					xLabel={xAxisColumn}
+					yLabel={yAxisColumn}/>
 			}
 		</Fragment>)
 };
