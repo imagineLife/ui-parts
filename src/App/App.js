@@ -10,7 +10,8 @@ import Widgets from './../Routes/Widgets';
 import Home from './../Routes/Home'
 import DataLoader from './../Routes/DataLoader'
 import CsvLoader from './../Routes/CsvLoader'
-import Scatter     from './../Routes/Scatter';
+import Scatter from './../Routes/Scatter';
+import Mapper from './../Routes/Map';
 import percBelow from './../mockData/percBelowPov.json'
 import percBelowMale from './../mockData/percBelowPovMale.json'
 //single-source of routes && Components to Lookup
@@ -40,10 +41,13 @@ const RoutesLookup = [
     }
   },
   {
+    component: Mapper,
+    path:'/map'
+  },
+  {
     component: Home,
     path: '/',
-  },
-
+  }
 ]
 
 export default function App() {
