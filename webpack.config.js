@@ -1,7 +1,17 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const MiniCss = require("mini-css-extract-plugin");
+const path = require('path');
 
 module.exports = {
+  entry: './src/index.js',
+  output: {
+    filename: 'main.js',
+
+    //where to put the output, in the build dir
+    path: path.resolve(__dirname, 'build'),
+    //  https://webpack.js.org/configuration/output/#outputpublicpath
+    publicPath: '/'
+  },
   module: {
     rules: [
       {
@@ -19,8 +29,6 @@ module.exports = {
           }
         ]
       },
-      // https://github.com/webpack-contrib/css-loader
-      // The css-loader interprets @import and url() like import/require() and will resolve them.
       {
         test: /\.css$/,
         use: [MiniCss.loader, "css-loader"]
@@ -38,6 +46,7 @@ module.exports = {
     })
   ],
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    publicPath: '/'
   }
 };
