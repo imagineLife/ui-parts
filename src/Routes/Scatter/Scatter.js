@@ -1,7 +1,7 @@
 import React from 'react';
 import Chart from './../../Components/Chart';
 
-const Scatter = ({x, y}) => {
+const Scatter = ({x, y, xLabel, yLabel}) => {
 
 	//prep min/max && paired incoming data
 	let xStats = {
@@ -51,8 +51,8 @@ const Scatter = ({x, y}) => {
 	    	chartType={'scatterplot'}
 	    	labels={
 	    		{
-	    			x: "Percent Below Poverty",
-	    			y: "Percent Below Poverty: Male"
+	    			x: xLabel || "Percent Below Poverty",
+	    			y: yLabel || "Percent Below Poverty: Male"
 	    		}
 	    	}
 	    />)
