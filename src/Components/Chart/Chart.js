@@ -185,8 +185,7 @@ const Chart = ({axis, data, w, h, chartType, groupedX, showPoints, labels}) => {
 	  	ref={ref}>
 	  	<svg 
 	  		width={width} 
-	  		height="100%" 
-	  		style={{border: "1px solid orange"}}>
+	  		height="100%">
 	  	  <g 
 	  	  	transform={`translate(${margins.l}, ${margins.t})`}>
 	  	  	<AxesAndMath

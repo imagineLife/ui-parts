@@ -1,3 +1,7 @@
+#chartDiv{
+	margin: 0 auto;
+}
+
 .axis-label{
 	font-family: sans-serif;
 	fill: rgb(150,150,150)
