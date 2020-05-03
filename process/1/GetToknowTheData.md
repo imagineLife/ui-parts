@@ -38,5 +38,21 @@ Here...
 -  build a ```jsonParseFile``` function that...
 	- parses a file
 	- returns a [resolved JavaScript Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) , passing along the header data at the end of the promise
+	-utilize the readLine createInterface to parse the incoming stream from the fs.createReadStream
+		the [readline class interface](https://nodejs.org/api/readline.html#readline_class_interface) offers a few [events](https://nodejs.org/api/events.html#events_events) me as a developer can take advantage of:
+		- close **this one I'm using** to resolve the promise
+		- line **this one I'm using** to parse the incoming line
+		- pause
+		- resume
+		- SIGCONT
+		- SIGINT
+		- SIGSTP
+	- in summary, the details of this function...
+		- create a promise object
+		- instantiate a readLine stream interface, here called lineReader
+		- associate a callback fn on the 'line' event of the lineReader
+			- the callback fn here splits the incoming line && passes the split incoming line to a placeholder array
+		- associates a callback fn on the 'close' event of the lineReader
+			- the callback fn here resolves the js promise object
 	- 
 	
