@@ -27,25 +27,44 @@ const groupIntoCategories = (srcArr) => {
 	debug('\x1b[32m%s\x1b[0m',`groupIntoCategories`)
 	//result placeholder
 	let groupedObj = {
-		"age": [],
+		"age": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		},
 		"gender": {
 			"percentBelowPoverty"	: [],
 			"total": [],
 			"belowPoverty": []
 		},
-		"income": [],
+		"income": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		},
 		"education": {
 			"percentBelowPoverty"	: [],
 			"total": [],
 			"belowPoverty": []
 		},
-		"race": []
+		"race": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		}
 	}
 
 	srcArr.map((header, headerIdx) => {
 		//AGE
 		if(header.match(/AGE/)){
-			groupedObj.age.push({"title": header, "idx": headerIdx})
+			if(header.match(/Percent/)){
+				groupedObj.age.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+			}
+			else if(header.match(/Total/)){
+				groupedObj.age.total.push({"title": header, "idx": headerIdx})
+			}else{
+				groupedObj.age.belowPoverty.push({"title": header, "idx": headerIdx})
+			}
 		}
 
 		//SEX
@@ -74,12 +93,26 @@ const groupIntoCategories = (srcArr) => {
 
 		//INCOME
 		if(header.match(/INCOME/)){
-			groupedObj.income.push({"title": header, "idx": headerIdx})
+			if(header.match(/Percent/)){
+				groupedObj.income.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+			}
+			else if(header.match(/Total/)){
+				groupedObj.income.total.push({"title": header, "idx": headerIdx})
+			}else{
+				groupedObj.income.belowPoverty.push({"title": header, "idx": headerIdx})
+			}
 		}
 
 		//race
 		if(header.match(/RACE/)){
-			groupedObj.race.push({"title": header, "idx": headerIdx})
+			if(header.match(/Percent/)){
+				groupedObj.race.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+			}
+			else if(header.match(/Total/)){
+				groupedObj.race.total.push({"title": header, "idx": headerIdx})
+			}else{
+				groupedObj.race.belowPoverty.push({"title": header, "idx": headerIdx})
+			}
 		}
 	})
 	return groupedObj
