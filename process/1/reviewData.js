@@ -27,17 +27,37 @@ const groupIntoCategories = (srcArr) => {
 	debug('\x1b[32m%s\x1b[0m',`groupIntoCategories`)
 	//result placeholder
 	let groupedObj = {
-		age: [],
-		sex: [],
-		income: [],
-		education: [],
-		race: []
+		"age": [],
+		"gender": [],
+		"income": [],
+		"education": [],
+		"race": []
 	}
 
 	srcArr.map((header, headerIdx) => {
 		//AGE
-		if(header.match(/AGE:/)){
-			groupedObj.age.push({title: header, idx: headerIdx})
+		if(header.match(/AGE/)){
+			groupedObj.age.push({"title": header, "idx": headerIdx})
+		}
+
+		//SEX
+		if(header.match(/SEX/)){
+			groupedObj.gender.push({"title": header, "idx": headerIdx})
+		}
+
+		//EDUCATION
+		if(header.match(/EDUCATION/)){
+			groupedObj.education.push({"title": header, "idx": headerIdx})
+		}
+
+		//INCOME
+		if(header.match(/INCOME/)){
+			groupedObj.income.push({"title": header, "idx": headerIdx})
+		}
+
+		//race
+		if(header.match(/RACE/)){
+			groupedObj.race.push({"title": header, "idx": headerIdx})
 		}
 	})
 	return groupedObj
@@ -47,4 +67,7 @@ jsonParseFile('./../../src/mockData/justHeaderRow.csv').then(headerData => {
 	debug('\x1b[32m%s\x1b[0m',`jsonParseFile THEN`)
 	let sorted = headerData.sort()
 	let grouped = groupIntoCategories(sorted)
+	console.log('grouped')
+	console.log(JSON.stringify(grouped))
+	
 })
