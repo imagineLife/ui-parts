@@ -35,7 +35,8 @@ Here...
 	- [fs](https://nodejs.org/api/fs.html#fs_file_system) for reading the csv file from the filesystem
 		- here I use the [createReadStream](https://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options) method of the fs module, 
 	- [readline](https://nodejs.org/api/readline.html#readline_readline), for reading the file data line by line
--  build a function that...
+-  build a ```jsonParseFile``` function that...
 	- parses a file
 	- returns a [resolved JavaScript Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) , passing along the header data at the end of the promise
+	- 
 	
