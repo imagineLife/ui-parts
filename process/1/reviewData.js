@@ -28,7 +28,11 @@ const groupIntoCategories = (srcArr) => {
 	//result placeholder
 	let groupedObj = {
 		"age": [],
-		"gender": [],
+		"gender": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		},
 		"income": [],
 		"education": {
 			"percentBelowPoverty"	: [],
@@ -46,7 +50,14 @@ const groupIntoCategories = (srcArr) => {
 
 		//SEX
 		if(header.match(/SEX/)){
-			groupedObj.gender.push({"title": header, "idx": headerIdx})
+			if(header.match(/Percent/)){
+				groupedObj.gender.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+			}
+			else if(header.match(/Total/)){
+				groupedObj.gender.total.push({"title": header, "idx": headerIdx})
+			}else{
+				groupedObj.gender.belowPoverty.push({"title": header, "idx": headerIdx})
+			}
 		}
 
 		//EDUCATION
