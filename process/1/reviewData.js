@@ -7,13 +7,10 @@ const jsonParseFile = (fileStr) => {
 		  input: fs.createReadStream(fileStr)
 		});
 
+		let resData = []
 		lineReader.on('line', function (line) {
-				console.log('line')
-				console.log(line)
-				let csvArr = line.split(/\r\n|\n/);
-				console.log('csvArr')
-				console.log(csvArr)
-				
+				let csvArr = line.split(',');
+				resData.push(csvArr)
 		});
 
 		lineReader.on('close', () => {
@@ -92,4 +89,7 @@ const makeIntoCSV = (nestedArr) => {
 	return resStr
 }
 
-jsonParseFile('./../../src/mockData/justHeaderRow.csv')
+jsonParseFile('./../../src/mockData/justHeaderRow.csv').then(headerData => {
+	console.log('headerData')
+	console.log(headerData)
+})
