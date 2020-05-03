@@ -30,7 +30,11 @@ const groupIntoCategories = (srcArr) => {
 		"age": [],
 		"gender": [],
 		"income": [],
-		"education": [],
+		"education": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		},
 		"race": []
 	}
 
@@ -47,7 +51,14 @@ const groupIntoCategories = (srcArr) => {
 
 		//EDUCATION
 		if(header.match(/EDUCATION/)){
-			groupedObj.education.push({"title": header, "idx": headerIdx})
+			if(header.match(/Percent/)){
+				groupedObj.education.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+			}
+			else if(header.match(/Total/)){
+				groupedObj.education.total.push({"title": header, "idx": headerIdx})
+			}else{
+				groupedObj.education.belowPoverty.push({"title": header, "idx": headerIdx})
+			}
 		}
 
 		//INCOME
