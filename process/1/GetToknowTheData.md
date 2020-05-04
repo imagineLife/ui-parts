@@ -1,4 +1,10 @@
 # Getting To Know the Data
+## T.O.C
+- [Process the Header](#process-the-header)  
+	- [Header-Processing Analysis](#header-processing-analysis)   
+- [Sort The Headers](#sort-the-headers)
+- [Use The Headers to Shaope the Dataset](#shape-the-data-object)
+
 Here, census data will be reviewed.  
 After, the data will be re-organized from a csv input format to a json object.
 
@@ -6,6 +12,8 @@ After, the data will be re-organized from a csv input format to a json object.
 	- this allows for less work while parsing header data in javaScript 
 - Here, i call this header-data-only file "justHeaderRow.csv"
 - parse the data headers using a node process
+
+### Process the Header
 ```
 const fs = require('fs')
 const rl = require('readline')
@@ -30,6 +38,7 @@ const jsonParseFile = (fileStr) => {
 }
 jsonParseFile('./../../src/mockData/justHeaderRow.csv')
 ```
+### Header Processing Analysis
 Here...
 - import 2 modules, fs and readline
 	- [fs](https://nodejs.org/api/fs.html#fs_file_system) for reading the csv file from the filesystem
@@ -54,5 +63,16 @@ Here...
 			- the callback fn here splits the incoming line && passes the split incoming line to a placeholder array
 		- associates a callback fn on the 'close' event of the lineReader
 			- the callback fn here resolves the js promise object
-	- 
-	
+- Begin handling the parsed Header promise resolution
+```
+jsonParseHeaderFile('./../../src/mockData/justHeaderRow.csv')
+.then(headerData => {...
+```
+
+### Sort The Headers
+- now that there is a variable passing the parsed data (```headerData```)...
+	- sort the headers alphabetically
+```let sorted = headerData.sort()```
+		- this could reveal a potential text-based pattern in the headers
+
+### Shape the Data
