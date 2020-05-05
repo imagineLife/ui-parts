@@ -131,10 +131,21 @@ const groupIntoCategories = (srcArr) => {
 	console.log(srcArr.length)
 	
 	srcArr.map((header, headerIdx) => {
-		if([0,1,2,3].includes(headerIdx)){
+		if([2,3].includes(headerIdx)){
 			indexArrayMapped.push("_")
 			return;
 		}
+
+		//IGNORE THESE
+		if(header.match(/EMPLOYMENT STATUS/) || header.match(/WORK EXPERIENCE/)){
+			// console.log('HUH?!');
+			// console.log(header)
+			// console.log(headerIdx)
+			indexArrayMapped.push("_")
+			return;
+		}
+
+
 		//AGE
 		if(header.match(/AGE/)){
 			if(header.match(/Under 5/)){
@@ -144,6 +155,12 @@ const groupIntoCategories = (srcArr) => {
 					return;
 				}
 				else if(header.match(/Total/)){
+					// console.log('AGE, UNDER 5, Total');
+					// console.log('header')
+					// console.log(header)
+					// console.log('headerIdx')
+					// console.log(headerIdx)
+					
 					indexArrayMapped.push(`age.<5.total`)
 					mappedColumnsGrouped.age["<5"].total.push({"title": header, "idx": headerIdx})
 					return;
@@ -152,9 +169,9 @@ const groupIntoCategories = (srcArr) => {
 					mappedColumnsGrouped.age["<5"].belowPoverty.push({"title": header, "idx": headerIdx})
 					return;
 				}else{
-					console.log('HUH?!');
-					console.log(header)
-					console.log(headerIdx)
+					// console.log('HUH?!');
+					// console.log(header)
+					// console.log(headerIdx)
 					indexArrayMapped.push("_")
 					return;
 				}
@@ -175,9 +192,9 @@ const groupIntoCategories = (srcArr) => {
 					mappedColumnsGrouped.age["5-17"].belowPoverty.push({"title": header, "idx": headerIdx})
 					return;
 				}else{
-					console.log('HUH?!');
-					console.log(header)
-					console.log(headerIdx)
+					// console.log('HUH?!');
+					// console.log(header)
+					// console.log(headerIdx)
 					indexArrayMapped.push("_")
 					return;
 				}
@@ -198,9 +215,9 @@ const groupIntoCategories = (srcArr) => {
 					mappedColumnsGrouped.age["18-34"].belowPoverty.push({"title": header, "idx": headerIdx})
 					return;
 				}else{
-					console.log('HUH?!');
-					console.log(header)
-					console.log(headerIdx)
+					// console.log('HUH?!');
+					// console.log(header)
+					// console.log(headerIdx)
 					indexArrayMapped.push("_")
 					return;
 				}
@@ -221,9 +238,9 @@ const groupIntoCategories = (srcArr) => {
 					mappedColumnsGrouped.age["35-64"].belowPoverty.push({"title": header, "idx": headerIdx})
 					return;
 				}else{
-					console.log('HUH?!');
-					console.log(header)
-					console.log(headerIdx)
+					// console.log('HUH?!');
+					// console.log(header)
+					// console.log(headerIdx)
 					indexArrayMapped.push("_")
 					return;
 				}
@@ -236,6 +253,8 @@ const groupIntoCategories = (srcArr) => {
 					return;
 				}
 				else if(header.match(/Total/)){
+					console.log('---- AGE . 65+ . Total -----');
+					console.log(header)
 					indexArrayMapped.push(`age.65+.total`)
 					mappedColumnsGrouped.age["65+"].total.push({"title": header, "idx": headerIdx})
 					return;
@@ -244,18 +263,20 @@ const groupIntoCategories = (srcArr) => {
 					mappedColumnsGrouped.age["65+"].belowPoverty.push({"title": header, "idx": headerIdx})
 					return;
 				}else{
-					console.log('HUH?!');
-					console.log(header)
-					console.log(headerIdx)
+					// console.log('HUH?!');
+					// console.log(header)
+					// console.log(headerIdx)
 					indexArrayMapped.push("_")
 					return;
 				}
 			}
 
 			else{
-				console.log('HUH?!');
+				// if(headerIdx === 5){
+					console.log('AGE MISSES');
 				console.log(header)
 				console.log(headerIdx)
+				// }
 
 				indexArrayMapped.push("_")
 				return;
@@ -297,11 +318,11 @@ const groupIntoCategories = (srcArr) => {
 				indexArrayMapped.push(`education.belowPoverty`)
 				mappedColumnsGrouped.education.belowPoverty.push({"title": header, "idx": headerIdx})
 			}else{
-				console.log('HUH?!');
-				console.log(header)
-				console.log(headerIdx)
+				// console.log('HUH?!');
+				// console.log(header)
+				// console.log(headerIdx)
 				indexArrayMapped.push("_")
-				console.log('// - - - - - //')	
+				// console.log('// - - - - - //')	
 			}
 			return;
 		}
@@ -351,24 +372,25 @@ const groupIntoCategories = (srcArr) => {
 		}
 
 		else{
-			console.log('HUH?!');
-			console.log(header)
-			console.log(headerIdx)
+			// console.log('HUH?!');
+			// console.log(header)
+			// console.log(headerIdx)
 			indexArrayMapped.push("_")
-			console.log('// - - - - - //')	
+			// console.log('// - - - - - //')	
 		}
 	})
 	return {mappedColumnsGrouped, indexArrayMapped} 
 }
 
 const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
-	console.log('----START-----');
-	console.log('indexArr.length')
-	console.log(indexArr.length)
+	console.log('----START categorizeFirstRow-----');
+	console.log('JSON.stringify(indexArr)')
+	console.log(JSON.stringify(indexArr))
 	
-	let resObj = {}		//state-object
+	//first-row consistent vars
+	let resObj = {}		//row-object, holding {StateName: {...content}}
 	let thisID;				//the column id
-	let thisState;		//state-name string
+	let thisState;		//row name
 	
 	dataArr.forEach((itm, idx) => {
 		console.log('---STARTING idx---')
@@ -378,13 +400,12 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
 		console.log('indexArr[idx]')
 		console.log(indexArr[idx])
 		let storageStr = indexArr[idx]
-		
 		//id column
-		if(idx === 0){
+		if(idx == 0){
 			thisID = itm;
 
 		//state-name column
-		}else if(idx === 1){
+		}else if(idx == 1){
 			console.log('IDX === 1')
 			console.log('itm')
 			console.log(itm)
@@ -393,14 +414,28 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
 			thisState = itm;
 			resObj[itm] = JSON.parse(JSON.stringify(groupedObj))
 			resObj[itm]["id"] = thisID;
-
+			console.log('idx 1 => resObj')
+			console.log(resObj)
+			
 		}else if([2,3].includes(idx) || indexArr[idx] === "_"){
 			return;
+		}else if(indexArr[idx][0] == '_'){
+			console.log('DASH');
+			return;
+		
 		//data-columns
 		}else{
 			console.log('ELS!!')
-			
-				const thisStateObj = resObj[thisState]
+				console.log('itm')
+				console.log(itm)
+				console.log('idx')
+				console.log(idx)
+				if(!resObj[thisState]){
+					resObj[thisState] = {}
+				}
+
+				let thisStateObj = resObj[thisState]
+				
 				console.log('storageStr')
 				console.log(storageStr)
 				
@@ -408,8 +443,8 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
 				console.log('storageArr')
 				console.log(storageArr)
 				let firstLevel = thisStateObj[storageArr[0]]
-				console.log('firstLevel')
-				console.log(firstLevel)
+				// console.log('firstLevel')
+				// console.log(firstLevel)
 				
 				let whereToStore = firstLevel[storageArr[1]]
 				if(storageArr.length == 3){
@@ -431,18 +466,13 @@ jsonParseFile('./../../src/mockData/justHeaderRow.csv')
 	//extract "meaningful" data from input
 	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(sorted)
 	console.log('indexArrayMapped.length')
-	console.log(indexArrayMapped.length)
-	// console.log('mappedColumnsGrouped')
-	// console.log(mappedColumnsGrouped)
+	console.log(indexArrayMapped.length)	
 	
-	
-	// jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
-	// 	console.log('firstRow.length')
-	// 	console.log(firstRow.length)
-	// 	let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj)
-		// console.log('resObj')
-		// console.log(JSON.stringify(resObj))
+	jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
+		let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj)
+		console.log('resObj')
+		console.log(JSON.stringify(resObj))
 		
-	// })
+	})
 	
 })
