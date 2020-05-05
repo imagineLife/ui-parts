@@ -137,7 +137,7 @@ const groupIntoCategories = (srcArr) => {
 		}
 
 		//IGNORE THESE
-		if(header.match(/EMPLOYMENT STATUS/) || header.match(/WORK EXPERIENCE/)){
+		if(header.match(/EMPLOYMENT STATUS/) || header.match(/WORK EXPERIENCE/) || header.match(/POVERTY RATIOS/)){
 			// console.log('HUH?!');
 			// console.log(header)
 			// console.log(headerIdx)
@@ -263,21 +263,12 @@ const groupIntoCategories = (srcArr) => {
 					mappedColumnsGrouped.age["65+"].belowPoverty.push({"title": header, "idx": headerIdx})
 					return;
 				}else{
-					// console.log('HUH?!');
-					// console.log(header)
-					// console.log(headerIdx)
 					indexArrayMapped.push("_")
 					return;
 				}
 			}
 
 			else{
-				// if(headerIdx === 5){
-					console.log('AGE MISSES');
-				console.log(header)
-				console.log(headerIdx)
-				// }
-
 				indexArrayMapped.push("_")
 				return;
 			}
@@ -382,7 +373,7 @@ const groupIntoCategories = (srcArr) => {
 	return {mappedColumnsGrouped, indexArrayMapped} 
 }
 
-const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
+const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 	console.log('----START categorizeFirstRow-----');
 	console.log('JSON.stringify(indexArr)')
 	console.log(JSON.stringify(indexArr))
@@ -399,6 +390,9 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
 		console.log(itm)
 		console.log('indexArr[idx]')
 		console.log(indexArr[idx])
+		console.log('headerData[idx]')
+		console.log(headerData[idx])
+		
 		let storageStr = indexArr[idx]
 		//id column
 		if(idx == 0){
@@ -406,16 +400,9 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
 
 		//state-name column
 		}else if(idx == 1){
-			console.log('IDX === 1')
-			console.log('itm')
-			console.log(itm)
-			
-			
 			thisState = itm;
 			resObj[itm] = JSON.parse(JSON.stringify(groupedObj))
 			resObj[itm]["id"] = thisID;
-			console.log('idx 1 => resObj')
-			console.log(resObj)
 			
 		}else if([2,3].includes(idx) || indexArr[idx] === "_"){
 			return;
@@ -425,34 +412,19 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
 		
 		//data-columns
 		}else{
-			console.log('ELS!!')
-				console.log('itm')
-				console.log(itm)
-				console.log('idx')
-				console.log(idx)
-				if(!resObj[thisState]){
-					resObj[thisState] = {}
-				}
+			if(!resObj[thisState]){
+				resObj[thisState] = {}
+			}
 
-				let thisStateObj = resObj[thisState]
-				
-				console.log('storageStr')
-				console.log(storageStr)
-				
-				const storageArr = storageStr.split('.')
-				console.log('storageArr')
-				console.log(storageArr)
-				let firstLevel = thisStateObj[storageArr[0]]
-				// console.log('firstLevel')
-				// console.log(firstLevel)
-				
-				let whereToStore = firstLevel[storageArr[1]]
-				if(storageArr.length == 3){
-					whereToStore = thisStateObj[storageArr[0]][storageArr[1]][storageArr[2]]
-				}
-				whereToStore.push(itm)
+			let thisStateObj = resObj[thisState]
+			const storageArr = storageStr.split('.')
+			let firstLevel = thisStateObj[storageArr[0]]
+			let lastChildKey = firstLevel[storageArr[1]]
+			if(storageArr.length == 3){
+				lastChildKey = thisStateObj[storageArr[0]][storageArr[1]][storageArr[2]]
+			}
+			lastChildKey.push(itm)
 		}
-		console.log('//--- --- ---//');
 	})
 
 	return resObj;
@@ -461,15 +433,13 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj) => {
 jsonParseFile('./../../src/mockData/justHeaderRow.csv')
 .then(headerData => {
 	debug('\x1b[32m%s\x1b[0m',`jsonParseHeaderFile THEN`)
-	let sorted = headerData.sort()
-
 	//extract "meaningful" data from input
-	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(sorted)
+	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(headerData)
 	console.log('indexArrayMapped.length')
 	console.log(indexArrayMapped.length)	
 	
 	jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
-		let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj)
+		let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj, headerData)
 		console.log('resObj')
 		console.log(JSON.stringify(resObj))
 		
