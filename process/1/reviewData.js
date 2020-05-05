@@ -141,13 +141,16 @@ const groupIntoCategories = (srcArr) => {
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`age.<5.percentBelowPoverty`)
 					mappedColumnsGrouped.age["<5"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`age.<5.total`)
 					mappedColumnsGrouped.age["<5"].total.push({"title": header, "idx": headerIdx})
+					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`age.<5.belowPoverty`)
 					mappedColumnsGrouped.age["<5"].belowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}else{
 					console.log('HUH?!');
 					console.log(header)
@@ -161,13 +164,16 @@ const groupIntoCategories = (srcArr) => {
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`age.5-17.percentBelowPoverty`)
 					mappedColumnsGrouped.age["5-17"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`age.5-17.total`)
 					mappedColumnsGrouped.age["5-17"].total.push({"title": header, "idx": headerIdx})
+					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`age.5-17.belowPoverty`)
 					mappedColumnsGrouped.age["5-17"].belowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}else{
 					console.log('HUH?!');
 					console.log(header)
@@ -181,13 +187,16 @@ const groupIntoCategories = (srcArr) => {
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`age.18-34.percentBelowPoverty`)
 					mappedColumnsGrouped.age["18-34"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`age.18-34.total`)
 					mappedColumnsGrouped.age["18-34"].total.push({"title": header, "idx": headerIdx})
+					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`age.18-34.belowPoverty`)
 					mappedColumnsGrouped.age["18-34"].belowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}else{
 					console.log('HUH?!');
 					console.log(header)
@@ -201,13 +210,16 @@ const groupIntoCategories = (srcArr) => {
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`age.35-64.percentBelowPoverty`)
 					mappedColumnsGrouped.age["35-64"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`age.35-64.total`)
 					mappedColumnsGrouped.age["35-64"].total.push({"title": header, "idx": headerIdx})
+					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`age.35-64.belowPoverty`)
 					mappedColumnsGrouped.age["35-64"].belowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}else{
 					console.log('HUH?!');
 					console.log(header)
@@ -221,13 +233,16 @@ const groupIntoCategories = (srcArr) => {
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`age.65+.percentBelowPoverty`)
 					mappedColumnsGrouped.age["65+"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`age.65+.total`)
 					mappedColumnsGrouped.age["65+"].total.push({"title": header, "idx": headerIdx})
+					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`age.65+.belowPoverty`)
 					mappedColumnsGrouped.age["65+"].belowPoverty.push({"title": header, "idx": headerIdx})
+					return;
 				}else{
 					console.log('HUH?!');
 					console.log(header)
@@ -263,6 +278,7 @@ const groupIntoCategories = (srcArr) => {
 				console.log('HUH?!');
 				console.log(header)
 				console.log(headerIdx)
+				indexArrayMapped.push("_")
 				console.log('// - - - - - //')	
 			}
 			return;
@@ -284,6 +300,7 @@ const groupIntoCategories = (srcArr) => {
 				console.log('HUH?!');
 				console.log(header)
 				console.log(headerIdx)
+				indexArrayMapped.push("_")
 				console.log('// - - - - - //')	
 			}
 			return;
@@ -305,6 +322,7 @@ const groupIntoCategories = (srcArr) => {
 				console.log('HUH?!');
 				console.log(header)
 				console.log(headerIdx)
+				indexArrayMapped.push("_")
 				console.log('// - - - - - //')	
 			}
 			return;
@@ -326,6 +344,7 @@ const groupIntoCategories = (srcArr) => {
 				console.log('HUH?!');
 				console.log(header)
 				console.log(headerIdx)
+				indexArrayMapped.push("_")
 				console.log('// - - - - - //')	
 			}
 			return;
@@ -335,6 +354,7 @@ const groupIntoCategories = (srcArr) => {
 			console.log('HUH?!');
 			console.log(header)
 			console.log(headerIdx)
+			indexArrayMapped.push("_")
 			console.log('// - - - - - //')	
 		}
 	})
@@ -412,8 +432,8 @@ jsonParseFile('./../../src/mockData/justHeaderRow.csv')
 	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(sorted)
 	console.log('indexArrayMapped.length')
 	console.log(indexArrayMapped.length)
-	console.log('mappedColumnsGrouped')
-	console.log(mappedColumnsGrouped)
+	// console.log('mappedColumnsGrouped')
+	// console.log(mappedColumnsGrouped)
 	
 	
 	// jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
