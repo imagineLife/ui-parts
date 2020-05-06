@@ -43,7 +43,13 @@ let groupedObj = {
 		"belowPoverty": []
 	},
 	"education": {
-		"percentBelowPoverty"	: [],
+		"percentBelowPoverty"	: {
+			"percent": [],
+			"noHS": [],
+			"hsGrad": [],
+			"someCollege": [],
+			"bachPlus": [],
+		},
 		"total": [],
 		"belowPoverty": []
 	},
@@ -53,6 +59,7 @@ let groupedObj = {
 		"belowPoverty": []
 	}
 }
+
 let mappedColumnsGrouped = {
 	"age": {
 		"<5": {
@@ -92,7 +99,13 @@ let mappedColumnsGrouped = {
 		"belowPoverty": []
 	},
 	"education": {
-		"percentBelowPoverty"	: [],
+		"percentBelowPoverty"	: {
+			"percent": [],
+			"noHS": [],
+			"hsGrad": [],
+			"someCollege": [],
+			"bachPlus": [],
+		},
 		"total": [],
 		"belowPoverty": []
 	},
@@ -127,8 +140,8 @@ const groupIntoCategories = (srcArr) => {
 	debug('\x1b[32m%s\x1b[0m',`groupIntoCategories`)
 
 	const indexArrayMapped = []
-	console.log('header length')
-	console.log(srcArr.length)
+	// console.log('header length')
+	// console.log(srcArr.length)
 	
 	srcArr.map((header, headerIdx) => {
 		if([2,3].includes(headerIdx)){
@@ -253,8 +266,6 @@ const groupIntoCategories = (srcArr) => {
 					return;
 				}
 				else if(header.match(/Total/)){
-					console.log('---- AGE . 65+ . Total -----');
-					console.log(header)
 					indexArrayMapped.push(`age.65+.total`)
 					mappedColumnsGrouped.age["65+"].total.push({"title": header, "idx": headerIdx})
 					return;
@@ -287,25 +298,46 @@ const groupIntoCategories = (srcArr) => {
 				indexArrayMapped.push(`gender.belowPoverty`)
 				mappedColumnsGrouped.gender.belowPoverty.push({"title": header, "idx": headerIdx})
 			}else{
-				console.log('HUH?!');
-				console.log(header)
-				console.log(headerIdx)
+				// console.log('HUH?!');
+				// console.log(header)
+				// console.log(headerIdx)
 				indexArrayMapped.push("_")
-				console.log('// - - - - - //')	
+				// console.log('// - - - - - //')	
 			}
 			return;
 		}
 
 		//EDUCATION
 		if(header.match(/EDUCATION/)){
+			// console.log('EDUCATION');
+			
 			if(header.match(/Percent/)){
-				indexArrayMapped.push(`education.percentBelowPoverty`)
-				mappedColumnsGrouped.education.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+				console.log('PERCENT');
+				if(header.match(/Bachelor/)){
+					indexArrayMapped.push(`education.percentBelowPoverty.bachPlus`)
+					mappedColumnsGrouped.education.percentBelowPoverty.bachPlus.push({"title": header, "idx": headerIdx})	
+				}else if(header.match(/Some/)){
+					indexArrayMapped.push(`education.percentBelowPoverty.someCollege`)
+					mappedColumnsGrouped.education.percentBelowPoverty.someCollege.push({"title": header, "idx": headerIdx})	
+				}else if(header.match(/High/)){
+					indexArrayMapped.push(`education.percentBelowPoverty.hsGrad`)
+					mappedColumnsGrouped.education.percentBelowPoverty.hsGrad.push({"title": header, "idx": headerIdx})	
+				}else if(header.match(/Less/)){
+					indexArrayMapped.push(`education.percentBelowPoverty.noHS`)
+					mappedColumnsGrouped.education.percentBelowPoverty.noHS.push({"title": header, "idx": headerIdx})	
+				}else{
+					indexArrayMapped.push(`education.percentBelowPoverty.percent`)
+					mappedColumnsGrouped.education.percentBelowPoverty.percent.push({"title": header, "idx": headerIdx})	
+				}
 			}
 			else if(header.match(/Total/)){
+				// console.log('TOTAL');
+				// console.log(header)
 				indexArrayMapped.push(`education.total`)
 				mappedColumnsGrouped.education.total.push({"title": header, "idx": headerIdx})
 			}else if(header.match(/Below poverty/)){
+				// console.log('BELOW P');
+				// console.log(header)
 				indexArrayMapped.push(`education.belowPoverty`)
 				mappedColumnsGrouped.education.belowPoverty.push({"title": header, "idx": headerIdx})
 			}else{
@@ -331,11 +363,11 @@ const groupIntoCategories = (srcArr) => {
 				indexArrayMapped.push(`income.belowPoverty`)
 				mappedColumnsGrouped.income.belowPoverty.push({"title": header, "idx": headerIdx})
 			}else{
-				console.log('HUH?!');
-				console.log(header)
-				console.log(headerIdx)
-				indexArrayMapped.push("_")
-				console.log('// - - - - - //')	
+				// console.log('HUH?!');
+				// console.log(header)
+				// console.log(headerIdx)
+				// indexArrayMapped.push("_")
+				// console.log('// - - - - - //')	
 			}
 			return;
 		}
@@ -353,11 +385,11 @@ const groupIntoCategories = (srcArr) => {
 				indexArrayMapped.push(`race.belowPoverty`)
 				mappedColumnsGrouped.race.belowPoverty.push({"title": header, "idx": headerIdx})
 			}else{
-				console.log('HUH?!');
-				console.log(header)
-				console.log(headerIdx)
+				// console.log('HUH?!');
+				// console.log(header)
+				// console.log(headerIdx)
 				indexArrayMapped.push("_")
-				console.log('// - - - - - //')	
+				// console.log('// - - - - - //')	
 			}
 			return;
 		}
@@ -374,9 +406,9 @@ const groupIntoCategories = (srcArr) => {
 }
 
 const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
-	console.log('----START categorizeFirstRow-----');
-	console.log('JSON.stringify(indexArr)')
-	console.log(JSON.stringify(indexArr))
+	// console.log('----START categorizeFirstRow-----');
+	// console.log('JSON.stringify(indexArr)')
+	// console.log(JSON.stringify(indexArr))
 	
 	//first-row consistent vars
 	let resObj = {}		//row-object, holding {StateName: {...content}}
@@ -384,14 +416,14 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 	let thisState;		//row name
 	
 	dataArr.forEach((itm, idx) => {
-		console.log('---STARTING idx---')
-		console.log(idx)
-		console.log('itm')
-		console.log(itm)
-		console.log('indexArr[idx]')
-		console.log(indexArr[idx])
-		console.log('headerData[idx]')
-		console.log(headerData[idx])
+		// console.log('---STARTING idx---')
+		// console.log(idx)
+		// console.log('itm')
+		// console.log(itm)
+		// console.log('indexArr[idx]')
+		// console.log(indexArr[idx])
+		// console.log('headerData[idx]')
+		// console.log(headerData[idx])
 		
 		let storageStr = indexArr[idx]
 		//id column
@@ -435,8 +467,8 @@ jsonParseFile('./../../src/mockData/justHeaderRow.csv')
 	debug('\x1b[32m%s\x1b[0m',`jsonParseHeaderFile THEN`)
 	//extract "meaningful" data from input
 	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(headerData)
-	console.log('indexArrayMapped.length')
-	console.log(indexArrayMapped.length)	
+	// console.log('indexArrayMapped.length')
+	// console.log(indexArrayMapped.length)	
 	
 	jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
 		let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj, headerData)
