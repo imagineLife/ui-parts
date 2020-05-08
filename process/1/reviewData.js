@@ -33,9 +33,16 @@ let groupedObj = {
 		},
 	},
 	"gender": {
-		"percentBelowPoverty"	: [],
-		"total": [],
-		"belowPoverty": []
+		"male": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		},
+		"female": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		}
 	},
 	"income": {
 		"percentBelowPoverty"	: [],
@@ -110,9 +117,16 @@ let mappedColumnsGrouped = {
 		},
 	},
 	"gender": {
-		"percentBelowPoverty"	: [],
-		"total": [],
-		"belowPoverty": []
+		"male": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		},
+		"female": {
+			"percentBelowPoverty"	: [],
+			"total": [],
+			"belowPoverty": []
+		}
 	},
 	"income": {
 		"percentBelowPoverty"	: [],
@@ -184,8 +198,6 @@ const groupIntoCategories = (srcArr) => {
 	const indexArrayMapped = []
 	
 	srcArr.map((header, headerIdx) => {
-		console.log('header');
-		console.log(headerIdx);
 		if([2,3].includes(headerIdx)){
 			indexArrayMapped.push("_")
 			return;
@@ -310,20 +322,40 @@ const groupIntoCategories = (srcArr) => {
 
 		//SEX
 		else if(header.match(/SEX/)){
-			console.log(`SEX ${headerIdx}`);
 			if(header.match(/Percent/)){
-				indexArrayMapped.push(`gender.percentBelowPoverty`)
-				mappedColumnsGrouped.gender.percentBelowPoverty.push({"title": header, "idx": headerIdx})
-				return;
+				if(header.match(/Female/)){
+					indexArrayMapped.push(`gender.female.percentBelowPoverty`)
+					mappedColumnsGrouped.gender.female.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else{
+					indexArrayMapped.push(`gender.male.percentBelowPoverty`)
+					mappedColumnsGrouped.gender.male.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					return;
+				}
 			}
 			else if(header.match(/Total/)){
-				indexArrayMapped.push(`gender.total`)
-				mappedColumnsGrouped.gender.total.push({"title": header, "idx": headerIdx})
-				return;
+				if(header.match(/Female/)){
+					indexArrayMapped.push(`gender.female.total`)
+					mappedColumnsGrouped.gender.female.total.push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else{
+					indexArrayMapped.push(`gender.male.total`)
+					mappedColumnsGrouped.gender.male.total.push({"title": header, "idx": headerIdx})
+					return;
+				}
 			}else if(header.match(/Below poverty/)){
-				indexArrayMapped.push(`gender.belowPoverty`)
-				mappedColumnsGrouped.gender.belowPoverty.push({"title": header, "idx": headerIdx})
-				return;
+				if(header.match(/Female/)){
+					indexArrayMapped.push(`gender.female.belowPoverty`)
+					mappedColumnsGrouped.gender.female.belowPoverty.push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else{
+					indexArrayMapped.push(`gender.male.belowPoverty`)
+					mappedColumnsGrouped.gender.male.belowPoverty.push({"title": header, "idx": headerIdx})
+					return;
+				}
 			}else{
 				indexArrayMapped.push("_")
 				return;
@@ -432,16 +464,7 @@ const groupIntoCategories = (srcArr) => {
 		//race
 		else if(header.match(/RACE/)){
 			console.log(`RACE ${headerIdx}`);
-			/*
-				"white": [],
-				"black": [],
-				"Native American*": [],
-				"Asian": [],
-				"Pacific Islander*": []
-				"Other": [],
-				"Mixed": [],
-				"Latino*": []
-			*/
+
 			if(header.match(/below poverty level/)){
 				// console.log('race below poverty header');
 				// console.log(header);
