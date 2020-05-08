@@ -5,6 +5,7 @@ const debug = util.debuglog('review')
 
 //result placeholder
 let groupedObj = {
+	"state": "",
 	"age": {
 		"<5": {
 			"percentBelowPoverty"	: [],
@@ -87,6 +88,7 @@ let groupedObj = {
 }
 
 let mappedColumnsGrouped = {
+	"state": "",
 	"age": {
 		"<5": {
 			"percentBelowPoverty"	: [],
@@ -507,9 +509,7 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 	// console.log(JSON.stringify(indexArr))
 	
 	//first-row consistent vars
-	let resObj = {}		//row-object, holding {StateName: {...content}}
 	let thisID;				//the column id
-	let thisState;		//row name
 	
 	dataArr.forEach((itm, idx) => {
 		if(itm === "2719"){
@@ -530,9 +530,8 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 
 		//state-name column
 		}else if(idx == 1){
-			thisState = itm;
-			resObj[itm] = JSON.parse(JSON.stringify(groupedObj))
-			resObj[itm]["id"] = thisID;
+			srcObj.state = itm;
+			srcObj.id = thisID;
 			
 		}else if([2,3].includes(idx) || indexArr[idx] === "_"){
 			return;
@@ -542,27 +541,20 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 		
 		//data-columns
 		}else{
-			if(!resObj[thisState]){
-				resObj[thisState] = {}
-			}
-
-			let thisStateObj = resObj[thisState]
 			const storageArr = storageStr.split('.')
-			if(itm === "51952"){
-				console.log('storageArr')
-				console.log(storageArr)
-			}
-			let firstLevel = thisStateObj[storageArr[0]]
+			console.log('storageArr[0]');
+			console.log(storageArr[0]);
+			let firstLevel = srcObj[storageArr[0]]
 			let lastChildKey = firstLevel[storageArr[1]]
 			if(storageArr.length == 3){
-				lastChildKey = thisStateObj[storageArr[0]][storageArr[1]][storageArr[2]]
+				lastChildKey = srcObj[storageArr[0]][storageArr[1]][storageArr[2]]
 			}
 			
 		lastChildKey.push(itm)
 		}
 	})
 
-	return resObj;
+	return srcObj;
 }
 
 jsonParseFile('./../../src/mockData/justHeaderRow.csv')
