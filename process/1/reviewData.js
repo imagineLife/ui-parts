@@ -78,7 +78,6 @@ let groupedObj = {
 			"Native American*": [],
 			"Asian": [],
 			"Pacific Islander*": [],
-			"Other": [],
 			"Mixed": [],
 			"Latino*": []
 		},
@@ -161,7 +160,6 @@ let mappedColumnsGrouped = {
 			"Native American*": [],
 			"Asian": [],
 			"Pacific Islander*": [],
-			"Other": [],
 			"Mixed": [],
 			"Latino*": []
 		},
@@ -479,6 +477,11 @@ const groupIntoCategories = (srcArr) => {
 					indexArrayMapped.push(`race.percentBelowPoverty.Latino*`)
 					mappedColumnsGrouped.race.percentBelowPoverty["Latino*"].push({"title": header, "idx": headerIdx})
 					return;
+				}
+				else if(header.match(/White/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.white`)
+					mappedColumnsGrouped.race.percentBelowPoverty["white"].push({"title": header, "idx": headerIdx})
+					return;
 				}else{
 					indexArrayMapped.push("_")
 					return;
@@ -554,7 +557,8 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 			if(storageArr.length == 3){
 				lastChildKey = thisStateObj[storageArr[0]][storageArr[1]][storageArr[2]]
 			}
-			lastChildKey.push(itm)
+			
+		lastChildKey.push(itm)
 		}
 	})
 
@@ -566,15 +570,7 @@ jsonParseFile('./../../src/mockData/justHeaderRow.csv')
 	debug('\x1b[32m%s\x1b[0m',`jsonParseHeaderFile THEN`)
 	//extract "meaningful" data from input
 	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(headerData)
-	console.log('indexArrayMapped.length');
-	console.log('indexArrayMapped.length')
-	console.log(indexArrayMapped.length)
-	
-	
 	jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
-		console.log('firstRow.length')
-		console.log(firstRow.length)
-		
 		let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj, headerData)
 		console.log('resObj')
 		console.log(JSON.stringify(resObj))
