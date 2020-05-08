@@ -183,69 +183,6 @@ let mappedColumnsGrouped = {
 			"Mixed": [],
 			"Latino*": []
 		}
-	},
-	"age": {
-		"<5": {
-			"total": []
-		},
-		"5-17": {
-			"total": []
-		},
-		"18-34": {
-			"total": []
-		},
-		"35-64": {
-			"total": []
-		},
-		"65+": {
-			"total": []
-		},
-	},
-	"gender": {
-		"male": {
-			"total": []
-		},
-		"female": {
-			"total": []
-		}
-	},
-	"education": {
-		"noHS":{
-			"total": []
-		},
-		"hsGrad":{
-			"total": []
-		},
-		"someCollege":{
-			"total": []
-		},
-		"bachPlus":{
-			"total": []
-		},
-		"total":{
-			"total": []
-		}
-	},
-	"race": {
-		"percentBelowPoverty"	: {
-			"white": [],
-			"black": [],
-			"Native American*": [],
-			"Asian": [],
-			"Pacific Islander*": [],
-			"Mixed": [],
-			"Latino*": []
-		},
-		"belowPoverty"	: {
-			"white": [],
-			"black": [],
-			"Native American*": [],
-			"Asian": [],
-			"Pacific Islander*": [],
-			"Mixed": [],
-			"Latino*": []
-		},
-		"total": []
 	}
 }
 
@@ -282,7 +219,6 @@ const groupIntoCategories = (srcArr) => {
 
 		//IGNORE THESE
 		else if(header.match(/EMPLOYMENT STATUS/) || header.match(/WORK EXPERIENCE/) || header.match(/RATIOS/)){
-			console.log(`PUSH _ ${headerIdx}`);
 			indexArrayMapped.push("_")
 			return;
 		}
@@ -564,20 +500,15 @@ const groupIntoCategories = (srcArr) => {
 				return;
 			}
 		}else{
-			console.log(`PUSH _ ${headerIdx}`);
 			indexArrayMapped.push("_")
 			return;
 		}
-		console.log(`RANDOM ${headerIdx}`);
 	})
 	return {mappedColumnsGrouped, indexArrayMapped} 
 }
 
 const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
-	console.log('----START categorizeFirstRow-----');
-	
-	// console.log('JSON.stringify(indexArr)')
-	// console.log(JSON.stringify(indexArr))
+	// console.log('----START categorizeFirstRow-----');
 	
 	//first-row consistent vars
 	let thisID;				//the column id
@@ -596,7 +527,6 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 		}else if([2,3].includes(idx) || indexArr[idx] === "_"){
 			return;
 		}else if(!indexArr[idx] || indexArr[idx][0] == '_'){
-			console.log('DASH');
 			return;
 		
 		//data-columns
@@ -608,13 +538,8 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 			if(storageArr.length == 3){
 				lastChildKey = srcObj[storageArr[0]][storageArr[1]][storageArr[2]]
 			}
-			if(['percentBelowPoverty', 'belowPoverty', 'total'].includes(storageArr[0])){
-				srcObj[storageArr[0]][storageArr[1]][storageArr[2]] = parseFloat(itm);
-				return;
-			}
-			else{
-				lastChildKey.push(itm)
-			}
+			srcObj[storageArr[0]][storageArr[1]][storageArr[2]] = parseFloat(itm);
+			return;
 		}
 	})
 
