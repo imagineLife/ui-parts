@@ -6,6 +6,15 @@ const debug = util.debuglog('review')
 //result placeholder
 let groupedObj = {
 	"state": "",
+	"percentBelowPoverty": {
+		"age": {
+			"<5": 0,
+			"5-17": 0,
+			"18-34": 0,
+			"35-64": 0,
+			"65+": 0
+		}
+	},
 	"age": {
 		"<5": {
 			"percentBelowPoverty"	: [],
@@ -89,6 +98,15 @@ let groupedObj = {
 
 let mappedColumnsGrouped = {
 	"state": "",
+	"percentBelowPoverty": {
+		"age": {
+			"<5": [],
+			"5-17": [],
+			"18-34": [],
+			"35-64": [],
+			"65+": []
+		}
+	},
 	"age": {
 		"<5": {
 			"percentBelowPoverty"	: [],
@@ -213,8 +231,8 @@ const groupIntoCategories = (srcArr) => {
 		else if(header.match(/AGE/)){
 			if(header.match(/Under 5/)){
 				if(header.match(/Percent/)){
-					indexArrayMapped.push(`age.<5.percentBelowPoverty`)
-					mappedColumnsGrouped.age["<5"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.age.<5`)
+					mappedColumnsGrouped.percentBelowPoverty.age["<5"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
@@ -233,8 +251,8 @@ const groupIntoCategories = (srcArr) => {
 
 			else if(header.match(/17/)){
 				if(header.match(/Percent/)){
-					indexArrayMapped.push(`age.5-17.percentBelowPoverty`)
-					mappedColumnsGrouped.age["5-17"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.age.5-17`)
+					mappedColumnsGrouped.percentBelowPoverty.age["5-17"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
@@ -253,8 +271,8 @@ const groupIntoCategories = (srcArr) => {
 
 			else if(header.match(/34/)){
 				if(header.match(/Percent/)){
-					indexArrayMapped.push(`age.18-34.percentBelowPoverty`)
-					mappedColumnsGrouped.age["18-34"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.age.18-34`)
+					mappedColumnsGrouped.percentBelowPoverty.age["18-34"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
@@ -273,8 +291,8 @@ const groupIntoCategories = (srcArr) => {
 
 			else if(header.match(/35/)){
 				if(header.match(/Percent/)){
-					indexArrayMapped.push(`age.35-64.percentBelowPoverty`)
-					mappedColumnsGrouped.age["35-64"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.age.35-64`)
+					mappedColumnsGrouped.percentBelowPoverty.age["35-64"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
@@ -293,8 +311,8 @@ const groupIntoCategories = (srcArr) => {
 
 			else if(header.match(/65/)){
 				if(header.match(/Percent/)){
-					indexArrayMapped.push(`age.65+.percentBelowPoverty`)
-					mappedColumnsGrouped.age["65+"].percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.age.65+`)
+					mappedColumnsGrouped.percentBelowPoverty.age["65+"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
@@ -542,15 +560,19 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 		//data-columns
 		}else{
 			const storageArr = storageStr.split('.')
-			console.log('storageArr[0]');
-			console.log(storageArr[0]);
+
 			let firstLevel = srcObj[storageArr[0]]
 			let lastChildKey = firstLevel[storageArr[1]]
 			if(storageArr.length == 3){
 				lastChildKey = srcObj[storageArr[0]][storageArr[1]][storageArr[2]]
 			}
-			
-		lastChildKey.push(itm)
+			if(storageArr[0] === 'percentBelowPoverty'){
+				srcObj[storageArr[0]][storageArr[1]][storageArr[2]] = parseInt(itm);
+				return;
+			}
+			else{
+				lastChildKey.push(itm)
+			}
 		}
 	})
 
