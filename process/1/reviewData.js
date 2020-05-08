@@ -50,26 +50,30 @@ let groupedObj = {
 		"belowPoverty": []
 	},
 	"education": {
-		"percentBelowPoverty"	: {
-			"percent": [],
-			"noHS": [],
-			"hsGrad": [],
-			"someCollege": [],
-			"bachPlus": []
-		},
-		"total": {
+		"noHS":{
+			"percentBelowPoverty": [],
 			"total": [],
-			"noHS": [],
-			"hsGrad": [],
-			"someCollege": [],
-			"bachPlus": []
+			"belowPoverty": []
 		},
-		"belowPoverty": {
+		"hsGrad":{
+			"percentBelowPoverty": [],
 			"total": [],
-			"noHS": [],
-			"hsGrad": [],
-			"someCollege": [],
-			"bachPlus": []
+			"belowPoverty": []
+		},
+		"someCollege":{
+			"percentBelowPoverty": [],
+			"total": [],
+			"belowPoverty": []
+		},
+		"bachPlus":{
+			"percentBelowPoverty": [],
+			"total": [],
+			"belowPoverty": []
+		},
+		"total":{
+			"percentBelowPoverty": [],
+			"total": [],
+			"belowPoverty": []
 		}
 	},
 	"race": {
@@ -134,26 +138,30 @@ let mappedColumnsGrouped = {
 		"belowPoverty": []
 	},
 	"education": {
-		"percentBelowPoverty"	: {
-			"percent": [],
-			"noHS": [],
-			"hsGrad": [],
-			"someCollege": [],
-			"bachPlus": []
-		},
-		"total": {
+		"noHS":{
+			"percentBelowPoverty": [],
 			"total": [],
-			"noHS": [],
-			"hsGrad": [],
-			"someCollege": [],
-			"bachPlus": []
+			"belowPoverty": []
 		},
-		"belowPoverty": {
+		"hsGrad":{
+			"percentBelowPoverty": [],
 			"total": [],
-			"noHS": [],
-			"hsGrad": [],
-			"someCollege": [],
-			"bachPlus": []
+			"belowPoverty": []
+		},
+		"someCollege":{
+			"percentBelowPoverty": [],
+			"total": [],
+			"belowPoverty": []
+		},
+		"bachPlus":{
+			"percentBelowPoverty": [],
+			"total": [],
+			"belowPoverty": []
+		},
+		"total":{
+			"percentBelowPoverty": [],
+			"total": [],
+			"belowPoverty": []
 		}
 	},
 	"race": {
@@ -213,7 +221,6 @@ const groupIntoCategories = (srcArr) => {
 
 		//AGE
 		else if(header.match(/AGE/)){
-			console.log(`AGE ${headerIdx}`);
 			if(header.match(/Under 5/)){
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`age.<5.percentBelowPoverty`)
@@ -364,46 +371,45 @@ const groupIntoCategories = (srcArr) => {
 
 		//EDUCATION
 		else if(header.match(/EDUCATION/)){
-			console.log(`EDUCATION ${headerIdx}`);
 			if(header.match(/Percent/)){
 				if(header.match(/Bachelor/)){
-					indexArrayMapped.push(`education.percentBelowPoverty.bachPlus`)
-					mappedColumnsGrouped.education.percentBelowPoverty.bachPlus.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.bachPlus.percentBelowPoverty`)
+					mappedColumnsGrouped.education.bachPlus.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Some/)){
-					indexArrayMapped.push(`education.percentBelowPoverty.someCollege`)
-					mappedColumnsGrouped.education.percentBelowPoverty.someCollege.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.someCollege.percentBelowPoverty`)
+					mappedColumnsGrouped.education.someCollege.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/High/)){
-					indexArrayMapped.push(`education.percentBelowPoverty.hsGrad`)
-					mappedColumnsGrouped.education.percentBelowPoverty.hsGrad.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.hsGrad.percentBelowPoverty`)
+					mappedColumnsGrouped.education.hsGrad.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Less/)){
-					indexArrayMapped.push(`education.percentBelowPoverty.noHS`)
-					mappedColumnsGrouped.education.percentBelowPoverty.noHS.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.noHS.percentBelowPoverty`)
+					mappedColumnsGrouped.education.noHS.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else{
-					indexArrayMapped.push(`education.percentBelowPoverty.percent`)
-					mappedColumnsGrouped.education.percentBelowPoverty.percent.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.total.percentBelowPoverty`)
+					mappedColumnsGrouped.education.total.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}
 			}
 			else if(header.match(/Total/)){
 				if(header.match(/Bachelor/)){
-					indexArrayMapped.push(`education.total.bachPlus`)
-					mappedColumnsGrouped.education.total.bachPlus.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.bachPlus.total`)
+					mappedColumnsGrouped.education.bachPlus.total.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Some/)){
-					indexArrayMapped.push(`education.total.someCollege`)
-					mappedColumnsGrouped.education.total.someCollege.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.someCollege.total`)
+					mappedColumnsGrouped.education.someCollege.total.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/High/)){
-					indexArrayMapped.push(`education.total.hsGrad`)
-					mappedColumnsGrouped.education.total.hsGrad.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.hsGrad.total`)
+					mappedColumnsGrouped.education.hsGrad.total.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Less/)){
-					indexArrayMapped.push(`education.total.noHS`)
-					mappedColumnsGrouped.education.total.noHS.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.noHS.total`)
+					mappedColumnsGrouped.education.noHS.total.push({"title": header, "idx": headerIdx})	
 					return;
 				}else{
 					indexArrayMapped.push(`education.total.total`)
@@ -412,24 +418,24 @@ const groupIntoCategories = (srcArr) => {
 				}
 			}else if(header.match(/Below poverty/)){
 				if(header.match(/Bachelor/)){
-					indexArrayMapped.push(`education.belowPoverty.bachPlus`)
-					mappedColumnsGrouped.education.belowPoverty.bachPlus.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.bachPlus.belowPoverty`)
+					mappedColumnsGrouped.education.bachPlus.belowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Some/)){
-					indexArrayMapped.push(`education.belowPoverty.someCollege`)
-					mappedColumnsGrouped.education.belowPoverty.someCollege.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.someCollege.belowPoverty`)
+					mappedColumnsGrouped.education.someCollege.belowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/High/)){
-					indexArrayMapped.push(`education.belowPoverty.hsGrad`)
-					mappedColumnsGrouped.education.belowPoverty.hsGrad.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.hsGrad.belowPoverty`)
+					mappedColumnsGrouped.education.hsGrad.belowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Less/)){
-					indexArrayMapped.push(`education.belowPoverty.noHS`)
-					mappedColumnsGrouped.education.belowPoverty.noHS.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.noHS.belowPoverty`)
+					mappedColumnsGrouped.education.noHS.belowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}else{
-					indexArrayMapped.push(`education.belowPoverty.total`)
-					mappedColumnsGrouped.education.belowPoverty.total.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`education.total.belowPoverty`)
+					mappedColumnsGrouped.education.total.belowPoverty.push({"title": header, "idx": headerIdx})	
 					return;
 				}
 			}else{
@@ -442,6 +448,7 @@ const groupIntoCategories = (srcArr) => {
 		else if(header.match(/INCOME/)){
 			console.log(`INCOME ${headerIdx}`);
 			if(header.match(/Percent/)){
+				console.log(header);
 				indexArrayMapped.push(`income.percentBelowPoverty`)
 				mappedColumnsGrouped.income.percentBelowPoverty.push({"title": header, "idx": headerIdx})
 				return;
@@ -463,7 +470,7 @@ const groupIntoCategories = (srcArr) => {
 
 		//race
 		else if(header.match(/RACE/)){
-			console.log(`RACE ${headerIdx}`);
+			// console.log(`RACE ${headerIdx}`);
 
 			if(header.match(/below poverty level/)){
 				// console.log('race below poverty header');
