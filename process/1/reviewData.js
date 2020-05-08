@@ -44,11 +44,6 @@ let groupedObj = {
 			"belowPoverty": []
 		}
 	},
-	"income": {
-		"percentBelowPoverty"	: [],
-		"total": [],
-		"belowPoverty": []
-	},
 	"education": {
 		"noHS":{
 			"percentBelowPoverty": [],
@@ -131,11 +126,6 @@ let mappedColumnsGrouped = {
 			"total": [],
 			"belowPoverty": []
 		}
-	},
-	"income": {
-		"percentBelowPoverty"	: [],
-		"total": [],
-		"belowPoverty": []
 	},
 	"education": {
 		"noHS":{
@@ -442,30 +432,6 @@ const groupIntoCategories = (srcArr) => {
 				indexArrayMapped.push("_")
 				return;
 			}
-		}
-
-		//INCOME
-		else if(header.match(/INCOME/)){
-			console.log(`INCOME ${headerIdx}`);
-			if(header.match(/Percent/)){
-				console.log(header);
-				indexArrayMapped.push(`income.percentBelowPoverty`)
-				mappedColumnsGrouped.income.percentBelowPoverty.push({"title": header, "idx": headerIdx})
-				return;
-			}
-			else if(header.match(/Total/)){
-				indexArrayMapped.push(`income.total`)
-				mappedColumnsGrouped.income.total.push({"title": header, "idx": headerIdx})
-				return;
-			}else if(header.match(/Below poverty/)){
-				indexArrayMapped.push(`income.belowPoverty`)
-				mappedColumnsGrouped.income.belowPoverty.push({"title": header, "idx": headerIdx})
-				return;
-			}else{
-				indexArrayMapped.push("_")
-				return;
-			}
-			return;
 		}
 
 		//race
