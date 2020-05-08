@@ -76,27 +76,22 @@ let groupedObj = {
 	},
 	"education": {
 		"noHS":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"hsGrad":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"someCollege":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"bachPlus":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"total":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		}
@@ -188,27 +183,22 @@ let mappedColumnsGrouped = {
 	},
 	"education": {
 		"noHS":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"hsGrad":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"someCollege":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"bachPlus":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		},
 		"total":{
-			"percentBelowPoverty": [],
 			"total": [],
 			"belowPoverty": []
 		}
