@@ -57,10 +57,25 @@ let groupedObj = {
 			"someCollege": [],
 			"bachPlus": []
 		},
-		"belowPoverty": []
+		"belowPoverty": {
+			"total": [],
+			"noHS": [],
+			"hsGrad": [],
+			"someCollege": [],
+			"bachPlus": []
+		}
 	},
 	"race": {
-		"percentBelowPoverty"	: [],
+		"percentBelowPoverty"	: {
+			"white": [],
+			"black": [],
+			"Native American*": [],
+			"Asian": [],
+			"Pacific Islander*": [],
+			"Other": [],
+			"Mixed": [],
+			"Latino*": []
+		},
 		"total": [],
 		"belowPoverty": []
 	}
@@ -119,10 +134,25 @@ let mappedColumnsGrouped = {
 			"someCollege": [],
 			"bachPlus": []
 		},
-		"belowPoverty": []
+		"belowPoverty": {
+			"total": [],
+			"noHS": [],
+			"hsGrad": [],
+			"someCollege": [],
+			"bachPlus": []
+		}
 	},
 	"race": {
-		"percentBelowPoverty"	: [],
+		"percentBelowPoverty"	: {
+			"white": [],
+			"black": [],
+			"Native American*": [],
+			"Asian": [],
+			"Pacific Islander*": [],
+			"Other": [],
+			"Mixed": [],
+			"Latino*": []
+		},
 		"total": [],
 		"belowPoverty": []
 	}
@@ -154,20 +184,24 @@ const groupIntoCategories = (srcArr) => {
 	const indexArrayMapped = []
 	
 	srcArr.map((header, headerIdx) => {
+		console.log('header');
+		console.log(headerIdx);
 		if([2,3].includes(headerIdx)){
 			indexArrayMapped.push("_")
 			return;
 		}
 
 		//IGNORE THESE
-		if(header.match(/EMPLOYMENT STATUS/) || header.match(/WORK EXPERIENCE/) || header.match(/POVERTY RATIOS/)){
+		else if(header.match(/EMPLOYMENT STATUS/) || header.match(/WORK EXPERIENCE/) || header.match(/RATIOS/)){
+			console.log(`PUSH _ ${headerIdx}`);
 			indexArrayMapped.push("_")
 			return;
 		}
 
 
 		//AGE
-		if(header.match(/AGE/)){
+		else if(header.match(/AGE/)){
+			console.log(`AGE ${headerIdx}`);
 			if(header.match(/Under 5/)){
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`age.<5.percentBelowPoverty`)
@@ -275,133 +309,201 @@ const groupIntoCategories = (srcArr) => {
 		}
 
 		//SEX
-		if(header.match(/SEX/)){
+		else if(header.match(/SEX/)){
+			console.log(`SEX ${headerIdx}`);
 			if(header.match(/Percent/)){
 				indexArrayMapped.push(`gender.percentBelowPoverty`)
 				mappedColumnsGrouped.gender.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+				return;
 			}
 			else if(header.match(/Total/)){
 				indexArrayMapped.push(`gender.total`)
 				mappedColumnsGrouped.gender.total.push({"title": header, "idx": headerIdx})
+				return;
 			}else if(header.match(/Below poverty/)){
 				indexArrayMapped.push(`gender.belowPoverty`)
 				mappedColumnsGrouped.gender.belowPoverty.push({"title": header, "idx": headerIdx})
+				return;
 			}else{
 				indexArrayMapped.push("_")
+				return;
 			}
-			return;
 		}
 
 		//EDUCATION
-		if(header.match(/EDUCATION/)){
+		else if(header.match(/EDUCATION/)){
+			console.log(`EDUCATION ${headerIdx}`);
 			if(header.match(/Percent/)){
 				if(header.match(/Bachelor/)){
 					indexArrayMapped.push(`education.percentBelowPoverty.bachPlus`)
 					mappedColumnsGrouped.education.percentBelowPoverty.bachPlus.push({"title": header, "idx": headerIdx})	
+					return;
 				}else if(header.match(/Some/)){
 					indexArrayMapped.push(`education.percentBelowPoverty.someCollege`)
 					mappedColumnsGrouped.education.percentBelowPoverty.someCollege.push({"title": header, "idx": headerIdx})	
+					return;
 				}else if(header.match(/High/)){
 					indexArrayMapped.push(`education.percentBelowPoverty.hsGrad`)
 					mappedColumnsGrouped.education.percentBelowPoverty.hsGrad.push({"title": header, "idx": headerIdx})	
+					return;
 				}else if(header.match(/Less/)){
 					indexArrayMapped.push(`education.percentBelowPoverty.noHS`)
 					mappedColumnsGrouped.education.percentBelowPoverty.noHS.push({"title": header, "idx": headerIdx})	
+					return;
 				}else{
 					indexArrayMapped.push(`education.percentBelowPoverty.percent`)
 					mappedColumnsGrouped.education.percentBelowPoverty.percent.push({"title": header, "idx": headerIdx})	
+					return;
 				}
 			}
 			else if(header.match(/Total/)){
-				console.log('ED----');
 				if(header.match(/Bachelor/)){
-					console.log('bach');
-					console.log(header);
 					indexArrayMapped.push(`education.total.bachPlus`)
 					mappedColumnsGrouped.education.total.bachPlus.push({"title": header, "idx": headerIdx})	
+					return;
 				}else if(header.match(/Some/)){
-					console.log('SOME');
-					console.log(header);
 					indexArrayMapped.push(`education.total.someCollege`)
 					mappedColumnsGrouped.education.total.someCollege.push({"title": header, "idx": headerIdx})	
+					return;
 				}else if(header.match(/High/)){
-					console.log('High');
-					console.log(header);
 					indexArrayMapped.push(`education.total.hsGrad`)
 					mappedColumnsGrouped.education.total.hsGrad.push({"title": header, "idx": headerIdx})	
+					return;
 				}else if(header.match(/Less/)){
-					console.log('Less');
-					console.log(header);
 					indexArrayMapped.push(`education.total.noHS`)
 					mappedColumnsGrouped.education.total.noHS.push({"title": header, "idx": headerIdx})	
+					return;
 				}else{
-					console.log('TOTAL?!');
-					console.log(header);
 					indexArrayMapped.push(`education.total.total`)
 					mappedColumnsGrouped.education.total.total.push({"title": header, "idx": headerIdx})	
+					return;
 				}
 			}else if(header.match(/Below poverty/)){
-				indexArrayMapped.push(`education.belowPoverty`)
-				mappedColumnsGrouped.education.belowPoverty.push({"title": header, "idx": headerIdx})
+				if(header.match(/Bachelor/)){
+					indexArrayMapped.push(`education.belowPoverty.bachPlus`)
+					mappedColumnsGrouped.education.belowPoverty.bachPlus.push({"title": header, "idx": headerIdx})	
+					return;
+				}else if(header.match(/Some/)){
+					indexArrayMapped.push(`education.belowPoverty.someCollege`)
+					mappedColumnsGrouped.education.belowPoverty.someCollege.push({"title": header, "idx": headerIdx})	
+					return;
+				}else if(header.match(/High/)){
+					indexArrayMapped.push(`education.belowPoverty.hsGrad`)
+					mappedColumnsGrouped.education.belowPoverty.hsGrad.push({"title": header, "idx": headerIdx})	
+					return;
+				}else if(header.match(/Less/)){
+					indexArrayMapped.push(`education.belowPoverty.noHS`)
+					mappedColumnsGrouped.education.belowPoverty.noHS.push({"title": header, "idx": headerIdx})	
+					return;
+				}else{
+					indexArrayMapped.push(`education.belowPoverty.total`)
+					mappedColumnsGrouped.education.belowPoverty.total.push({"title": header, "idx": headerIdx})	
+					return;
+				}
 			}else{
 				indexArrayMapped.push("_")
+				return;
 			}
-			return;
 		}
 
 		//INCOME
-		if(header.match(/INCOME/)){
+		else if(header.match(/INCOME/)){
+			console.log(`INCOME ${headerIdx}`);
 			if(header.match(/Percent/)){
 				indexArrayMapped.push(`income.percentBelowPoverty`)
 				mappedColumnsGrouped.income.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+				return;
 			}
 			else if(header.match(/Total/)){
 				indexArrayMapped.push(`income.total`)
 				mappedColumnsGrouped.income.total.push({"title": header, "idx": headerIdx})
+				return;
 			}else if(header.match(/Below poverty/)){
 				indexArrayMapped.push(`income.belowPoverty`)
 				mappedColumnsGrouped.income.belowPoverty.push({"title": header, "idx": headerIdx})
+				return;
 			}else{
 				indexArrayMapped.push("_")
+				return;
 			}
 			return;
 		}
 
 		//race
-		if(header.match(/RACE/)){
-			if(header.match(/Percent/)){
-				indexArrayMapped.push(`race.percentBelowPoverty`)
-				mappedColumnsGrouped.race.percentBelowPoverty.push({"title": header, "idx": headerIdx})
-			}
-			else if(header.match(/Total/)){
-				indexArrayMapped.push(`race.total`)
-				mappedColumnsGrouped.race.total.push({"title": header, "idx": headerIdx})
-			}else if(header.match(/Below poverty/)){
-				indexArrayMapped.push(`race.belowPoverty`)
-				mappedColumnsGrouped.race.belowPoverty.push({"title": header, "idx": headerIdx})
+		else if(header.match(/RACE/)){
+			console.log(`RACE ${headerIdx}`);
+			/*
+				"white": [],
+				"black": [],
+				"Native American*": [],
+				"Asian": [],
+				"Pacific Islander*": []
+				"Other": [],
+				"Mixed": [],
+				"Latino*": []
+			*/
+			if(header.match(/below poverty level/)){
+				// console.log('race below poverty header');
+				// console.log(header);
+				// console.log(headerIdx);
+				// console.log('// - - - - - //')
+				
+				
+				if(header.match(/Black/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.black`)
+					mappedColumnsGrouped.race.percentBelowPoverty.black.push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Indian/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.Native American*`)
+					mappedColumnsGrouped.race.percentBelowPoverty["Native American*"].push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Asian/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.Asian`)
+					mappedColumnsGrouped.race.percentBelowPoverty["Asian"].push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Pacific/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.Pacific Islander*`)
+					mappedColumnsGrouped.race.percentBelowPoverty["Pacific Islander*"].push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Other/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.Other`)
+					mappedColumnsGrouped.race.percentBelowPoverty["Other"].push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/any/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.Mixed`)
+					mappedColumnsGrouped.race.percentBelowPoverty["Mixed"].push({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Latino/)){
+					indexArrayMapped.push(`race.percentBelowPoverty.Latino*`)
+					mappedColumnsGrouped.race.percentBelowPoverty["Latino*"].push({"title": header, "idx": headerIdx})
+					return;
+				}else{
+					indexArrayMapped.push("_")
+					return;
+				}
 			}else{
-				// console.log('HUH?!');
-				// console.log(header)
-				// console.log(headerIdx)
 				indexArrayMapped.push("_")
-				// console.log('// - - - - - //')	
+				return;
 			}
+		}else{
+			console.log(`PUSH _ ${headerIdx}`);
+			indexArrayMapped.push("_")
 			return;
 		}
-
-		else{
-			// console.log('HUH?!');
-			// console.log(header)
-			// console.log(headerIdx)
-			indexArrayMapped.push("_")
-			// console.log('// - - - - - //')	
-		}
+		console.log(`RANDOM ${headerIdx}`);
 	})
 	return {mappedColumnsGrouped, indexArrayMapped} 
 }
 
 const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
-	// console.log('----START categorizeFirstRow-----');
+	console.log('----START categorizeFirstRow-----');
+	
 	// console.log('JSON.stringify(indexArr)')
 	// console.log(JSON.stringify(indexArr))
 	
@@ -411,14 +513,16 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 	let thisState;		//row name
 	
 	dataArr.forEach((itm, idx) => {
-		// console.log('---STARTING idx---')
-		// console.log(idx)
-		// console.log('itm')
-		// console.log(itm)
-		// console.log('indexArr[idx]')
-		// console.log(indexArr[idx])
-		// console.log('headerData[idx]')
-		// console.log(headerData[idx])
+		if(itm === "2719"){
+			console.log('---STARTING LOOP, idx---')
+			console.log(idx)
+			console.log('itm')
+			console.log(itm)
+			console.log('indexArr[idx]')
+			console.log(indexArr[idx])
+			console.log('headerData[idx]')
+			console.log(headerData[idx])
+		}
 		
 		let storageStr = indexArr[idx]
 		//id column
@@ -433,7 +537,7 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 			
 		}else if([2,3].includes(idx) || indexArr[idx] === "_"){
 			return;
-		}else if(indexArr[idx][0] == '_'){
+		}else if(!indexArr[idx] || indexArr[idx][0] == '_'){
 			console.log('DASH');
 			return;
 		
@@ -445,6 +549,10 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 
 			let thisStateObj = resObj[thisState]
 			const storageArr = storageStr.split('.')
+			if(itm === "51952"){
+				console.log('storageArr')
+				console.log(storageArr)
+			}
 			let firstLevel = thisStateObj[storageArr[0]]
 			let lastChildKey = firstLevel[storageArr[1]]
 			if(storageArr.length == 3){
@@ -462,8 +570,15 @@ jsonParseFile('./../../src/mockData/justHeaderRow.csv')
 	debug('\x1b[32m%s\x1b[0m',`jsonParseHeaderFile THEN`)
 	//extract "meaningful" data from input
 	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(headerData)
+	console.log('indexArrayMapped.length');
+	console.log('indexArrayMapped.length')
+	console.log(indexArrayMapped.length)
+	
 	
 	jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
+		console.log('firstRow.length')
+		console.log(firstRow.length)
+		
 		let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj, headerData)
 		console.log('resObj')
 		console.log(JSON.stringify(resObj))
