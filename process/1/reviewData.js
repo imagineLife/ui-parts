@@ -24,6 +24,15 @@ let groupedObj = {
 			"someCollege":0,
 			"bachPlus":0,
 			"total":0,
+		},
+		"race": {
+			"white": 0,
+			"black": 0,
+			"Native American*": 0,
+			"Asian": 0,
+			"Pacific Islander*": 0,
+			"Mixed": 0,
+			"Latino*": 0
 		}
 	},
 	"age": {
@@ -127,6 +136,15 @@ let mappedColumnsGrouped = {
 			"someCollege":[],
 			"bachPlus":[],
 			"total":[],
+		},
+		"race": {
+			"white": [],
+			"black": [],
+			"Native American*": [],
+			"Asian": [],
+			"Pacific Islander*": [],
+			"Mixed": [],
+			"Latino*": []
 		}
 	},
 	"age": {
@@ -476,53 +494,45 @@ const groupIntoCategories = (srcArr) => {
 
 		//race
 		else if(header.match(/RACE/)){
-			// console.log(`RACE ${headerIdx}`);
-
 			if(header.match(/below poverty level/)){
-				// console.log('race below poverty header');
-				// console.log(header);
-				// console.log(headerIdx);
-				// console.log('// - - - - - //')
-				
-				
 				if(header.match(/Black/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.black`)
-					mappedColumnsGrouped.race.percentBelowPoverty.black.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.black`)
+					mappedColumnsGrouped.percentBelowPoverty.race.black.push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Indian/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.Native American*`)
-					mappedColumnsGrouped.race.percentBelowPoverty["Native American*"].push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.Native American*`)
+					mappedColumnsGrouped.percentBelowPoverty.race["Native American*"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Asian/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.Asian`)
-					mappedColumnsGrouped.race.percentBelowPoverty["Asian"].push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.Asian`)
+					mappedColumnsGrouped.percentBelowPoverty.race["Asian"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Pacific/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.Pacific Islander*`)
-					mappedColumnsGrouped.race.percentBelowPoverty["Pacific Islander*"].push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.Pacific Islander*`)
+					mappedColumnsGrouped.percentBelowPoverty.race["Pacific Islander*"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Other/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.Other`)
-					mappedColumnsGrouped.race.percentBelowPoverty["Other"].push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.Other`)
+					mappedColumnsGrouped.percentBelowPoverty.race["Other"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/any/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.Mixed`)
-					mappedColumnsGrouped.race.percentBelowPoverty["Mixed"].push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.Mixed`)
+					mappedColumnsGrouped.percentBelowPoverty.race["Mixed"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Latino/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.Latino*`)
-					mappedColumnsGrouped.race.percentBelowPoverty["Latino*"].push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.Latino*`)
+					mappedColumnsGrouped.percentBelowPoverty.race["Latino*"].push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/White/)){
-					indexArrayMapped.push(`race.percentBelowPoverty.white`)
-					mappedColumnsGrouped.race.percentBelowPoverty["white"].push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.race.white`)
+					mappedColumnsGrouped.percentBelowPoverty.race["white"].push({"title": header, "idx": headerIdx})
 					return;
 				}else{
 					indexArrayMapped.push("_")
