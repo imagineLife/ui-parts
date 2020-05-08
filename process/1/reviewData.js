@@ -13,6 +13,17 @@ let groupedObj = {
 			"18-34": 0,
 			"35-64": 0,
 			"65+": 0
+		},
+		"gender": {
+			"male": 0,
+			"female": 0
+		},
+		"education": {
+			"noHS":0,
+			"hsGrad":0,
+			"someCollege":0,
+			"bachPlus":0,
+			"total":0,
 		}
 	},
 	"age": {
@@ -105,6 +116,17 @@ let mappedColumnsGrouped = {
 			"18-34": [],
 			"35-64": [],
 			"65+": []
+		},
+		"gender": {
+			"male": [],
+			"female": []
+		},
+		"education": {
+			"noHS":[],
+			"hsGrad":[],
+			"someCollege":[],
+			"bachPlus":[],
+			"total":[],
 		}
 	},
 	"age": {
@@ -339,13 +361,13 @@ const groupIntoCategories = (srcArr) => {
 		else if(header.match(/SEX/)){
 			if(header.match(/Percent/)){
 				if(header.match(/Female/)){
-					indexArrayMapped.push(`gender.female.percentBelowPoverty`)
-					mappedColumnsGrouped.gender.female.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.gender.female`)
+					mappedColumnsGrouped.percentBelowPoverty.gender.female.push({"title": header, "idx": headerIdx})
 					return;
 				}
 				else{
-					indexArrayMapped.push(`gender.male.percentBelowPoverty`)
-					mappedColumnsGrouped.gender.male.percentBelowPoverty.push({"title": header, "idx": headerIdx})
+					indexArrayMapped.push(`percentBelowPoverty.gender.male`)
+					mappedColumnsGrouped.percentBelowPoverty.gender.male.push({"title": header, "idx": headerIdx})
 					return;
 				}
 			}
@@ -381,24 +403,24 @@ const groupIntoCategories = (srcArr) => {
 		else if(header.match(/EDUCATION/)){
 			if(header.match(/Percent/)){
 				if(header.match(/Bachelor/)){
-					indexArrayMapped.push(`education.bachPlus.percentBelowPoverty`)
-					mappedColumnsGrouped.education.bachPlus.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`percentBelowPoverty.education.bachPlus`)
+					mappedColumnsGrouped.percentBelowPoverty.education.bachPlus.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Some/)){
-					indexArrayMapped.push(`education.someCollege.percentBelowPoverty`)
-					mappedColumnsGrouped.education.someCollege.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`percentBelowPoverty.education.someCollege`)
+					mappedColumnsGrouped.percentBelowPoverty.education.someCollege.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/High/)){
-					indexArrayMapped.push(`education.hsGrad.percentBelowPoverty`)
-					mappedColumnsGrouped.education.hsGrad.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`percentBelowPoverty.education.hsGrad`)
+					mappedColumnsGrouped.percentBelowPoverty.education.hsGrad.push({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Less/)){
-					indexArrayMapped.push(`education.noHS.percentBelowPoverty`)
-					mappedColumnsGrouped.education.noHS.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`percentBelowPoverty.education.noHS`)
+					mappedColumnsGrouped.percentBelowPoverty.education.noHS.push({"title": header, "idx": headerIdx})	
 					return;
 				}else{
-					indexArrayMapped.push(`education.total.percentBelowPoverty`)
-					mappedColumnsGrouped.education.total.percentBelowPoverty.push({"title": header, "idx": headerIdx})	
+					indexArrayMapped.push(`percentBelowPoverty.education.total`)
+					mappedColumnsGrouped.percentBelowPoverty.education.total.push({"title": header, "idx": headerIdx})	
 					return;
 				}
 			}
@@ -530,17 +552,6 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 	let thisID;				//the column id
 	
 	dataArr.forEach((itm, idx) => {
-		if(itm === "2719"){
-			console.log('---STARTING LOOP, idx---')
-			console.log(idx)
-			console.log('itm')
-			console.log(itm)
-			console.log('indexArr[idx]')
-			console.log(indexArr[idx])
-			console.log('headerData[idx]')
-			console.log(headerData[idx])
-		}
-		
 		let storageStr = indexArr[idx]
 		//id column
 		if(idx == 0){
@@ -567,7 +578,7 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 				lastChildKey = srcObj[storageArr[0]][storageArr[1]][storageArr[2]]
 			}
 			if(storageArr[0] === 'percentBelowPoverty'){
-				srcObj[storageArr[0]][storageArr[1]][storageArr[2]] = parseInt(itm);
+				srcObj[storageArr[0]][storageArr[1]][storageArr[2]] = parseFloat(itm);
 				return;
 			}
 			else{
