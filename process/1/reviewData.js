@@ -99,102 +99,103 @@ let mappedColumnsGrouped = {
 	"state": "",
 	"percentBelowPoverty": {
 		"age": {
-			"<5": [],
-			"5-17": [],
-			"18-34": [],
-			"35-64": [],
-			"65+": []
+			"<5": {},
+			"5-17": {},
+			"18-34": {},
+			"35-64": {},
+			"65+": {}
 		},
 		"gender": {
-			"male": [],
-			"female": []
+			"male": {},
+			"female": {}
 		},
 		"education": {
-			"noHS":[],
-			"hsGrad":[],
-			"someCollege":[],
-			"bachPlus":[],
-			"total":[],
+			"noHS":{},
+			"hsGrad":{},
+			"someCollege":{},
+			"bachPlus":{},
+			"total":{},
 		},
 		"race": {
-			"white": [],
-			"black": [],
-			"Native American*": [],
-			"Asian": [],
-			"Pacific Islander*": [],
-			"Mixed": [],
-			"Latino*": []
+			"white": {},
+			"black": {},
+			"Native American*": {},
+			"Asian": {},
+			"Pacific Islander*": {},
+			"Mixed": {},
+			"Latino*": {}
 		}
 	},
 	"belowPoverty": {
 		"age": {
-			"<5": [],
-			"5-17": [],
-			"18-34": [],
-			"35-64": [],
-			"65+": []
+			"<5": {},
+			"5-17": {},
+			"18-34": {},
+			"35-64": {},
+			"65+": {}
 		},
 		"gender": {
-			"male": [],
-			"female": []
+			"male": {},
+			"female": {}
 		},
 		"education": {
-			"noHS":[],
-			"hsGrad":[],
-			"someCollege":[],
-			"bachPlus":[],
-			"total":[],
+			"noHS":{},
+			"hsGrad":{},
+			"someCollege":{},
+			"bachPlus":{},
+			"total":{},
 		},
 		"race": {
-			"white": [],
-			"black": [],
-			"Native American*": [],
-			"Asian": [],
-			"Pacific Islander*": [],
-			"Mixed": [],
-			"Latino*": []
+			"white": {},
+			"black": {},
+			"Native American*": {},
+			"Asian": {},
+			"Pacific Islander*": {},
+			"Mixed": {},
+			"Latino*": {}
 		}
 	},
 	"total": {
 		"age": {
-			"<5": [],
-			"5-17": [],
-			"18-34": [],
-			"35-64": [],
-			"65+": []
+			"<5": {},
+			"5-17": {},
+			"18-34": {},
+			"35-64": {},
+			"65+": {}
 		},
 		"gender": {
-			"male": [],
-			"female": []
+			"male": {},
+			"female": {}
 		},
 		"education": {
-			"noHS":[],
-			"hsGrad":[],
-			"someCollege":[],
-			"bachPlus":[],
-			"total":[],
+			"noHS":{},
+			"hsGrad":{},
+			"someCollege":{},
+			"bachPlus":{},
+			"total":{},
 		},
 		"race": {
-			"white": [],
-			"black": [],
-			"Native American*": [],
-			"Asian": [],
-			"Pacific Islander*": [],
-			"Mixed": [],
-			"Latino*": []
+			"white": {},
+			"black": {},
+			"Native American*": {},
+			"Asian": {},
+			"Pacific Islander*": {},
+			"Mixed": {},
+			"Latino*": {}
 		}
 	}
 }
 
-const jsonParseFile = (fileStr) => {
+const jsonParseSingleRow = (fileStr) => {
 	debug('\x1b[32m%s\x1b[0m',`jsonParseHeaderFile`)
 	return new Promise((resolve,reject) => {
 		var lineReader = rl.createInterface({
 		  input: fs.createReadStream(fileStr)
 		});
 
+		let i = 0
 		let resData = []
-		lineReader.on('line', function (line) {
+		lineReader.on('line', function (line) {	
 				let csvArr = line.split(',');
 				resData = csvArr
 		});
@@ -229,16 +230,16 @@ const groupIntoCategories = (srcArr) => {
 			if(header.match(/Under 5/)){
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`percentBelowPoverty.age.<5`)
-					mappedColumnsGrouped.percentBelowPoverty.age["<5"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.age["<5"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`total.age.<5`)
-					mappedColumnsGrouped.total.age["<5"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.total.age["<5"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`belowPoverty.age.<5`)
-					mappedColumnsGrouped.belowPoverty.age["<5"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.belowPoverty.age["<5"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else{
 					indexArrayMapped.push("_")
@@ -249,16 +250,16 @@ const groupIntoCategories = (srcArr) => {
 			else if(header.match(/17/)){
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`percentBelowPoverty.age.5-17`)
-					mappedColumnsGrouped.percentBelowPoverty.age["5-17"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.age["5-17"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`total.age.5-17`)
-					mappedColumnsGrouped.total.age["5-17"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.total.age["5-17"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`belowPoverty.age.5-17`)
-					mappedColumnsGrouped.belowPoverty.age["5-17"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.belowPoverty.age["5-17"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else{
 					indexArrayMapped.push("_")
@@ -269,16 +270,16 @@ const groupIntoCategories = (srcArr) => {
 			else if(header.match(/34/)){
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`percentBelowPoverty.age.18-34`)
-					mappedColumnsGrouped.percentBelowPoverty.age["18-34"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.age["18-34"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`total.age.18-34`)
-					mappedColumnsGrouped.total.age["18-34"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.total.age["18-34"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`belowPoverty.age.18-34`)
-					mappedColumnsGrouped.belowPoverty.age["18-34"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.belowPoverty.age["18-34"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else{
 					indexArrayMapped.push("_")
@@ -289,16 +290,16 @@ const groupIntoCategories = (srcArr) => {
 			else if(header.match(/35/)){
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`percentBelowPoverty.age.35-64`)
-					mappedColumnsGrouped.percentBelowPoverty.age["35-64"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.age["35-64"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`total.age.35-64`)
-					mappedColumnsGrouped.total.age["35-64"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.total.age["35-64"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`belowPoverty.age.35-64`)
-					mappedColumnsGrouped.belowPoverty.age["35-64"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.belowPoverty.age["35-64"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else{
 					indexArrayMapped.push("_")
@@ -309,16 +310,16 @@ const groupIntoCategories = (srcArr) => {
 			else if(header.match(/65/)){
 				if(header.match(/Percent/)){
 					indexArrayMapped.push(`percentBelowPoverty.age.65+`)
-					mappedColumnsGrouped.percentBelowPoverty.age["65+"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.age["65+"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Total/)){
 					indexArrayMapped.push(`total.age.65+`)
-					mappedColumnsGrouped.total.age["65+"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.total.age["65+"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else if(header.match(/Below poverty/)){
 					indexArrayMapped.push(`belowPoverty.age.65+`)
-					mappedColumnsGrouped.belowPoverty.age["65+"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.belowPoverty.age["65+"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else{
 					indexArrayMapped.push("_")
@@ -337,35 +338,35 @@ const groupIntoCategories = (srcArr) => {
 			if(header.match(/Percent/)){
 				if(header.match(/Female/)){
 					indexArrayMapped.push(`percentBelowPoverty.gender.female`)
-					mappedColumnsGrouped.percentBelowPoverty.gender.female.push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.gender.female = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else{
 					indexArrayMapped.push(`percentBelowPoverty.gender.male`)
-					mappedColumnsGrouped.percentBelowPoverty.gender.male.push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.gender.male = ({"title": header, "idx": headerIdx})
 					return;
 				}
 			}
 			else if(header.match(/Total/)){
 				if(header.match(/Female/)){
 					indexArrayMapped.push(`total.gender.female`)
-					mappedColumnsGrouped.total.gender.female.push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.total.gender.female = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else{
 					indexArrayMapped.push(`total.gender.male`)
-					mappedColumnsGrouped.total.gender.male.push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.total.gender.male = ({"title": header, "idx": headerIdx})
 					return;
 				}
 			}else if(header.match(/Below poverty/)){
 				if(header.match(/Female/)){
 					indexArrayMapped.push(`belowPoverty.gender.female`)
-					mappedColumnsGrouped.belowPoverty.gender.female.push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.belowPoverty.gender.female = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else{
 					indexArrayMapped.push(`belowPoverty.gender.male`)
-					mappedColumnsGrouped.belowPoverty.gender.male.push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.belowPoverty.gender.male = ({"title": header, "idx": headerIdx})
 					return;
 				}
 			}else{
@@ -379,68 +380,68 @@ const groupIntoCategories = (srcArr) => {
 			if(header.match(/Percent/)){
 				if(header.match(/Bachelor/)){
 					indexArrayMapped.push(`percentBelowPoverty.education.bachPlus`)
-					mappedColumnsGrouped.percentBelowPoverty.education.bachPlus.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.percentBelowPoverty.education.bachPlus = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Some/)){
 					indexArrayMapped.push(`percentBelowPoverty.education.someCollege`)
-					mappedColumnsGrouped.percentBelowPoverty.education.someCollege.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.percentBelowPoverty.education.someCollege = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/High/)){
 					indexArrayMapped.push(`percentBelowPoverty.education.hsGrad`)
-					mappedColumnsGrouped.percentBelowPoverty.education.hsGrad.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.percentBelowPoverty.education.hsGrad = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Less/)){
 					indexArrayMapped.push(`percentBelowPoverty.education.noHS`)
-					mappedColumnsGrouped.percentBelowPoverty.education.noHS.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.percentBelowPoverty.education.noHS = ({"title": header, "idx": headerIdx})	
 					return;
 				}else{
 					indexArrayMapped.push(`percentBelowPoverty.education.total`)
-					mappedColumnsGrouped.percentBelowPoverty.education.total.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.percentBelowPoverty.education.total = ({"title": header, "idx": headerIdx})	
 					return;
 				}
 			}
 			else if(header.match(/Total/)){
 				if(header.match(/Bachelor/)){
 					indexArrayMapped.push(`total.education.bachPlus`)
-					mappedColumnsGrouped.total.education.bachPlus.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.total.education.bachPlus = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Some/)){
 					indexArrayMapped.push(`total.education.someCollege`)
-					mappedColumnsGrouped.total.education.someCollege.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.total.education.someCollege = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/High/)){
 					indexArrayMapped.push(`total.education.hsGrad`)
-					mappedColumnsGrouped.total.education.hsGrad.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.total.education.hsGrad = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Less/)){
 					indexArrayMapped.push(`total.education.noHS`)
-					mappedColumnsGrouped.total.education.noHS.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.total.education.noHS = ({"title": header, "idx": headerIdx})	
 					return;
 				}else{
 					indexArrayMapped.push(`total.education.total`)
-					mappedColumnsGrouped.total.education.total.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.total.education.total = ({"title": header, "idx": headerIdx})	
 					return;
 				}
 			}else if(header.match(/Below poverty/)){
 				if(header.match(/Bachelor/)){
 					indexArrayMapped.push(`belowPoverty.education.bachPlus`)
-					mappedColumnsGrouped.belowPoverty.education.bachPlus.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.belowPoverty.education.bachPlus = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Some/)){
 					indexArrayMapped.push(`belowPoverty.education.someCollege`)
-					mappedColumnsGrouped.belowPoverty.education.someCollege.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.belowPoverty.education.someCollege = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/High/)){
 					indexArrayMapped.push(`belowPoverty.education.hsGrad`)
-					mappedColumnsGrouped.belowPoverty.education.hsGrad.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.belowPoverty.education.hsGrad = ({"title": header, "idx": headerIdx})	
 					return;
 				}else if(header.match(/Less/)){
 					indexArrayMapped.push(`belowPoverty.education.noHS`)
-					mappedColumnsGrouped.belowPoverty.education.noHS.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.belowPoverty.education.noHS = ({"title": header, "idx": headerIdx})	
 					return;
 				}else{
 					indexArrayMapped.push(`belowPoverty.education.total`)
-					mappedColumnsGrouped.belowPoverty.education.total.push({"title": header, "idx": headerIdx})	
+					mappedColumnsGrouped.belowPoverty.education.total = ({"title": header, "idx": headerIdx})	
 					return;
 				}
 			}else{
@@ -454,42 +455,42 @@ const groupIntoCategories = (srcArr) => {
 			if(header.match(/below poverty level/)){
 				if(header.match(/Black/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.black`)
-					mappedColumnsGrouped.percentBelowPoverty.race.black.push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race.black = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Indian/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.Native American*`)
-					mappedColumnsGrouped.percentBelowPoverty.race["Native American*"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race["Native American*"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Asian/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.Asian`)
-					mappedColumnsGrouped.percentBelowPoverty.race["Asian"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race["Asian"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Pacific/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.Pacific Islander*`)
-					mappedColumnsGrouped.percentBelowPoverty.race["Pacific Islander*"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race["Pacific Islander*"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Other/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.Other`)
-					mappedColumnsGrouped.percentBelowPoverty.race["Other"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race["Other"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/any/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.Mixed`)
-					mappedColumnsGrouped.percentBelowPoverty.race["Mixed"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race["Mixed"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/Latino/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.Latino*`)
-					mappedColumnsGrouped.percentBelowPoverty.race["Latino*"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race["Latino*"] = ({"title": header, "idx": headerIdx})
 					return;
 				}
 				else if(header.match(/White/)){
 					indexArrayMapped.push(`percentBelowPoverty.race.white`)
-					mappedColumnsGrouped.percentBelowPoverty.race["white"].push({"title": header, "idx": headerIdx})
+					mappedColumnsGrouped.percentBelowPoverty.race["white"] = ({"title": header, "idx": headerIdx})
 					return;
 				}else{
 					indexArrayMapped.push("_")
@@ -546,16 +547,14 @@ const categorizeFirstRow = (dataArr, indexArr, srcObj, headerData) => {
 	return srcObj;
 }
 
-jsonParseFile('./../../src/mockData/justHeaderRow.csv')
+jsonParseSingleRow('./../../src/mockData/justHeaderRow.csv')
 .then(headerData => {
 	debug('\x1b[32m%s\x1b[0m',`jsonParseHeaderFile THEN`)
 	//extract "meaningful" data from input
 	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(headerData)
-	jsonParseFile('./../../src/mockData/firstRow.csv').then(firstRow => {
+
+	jsonParseSingleRow('./../../src/mockData/firstRow.csv').then(firstRow => {
 		let resObj = categorizeFirstRow(firstRow, indexArrayMapped, groupedObj, headerData)
-		console.log('resObj')
-		console.log(JSON.stringify(resObj))
-		
 	})
 	
 })
