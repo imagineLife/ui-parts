@@ -496,7 +496,55 @@ const groupIntoCategories = (srcArr) => {
 					indexArrayMapped.push("_")
 					return;
 				}
+			}else if(header.match(/Below poverty level/)){
+				if(header.match(/Black/)){
+					indexArrayMapped.push(`belowPoverty.race.black`)
+					mappedColumnsGrouped.belowPoverty.race.black = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Indian/)){
+					indexArrayMapped.push(`belowPoverty.race.Native American*`)
+					mappedColumnsGrouped.belowPoverty.race["Native American*"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Asian/)){
+					indexArrayMapped.push(`belowPoverty.race.Asian`)
+					mappedColumnsGrouped.belowPoverty.race["Asian"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Pacific/)){
+					indexArrayMapped.push(`belowPoverty.race.Pacific Islander*`)
+					mappedColumnsGrouped.belowPoverty.race["Pacific Islander*"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Other/)){
+					indexArrayMapped.push(`belowPoverty.race.Other`)
+					mappedColumnsGrouped.belowPoverty.race["Other"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/any/)){
+					indexArrayMapped.push(`belowPoverty.race.Mixed`)
+					mappedColumnsGrouped.belowPoverty.race["Mixed"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Latino/)){
+					indexArrayMapped.push(`belowPoverty.race.Latino*`)
+					mappedColumnsGrouped.belowPoverty.race["Latino*"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/White/)){
+					indexArrayMapped.push(`belowPoverty.race.white`)
+					mappedColumnsGrouped.belowPoverty.race["white"] = ({"title": header, "idx": headerIdx})
+					return;
+				}else{
+					indexArrayMapped.push("_")
+					return;
+				}
 			}else{
+				console.log('---- RACE ----');
+				console.log(header);
+				console.log('// - - - - - //')
+				
 				indexArrayMapped.push("_")
 				return;
 			}
@@ -516,8 +564,8 @@ jsonParseSingleRow('./../../src/mockData/justHeaderRow.csv')
 	
 	jsonParseSingleRow('./../../src/mockData/firstRow.csv').then(firstRow => {
 		let resObj = categorizeSingleRow(firstRow, indexArrayMapped, groupedObj, headerData)
-		// console.log('resObj')
-		// 	console.log(resObj)
+		console.log('resObj')
+			console.log(JSON.stringify(resObj))
 				
 	})
 	
