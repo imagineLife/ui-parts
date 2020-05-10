@@ -540,6 +540,50 @@ const groupIntoCategories = (srcArr) => {
 					indexArrayMapped.push("_")
 					return;
 				}
+			}else if(header.match(/Total/)){
+				if(header.match(/Black/)){
+					indexArrayMapped.push(`total.race.black`)
+					mappedColumnsGrouped.total.race.black = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Indian/)){
+					indexArrayMapped.push(`total.race.Native American*`)
+					mappedColumnsGrouped.total.race["Native American*"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Asian/)){
+					indexArrayMapped.push(`total.race.Asian`)
+					mappedColumnsGrouped.total.race["Asian"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Pacific/)){
+					indexArrayMapped.push(`total.race.Pacific Islander*`)
+					mappedColumnsGrouped.total.race["Pacific Islander*"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Other/)){
+					indexArrayMapped.push(`total.race.Other`)
+					mappedColumnsGrouped.total.race["Other"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/any/)){
+					indexArrayMapped.push(`total.race.Mixed`)
+					mappedColumnsGrouped.total.race["Mixed"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/Latino/)){
+					indexArrayMapped.push(`total.race.Latino*`)
+					mappedColumnsGrouped.total.race["Latino*"] = ({"title": header, "idx": headerIdx})
+					return;
+				}
+				else if(header.match(/White/)){
+					indexArrayMapped.push(`total.race.white`)
+					mappedColumnsGrouped.total.race["white"] = ({"title": header, "idx": headerIdx})
+					return;
+				}else{
+					indexArrayMapped.push("_")
+					return;
+				}
 			}else{
 				console.log('---- RACE ----');
 				console.log(header);
