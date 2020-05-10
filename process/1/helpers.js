@@ -22,7 +22,6 @@ const categorizeSingleRow = (dataArr, indexArr, srcObj, headerData) => {
 		//data-columns
 		}else{
 			const storageArr = storageStr.split('.')
-
 			let firstLevel = srcObj[storageArr[0]]
 			let lastChildKey = firstLevel[storageArr[1]]
 			if(storageArr.length == 3){
