@@ -35,6 +35,16 @@ const categorizeSingleRow = (dataArr, indexArr, srcObj, headerData) => {
 	return srcObj;
 }
 
+//Converts array of objects into string of objects, no delimeters
+const prepForMongoConsumption = (arr) => {
+	let resString = ''
+	arr.forEach(itm => {
+		resString = resString + JSON.stringify(itm)
+	})
+	return resString
+}
+
 module.exports = {
-	categorizeSingleRow
+	categorizeSingleRow,
+	prepForMongoConsumption
 }
