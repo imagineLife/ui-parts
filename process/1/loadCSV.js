@@ -1,6 +1,6 @@
 const fs = require('fs')
 const rl = require('readline')
-const { categorizeSingleRow } = require('./helpers')
+const { categorizeSingleRow, prepForMongoConsumption } = require('./helpers')
 const specialArrMapping = require('./mappingArr')
 
 let groupedObj = {
@@ -107,7 +107,6 @@ const jsonParseCSVFile = (fileStr) => {
 		});
 
 		lineReader.on('line', function (line) {
-			// if(i < 10){
 				csvArr = line.split(',');
 				if(i === 0){
 					headerRow = csvArr
@@ -117,10 +116,6 @@ const jsonParseCSVFile = (fileStr) => {
 					resData.push(categorizedRow)
 				}
 				i = i + 1;
-			// }else{
-			// 	i = i + 1;
-			// 	return;
-			// }
 		});
 
 		lineReader.on('close', () => {
@@ -129,9 +124,17 @@ const jsonParseCSVFile = (fileStr) => {
 	})
 }
 
-console.log('START: '+ new Date());
-jsonParseCSVFile('./../../src/mockData/cleaned.csv').then(csvData => {
-	console.log('JSON.stringify(csvData)')
-	console.log(JSON.stringify(csvData))
-	console.log('END: '+ new Date());
+jsonParseCSVFile('./../../src/mockData/cleaned.csv')
+.then(prepForMongoConsumption)
+.then(resStr => {
+	console.log('resStr')
+	console.log(resStr)
+
+	/*
+		OUTPUT
+		- json objects ready to import into a MongoDB
+
+		MONGO COMMAND
+		mongoimport --db povertystates --collection states --drop --file states.json
+	*/
 })
