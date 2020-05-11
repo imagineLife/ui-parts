@@ -3,6 +3,7 @@ const rl = require('readline')
 const util = require('util')
 const debug = util.debuglog('review')
 const { categorizeSingleRow } = require('./helpers')
+
 //result placeholder
 let groupedObj = {
 	"state": "",
@@ -585,10 +586,6 @@ const groupIntoCategories = (srcArr) => {
 					return;
 				}
 			}else{
-				console.log('---- RACE ----');
-				console.log(header);
-				console.log('// - - - - - //')
-				
 				indexArrayMapped.push("_")
 				return;
 			}
@@ -605,12 +602,8 @@ jsonParseSingleRow('./../../src/mockData/justHeaderRow.csv')
 	debug('\x1b[32m%s\x1b[0m',`jsonParseHeaderFile THEN`)
 	//extract "meaningful" data from input
 	let {mappedColumnsGrouped, indexArrayMapped } = groupIntoCategories(headerData)
-	
 	jsonParseSingleRow('./../../src/mockData/firstRow.csv').then(firstRow => {
 		let resObj = categorizeSingleRow(firstRow, indexArrayMapped, groupedObj, headerData)
-		console.log('resObj')
-			console.log(JSON.stringify(resObj))
-				
 	})
 	
 })
