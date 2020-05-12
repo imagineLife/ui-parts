@@ -32,6 +32,10 @@ module.exports = {
       {
         test: /\.css$/,
         use: [MiniCss.loader, "css-loader"]
+      },
+      {
+        test: /\.geojson$/,
+        loader: 'json-loader'
       }
     ]
   },
