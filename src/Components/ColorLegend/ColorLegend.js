@@ -19,31 +19,35 @@ const ColorLegendComp = (props) => {
 		if(colorScaleRef && colorScaleRef.current && !colorApplied){
 
 			const canvasObj = colorScaleRef.current
+			
 			//prepare the d3 color-scale
-			const colorScale = ds.scaleSequential(dsc.interpolateGreens).domain([0,100])
+			const colorScale = ds
+				.scaleSequential(dsc.interpolateGreens)
+				.domain([0,props.size.h])
+
+			//legend scale
+			var legendScale = ds.scaleLinear()
+        .range([props.size.h, 1])
+        .domain(colorScale.domain());
 			
 			// https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/getContext
 			var canvasContext = canvasObj.getContext("2d");
 
 			//... based on http://bl.ocks.org/mbostock/048d21cf747371b11884f75ad896e5a5
-		  var image = canvasContext.createImageData(1, props.size.h || 150);
+		  let image = canvasContext.createImageData(1, props.size.h); //props.size.h || 150, props.size.w || 500
 
-		  d3Arr.range(props.size.w || 500).forEach(function(i) {
-          const c = d3Color.rgb(
-          	colorScale(
-          		ds.scaleLinear().domain([0,100]).invert(i)
-          	)
-          );
-          image.data[4*i] = c.r;
-          image.data[4*i + 1] = c.g;
-          image.data[4*i + 2] = c.b;
-          image.data[4*i + 3] = 255;
-        });
+		  d3Arr.range(props.size.h).forEach(function(idx){
+          const c = d3Color.rgb(colorScale(legendScale.invert(idx)));
+          image.data[4*idx] = c.r;
+          image.data[4*idx + 1] = c.g;
+          image.data[4*idx + 2] = c.b;
+          image.data[4*idx + 3] = 255;
+        })
 
-        canvasContext.putImageData(image, 0, 0);
+      canvasContext.putImageData(image, 0, 0);
 		  setColorApplied(true)
-
 		}
+
 	},[colorScaleRef, colorApplied, setColorApplied])
 
 	const h = props.size && props.size.h || 150;
@@ -52,6 +56,8 @@ const ColorLegendComp = (props) => {
 	return (<div>
 		<canvas 
 			ref={colorScaleRef}
+			width={1}
+			height={h}
 			style={{
 				height: h,
 				width: w
