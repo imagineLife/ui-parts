@@ -50,5 +50,5 @@ mongoimport --host Cluster0-shard-0/cluster0-shard-00-00-utxza.mongodb.net:27017
 ```
 - replace the vars with my own content...
 ```
-mongoimport --host Cluster0-shard-0/cluster0-shard-00-00-utxza.mongodb.net:27017,cluster0-shard-00-01-utxza.mongodb.net:27017,cluster0-shard-00-02-utxza.mongodb.net:27017 --ssl --username states-api-user --password <PASSWORD> --authenticationDatabase admin --db censusData --collection states --type json --file states.json
+mongoimport --host Cluster0-shard-0/cluster0-shard-00-00-utxza.mongodb.net:27017,cluster0-shard-00-01-utxza.mongodb.net:27017,cluster0-shard-00-02-utxza.mongodb.net:27017 --ssl --username states-api-user --password <my-password-here> --authenticationDatabase admin --db censusData --collection states --type json --file /Users/Jake/Desktop/states.json
 ```
