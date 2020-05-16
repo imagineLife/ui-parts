@@ -16,6 +16,20 @@ Here, the db user will be used by the app to connect from the app to the db.
   - states-api-user
   - **********
 
+# Whitelist IPs
+- in prep for Heroku connection, all ips will be whitelisted
+- find sidebar
+- find security header
+- find "Network Access" option && select it
+- GUI should show a tab view with "IP Whitelist" selected
+- Add IP
+- **ALL** for now
+
+# Connect to remote atlas instance from local machine
+Here, we're going to connect!
+- find sidebar
+- find "Data Storage" header
+- find "Clusters" item && Click it
+- find the sandbox pill, with Cluster0 named inside the outline
 
 
-  
