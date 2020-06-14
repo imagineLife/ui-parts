@@ -15,6 +15,7 @@ import Scatter from './../Routes/Scatter';
 import ColorLegend from './../Routes/ColorLegend';
 import Mapper from './../Routes/Map';
 import MapperTwo from './../Routes/Map2';
+import MapperThree from './../Routes/Map3';
 
 // data
 import percBelow from './../mockData/percBelowPov.json'
@@ -52,6 +53,10 @@ const RoutesLookup = [
   {
     component: MapperTwo,
     path:'/map2'
+  },
+  {
+    component: MapperThree,
+    path:'/map3'
   },
   {
     component: ColorLegend,
