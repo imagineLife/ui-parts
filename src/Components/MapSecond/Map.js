@@ -3,7 +3,7 @@ import * as dg from 'd3-geo'
 import * as d3Select from 'd3-selection'
 import * as d3Z from 'd3-zoom'
 import './Map.css'
-
+import Rtt from 'react-tooltip'
 // https://github.com/topojson/topojson-client
 import * as topo from "topojson-client"
 
@@ -55,13 +55,6 @@ const Map = () => {
 			dg
 				.geoAlbersUsa()
 				.translate([487.5, 305]).scale([800]))
-
-	// const stateBoundaries = d3Path(topo.mesh(topofile, topofile.objects.states))
-	// const stateBoundaries = d3Path(topo.mesh(topofile, topofile.objects.states, (a, b) => a !== b))
-	// const countryBoundry = d3Path(topo.feature(topofile, topofile.objects.nation))
-
-	console.log('topofile.objects.states')
-	console.log(topofile.objects.states)
 	
 	return(
 		<div id="map-wrapper">
@@ -76,45 +69,23 @@ const Map = () => {
 						strokeLinecap="round"
 						ref={gRef}
 					>
-						{/* 
-							State Boundaries 
-							<path 
-								strokeWidth={strokeW}
-								stroke={strokeColor}
-								d={stateBoundaries}
-							/>
-						*/}
-
-					{/* 
-						Country Boundary 
-						<path 
-							strokeWidth={strokeW}
-							stroke={strokeColor}
-							d={countryBoundry}
-						/>
-					*/}
-
 					{topofile.objects.states.geometries.map((s,sidx) => (
 						<path
 							key={`state-${sidx}`}
-								strokeWidth={strokeW}
-								stroke={strokeColor}
-								d={d3Path(topo.mesh(topofile, s))}
-								onClick={() => {
-									console.log('clicked')
-									console.log(s)
-								}}
-								onMouseMove={() => {
-									console.log('MOUSE MOVE!');
-									console.log(s);
-								}}
-								// data-tip={`${}`}
-							/>
+							strokeWidth={strokeW}
+							stroke={strokeColor}
+							vectorEffect="non-scaling-stroke"
+							d={d3Path(topo.feature(topofile, s))}
+							onMouseMove={() => {
+								console.log(s);
+							}}
+							// fill={`rgba(125,125,250,${Math.random()}`}
+						/>
 					))}
-						
 					</g>
 					}
 			</svg>
+			<Rtt />
 		</div>)
 };
 
