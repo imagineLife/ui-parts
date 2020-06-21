@@ -3,15 +3,15 @@ body {
 }
 svg {
   border: 2px solid rgb(125,125,125);
-  background-color: darkblue;
+  background-color: rgb(15,15,65);
 }
 
 .selected {
-  fill: darkgreen;
+  fill: rgb(0,40,0);
 }
 
 .boundary {
-  fill: forestgreen;
+  fill: rgb(0,60,0);
 
   /* 
     Solid option 
