@@ -6,28 +6,31 @@ svg {
   background-color: rgb(15,15,65);
 }
 
-.selected {
-  fill: rgb(0,40,0);
-}
-
 .boundary {
   fill: rgb(0,60,0);
 
   /* 
     Solid option 
   */
-/*
+  
+  /*
   stroke: rgb(175,175,175);
-  stroke-width: .25px; */
+  stroke-width: .25px; 
+  */
   
   /*
       Dashed-option?!
   */
-  stroke: rgb(175,175,175);
+  stroke: rgb(105,105,105);
   stroke-width: .5px; 
   stroke-dasharray: 3 2 3 3;
 
   vector-effect: non-scaling-stroke;
+  transition: fill 150ms;
+}
+
+.boundary:hover{
+  fill: rgb(0,50,0);
 }
 
 .hidden {
