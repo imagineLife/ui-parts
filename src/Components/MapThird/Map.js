@@ -8,14 +8,14 @@ import Rtt from 'react-tooltip'
 import * as topo from "topojson-client"
 
 // https://github.com/topojson/us-atlas
-import topofile from './../../mockData/states-geojson.json'
+import geoJSONFile from './../../mockData/states-geojson.json'
 
 const MapComponent = () => {
 	
 	const [divSize] = useState({w: 975, h: 610})
 	const [paths, setPaths] = useState(null)
 	const [tooltipText, setTooltipText] = useState(null)
-	const [tooltipClass, setTooltipClass] = useState('tooltip hidden');
+	const [ttVis, setTTVis] = useState(false)
 	const svgRef = useRef()
 	const gRef = useRef()
 
@@ -48,11 +48,14 @@ const MapComponent = () => {
 			const enterStates = e => {
 		    e.append("path")
 		    .attr("d", d3Path)
-		    .style("stroke", "#fff")
-		    .style("stroke-width", "1")
+		    .style("stroke", "rgb(185,185,185)")
+		    .style("stroke-width", ".5px")
 		    .style('vector-effect', 'non-scaling-stroke')
 		    .attr('class', 'boundary')
-		    .on('mouse')
+		    .on('mousemove', (d) => {
+		    	setTooltipText(d.properties.NAME)
+
+		    })
 		  }
 
 		  const updateStates = u => {
@@ -76,7 +79,7 @@ const MapComponent = () => {
 
 	   	const statePathsDJ = d3SVG
 	    	.selectAll("path")
-	    	.data(topofile.features)
+	    	.data(geoJSONFile.features)
   		statePathsDJ.join(enterStates, updateStates)
 		}
 	})
@@ -105,11 +108,13 @@ const MapComponent = () => {
 					ref={gRef}
 				/>
 			</svg>
-			<div 
-				id="tooltip" 
-				className={tooltipClass}>
-					{tooltipText}
-			</div>
+			{ttVis && 
+				<div 
+					id="tooltip" 
+					className={'tooltip'}>
+						{tooltipText}
+				</div>
+			}
 		</div>)
 };
 
