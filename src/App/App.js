@@ -17,6 +17,7 @@ import {
 // import MapperFour from './../Routes/Map4';
 import MapperFive from './../Routes/Map5';
 import MapperSix from './../Routes/Map6';
+import MapperSeven from './../Routes/Map7';
 import ColorLegend from './../Routes/ColorLegend';
 import Home from './../Routes/Home'
 
@@ -72,6 +73,10 @@ const RoutesLookup = [
   {
     component: MapperSix,
     path:'/map6'
+  }, 
+  {
+    component: MapperSeven,
+    path:'/map7'
   },  
   {
     component: ColorLegend,
