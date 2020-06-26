@@ -96,7 +96,8 @@ const MapComponent = () => {
 		    .attr("d", d3Path)
 		    .attr("id", d => d.id)
 		    .style('vector-effect', 'non-scaling-stroke')
-		    .attr('class', 'boundary')
+		    // .attr('class', 'boundary')
+		    .attr('fill', `rgba(100,100,250,${Math.random()})`)
 		  	// .on('click', clickedState)
 		  }
 
@@ -105,7 +106,8 @@ const MapComponent = () => {
 		    .attr("d", d3Path)
 		    .attr("id", d => d.id)
 		    .style('vector-effect', 'non-scaling-stroke')
-		    .attr('class', 'boundary')
+		    .attr('fill', `rgba(100,100,250,${Math.random()})`)
+		    // .attr('class', 'boundary')
 		  	// .on('click', clickedState)
 		  }
 
