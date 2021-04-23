@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 // Components
-// import Sidebars from './../Routes/Sidebar';
+import Sidebars from './../Routes/Sidebar';
 // import Widgets from './../Routes/Widgets';
 // import DataLoader from './../Routes/DataLoader'
 // import CsvLoader from './../Routes/CsvLoader'
@@ -19,6 +19,7 @@ import MapperFive from './../Routes/Map5';
 import MapperSix from './../Routes/Map6';
 import MapperSeven from './../Routes/Map7';
 import ColorLegend from './../Routes/ColorLegend';
+import FetchOnHover from './../Routes/FetchOnHover';
 import Home from './../Routes/Home'
 
 // data
@@ -26,10 +27,10 @@ import percBelow from './../mockData/percBelowPov.json'
 import percBelowMale from './../mockData/percBelowPovMale.json'
 //single-source of routes && Components to Lookup
 const RoutesLookup = [
-  // {
-  //   component: Sidebars,
-  //   path: '/sidebars'
-  // },
+  {
+    component: Sidebars,
+    path: '/sidebars'
+  },
   // {
   //   component: Widgets,
   //   path: '/widgets'
@@ -66,6 +67,10 @@ const RoutesLookup = [
   //   component: MapperFour,
   //   path:'/map4'
   // },
+  {
+    component: FetchOnHover,
+    path:'/fetch-on-hover'
+  },
   {
     component: MapperFive,
     path:'/map5'
