@@ -47,6 +47,7 @@ export default function FOHCodeChanged(){
 
   // store data in ref
   const [boxOneState, setBoxOneState] = useState({show: false, fetching: false, data: useRef()})
+  const [boxTwoState, setBoxTwoState] = useState({show: false, fetching: false, data: useRef()})
   
   /*
     when 'fetching' && no ref data
@@ -64,11 +65,11 @@ export default function FOHCodeChanged(){
   }, boxOneState.data.current === undefined ? INTERVAL_TIME : null, boxOneState.fetching && boxOneState.show);
 
   
-  const fetchOnHover = () => {
-    if(!boxOneState.fetching && !boxOneState.data.current){
+  const fetchForRefOnHover = (isFetching, curData, setRefDataCallback, cb) => {
+    if(!isFetching && !curData){
       console.log('fetching on hover')
-      mockFetch((d) => boxOneState.data.current = d, FETCH_DELAY)
-      setBoxOneState(cur => ({...cur, fetching: true}))
+      mockFetch(setRefDataCallback, FETCH_DELAY)
+      cb()
     }
   }
   
@@ -81,7 +82,12 @@ export default function FOHCodeChanged(){
         type="button"
         style={{border : '1px solid rgb(125,125,125)'}} 
         id="fetch-hover" 
-        onMouseOver={fetchOnHover} 
+        onMouseOver={() => fetchForRefOnHover(
+          boxOneState.fetching, 
+          boxOneState.data.current, 
+          (d) => boxOneState.data.current = d, 
+          () => setBoxOneState(cur => ({...cur, fetching: true}))
+        )} 
         value="Hover here to fetch"
         onClick={() => {
           if(!boxOneState.show) setBoxOneState(cur => ({...cur, show: true}))
@@ -90,6 +96,27 @@ export default function FOHCodeChanged(){
         boxOneState.show && (
           <Suspense fallback={<p></p>}>
             <ConditionalChild data={boxOneState.data.current} fetching={boxOneState.fetching}/>
+          </Suspense>
+        )
+      }
+      <input 
+        type="button"
+        style={{border : '1px solid rgb(125,125,125)'}} 
+        id="fetch-hover-two" 
+        onMouseOver={() => fetchForRefOnHover(
+          boxTwoState.fetching, 
+          boxTwoState.data.current, 
+          (d) => boxTwoState.data.current = d, 
+          () => setBoxTwoState(cur => ({...cur, fetching: true}))
+        )} 
+        value="Hover here to fetch box two"
+        onClick={() => {
+          if(!boxTwoState.show) setBoxTwoState(cur => ({...cur, show: true}))
+        }}/>
+      {
+        boxTwoState.show && (
+          <Suspense fallback={<p></p>}>
+            <ConditionalChild data={boxTwoState.data.current} fetching={boxTwoState.fetching}/>
           </Suspense>
         )
       }
