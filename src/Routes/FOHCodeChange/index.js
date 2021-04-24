@@ -42,12 +42,11 @@ const ConditionalChild = lazy(() => import('./ConditionalChild'))
 const INTERVAL_TIME = 50
 const FETCH_DELAY = 1000
 
+
 export default function FOHCodeChanged(){
 
   // store data in ref
-  const data = useRef();
-  const [showConditionalComponent, setShowConditionalComponent] = useState(false)
-  const [fetching, setFetching] = useState(false)
+  const [boxOneState, setBoxOneState] = useState({show: false, fetching: false, data: useRef()})
   
   /*
     when 'fetching' && no ref data
@@ -55,19 +54,21 @@ export default function FOHCodeChanged(){
     when data is present
       turn-off the 'fetching' state
   */
-  useInterval(() => {
-    console.log('running tick in useInterval')
-    if(data.current && fetching){
-      console.log('%c IS DATA, turn-off fetching flag', 'background-color: steelblue; color: white;')
-      setFetching(false)
-    }
-  }, data.current === undefined ? INTERVAL_TIME : null, fetching && showConditionalComponent);
 
+  useInterval(() => {
+    console.log('Box 1 Running Tick')
+    if(boxOneState.data.current && boxOneState.fetching){
+      console.log('%c IS DATA, turn-off fetching flag', 'background-color: steelblue; color: white;')
+      setBoxOneState(cur => ({...cur, fetching: false}))
+    }
+  }, boxOneState.data.current === undefined ? INTERVAL_TIME : null, boxOneState.fetching && boxOneState.show);
+
+  
   const fetchOnHover = () => {
-    if(!fetching && !data.current){
+    if(!boxOneState.fetching && !boxOneState.data.current){
       console.log('fetching on hover')
-      mockFetch((d) => data.current = d, FETCH_DELAY)
-      setFetching(true)
+      mockFetch((d) => boxOneState.data.current = d, FETCH_DELAY)
+      setBoxOneState(cur => ({...cur, fetching: true}))
     }
   }
   
@@ -83,12 +84,12 @@ export default function FOHCodeChanged(){
         onMouseOver={fetchOnHover} 
         value="Hover here to fetch"
         onClick={() => {
-          if(!showConditionalComponent) setShowConditionalComponent(true)
+          if(!boxOneState.show) setBoxOneState(cur => ({...cur, show: true}))
         }}/>
       {
-        showConditionalComponent && (
+        boxOneState.show && (
           <Suspense fallback={<p></p>}>
-            <ConditionalChild data={data.current} fetching={fetching}/>
+            <ConditionalChild data={boxOneState.data.current} fetching={boxOneState.fetching}/>
           </Suspense>
         )
       }
