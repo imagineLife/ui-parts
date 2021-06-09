@@ -20,6 +20,8 @@ import MapperSix from './../Routes/Map6';
 import MapperSeven from './../Routes/Map7';
 import ColorLegend from './../Routes/ColorLegend';
 import FetchOnHover from './../Routes/FetchOnHover';
+import TextUploader from './../Routes/TextUploader';
+import FOHChanged from './../Routes/FOHCodeChange';
 import Home from './../Routes/Home'
 
 // data
@@ -70,6 +72,14 @@ const RoutesLookup = [
   {
     component: FetchOnHover,
     path:'/fetch-on-hover'
+  },
+  {
+    component: TextUploader,
+    path:'/upload-text'
+  },
+  {
+    component: FOHChanged,
+    path:'/foh-changed'
   },
   {
     component: MapperFive,
