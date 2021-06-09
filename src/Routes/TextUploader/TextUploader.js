@@ -21,6 +21,7 @@ const TextUploader = () => {
         type="file" 
         id="file-selector" 
         multiple
+        accept=".txt"
       />
     </Fragment>
   )
