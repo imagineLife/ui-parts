@@ -5,47 +5,24 @@ import React, {
   useState
 } from 'react';
 
-import {readFile} from './helpers';
+import TextUploaderInput from './../../Components/TextUploaderInput'
 
 const TextUploader = () => {
-  const inputRef = useRef()
-  const [fileList, setFileList] = useState(null)
+  const [fileContent, setFileContent] = useState(null);
+  console.log('fileContent')
+  console.log(fileContent)
   
-  const inputChange = (e) => {
-    readFile(e.target.files[0], (err, res) => {
-      console.log('readFile Callback')
-      
-      if(err) console.warn(err);
-      if(!err){
-        console.log(`RES in textUploader!`); 
-        console.log(res);
-        setFileList(e.target.files)
-      }
-    })
-  }
-
-  
-
-  // register input eventListener
-  useEffect(() => {
-    inputRef.current.addEventListener('change', inputChange);
-    console.log('Event Listener registered')
-  },[])
-
-  console.log('fileList')
-  console.log(fileList)
-  
-
   return(
     <Fragment>
       <p>See <a target="_blank" href="https://avalon.law.yale.edu/subject_menus/inaug.asp">This Link</a> for more historical presidential inaugural addresses.</p>
-      <input 
-        ref={inputRef} 
+      <TextUploaderInput 
         type="file" 
         id="file-selector" 
         multiple
         accept=".txt"
+        onUpload={(f) =>setFileContent(f)}
       />
+      {fileContent && <p>{fileContent}</p>}
     </Fragment>
   )
 };
