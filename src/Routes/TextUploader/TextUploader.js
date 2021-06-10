@@ -22,7 +22,7 @@ const TextUploader = () => {
         accept=".txt"
         onUpload={(f) =>setFileContent(f)}
       />
-      {fileContent && <p>{fileContent}</p>}
+      {fileContent && <p style={{ whiteSpace: "pre-line"}}>{fileContent}</p>}
     </Fragment>
   )
 };
