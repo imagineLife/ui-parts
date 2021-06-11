@@ -9,8 +9,6 @@ import TextUploaderInput from './../../Components/TextUploaderInput'
 
 const TextUploader = () => {
   const [fileContent, setFileContent] = useState(null);
-  console.log('fileContent')
-  console.log(fileContent)
   
   return(
     <Fragment>
@@ -20,7 +18,7 @@ const TextUploader = () => {
         id="file-selector" 
         multiple
         accept=".txt"
-        onUpload={(f) =>setFileContent(f)}
+        onUpload={setFileContent}
       />
       {fileContent && <p style={{ whiteSpace: "pre-line"}}>{fileContent}</p>}
     </Fragment>
