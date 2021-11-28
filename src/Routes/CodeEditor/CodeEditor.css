@@ -1,0 +1,17 @@
+:root{
+  --col-width: 45%;  
+}
+
+.flex{
+  display: flex;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-half-width{
+  flex: 0 0 var(--col-width);
+  max-width: var(--col-width);
+}
