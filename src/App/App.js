@@ -22,6 +22,7 @@ import ColorLegend from './../Routes/ColorLegend';
 import FetchOnHover from './../Routes/FetchOnHover';
 import TextUploader from './../Routes/TextUploader';
 import FOHChanged from './../Routes/FOHCodeChange';
+import CodeEditor from './../Routes/CodeEditor'
 import Home from './../Routes/Home'
 
 // data
@@ -101,6 +102,10 @@ const RoutesLookup = [
       axis: 'bottom',
       ticks: 4
     }
+  },
+  {
+    component: CodeEditor,
+    path: '/editor'
   },
   {
     component: Home,
