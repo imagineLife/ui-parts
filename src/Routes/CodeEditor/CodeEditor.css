@@ -1,5 +1,9 @@
 :root{
-  --col-width: 45%;  
+  --col-width: 48%;  
+}
+
+body{
+  background-color: unset;
 }
 
 .flex{
