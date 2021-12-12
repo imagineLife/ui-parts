@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import SyntaxHighlighter from 'react-syntax-highlighter';
 import * as d3 from 'd3';
 import './CodeEditor.css';
 import startingText from './startingText';
@@ -21,18 +22,15 @@ const CodeEditor = () => {
     // get the content of the origin div (first argument)
     var content = textBlockRef.current.innerText;
     // remove the xmp tag
-    content = content.replace(/<xmp>/,"").replace(/<.xmp>/,"").replace(/<\/?span[^>]*>/g,"");
-    // write the content in the destination div (second argument)
-    myJSParser(content)
-  }
-
-  function myJSParser(content){
-    var command = content;
+    content = content.replace(/<\/?span[^>]*>/g,"");
+    
+    
+    // parse the js
     // remove the xmp tag and the script tags
-    command = command.replace(/&lt;/g,'<')
+    content = content.replace(/&lt;/g,'<')
       .replace(/&gt;/g,'>')
       .replace(/&amp;/g,'&');
-      window.eval(command)
+      window.eval(content)
   }
   return (
     <main id="code-editor">
@@ -50,21 +48,19 @@ const CodeEditor = () => {
         </div>
         <div id="right-col" className="flex-half-width">
           <h3>Right Column</h3>
-          <pre className="language-js">
+          <pre className="language-js" style={{height: '600px', overflowY: 'scroll'}}>
             <code 
               ref={textBlockRef} 
               id="codejs" 
+              className="flex-half-width"
               contentEditable="true" 
               onInput={(e) => {
                 myHtmlParser()
-                // myJSParser()
-              //   setRenderedText(textBlockRef.current.innerHTML
-              //   .replace(/&lt;/g,'<')
-              //   .replace(/&gt;/g,'>')
-              //   .replace(/&amp;/g,'&'))
               }} 
               suppressContentEditableWarning>
-              {renderedText}
+                <SyntaxHighlighter language="javascript">
+                  {renderedText}
+                </SyntaxHighlighter>
             </code>
           </pre>
         </div>
