@@ -1,6 +1,6 @@
 export default `
 // VARS
-const w = 460;
+const w = 500;
 const h = 400;
 const margin = {top: 10, right: 30, bottom: 30, left: 40};
 const svgWidth = w + margin.left + margin.right;
@@ -58,4 +58,4 @@ const svg =
     .attr("transform", d => "translate("+ x(d.x0) +"," + y(d.length) + ")")
         .attr("width", d => x(d.x1) - x(d.x0) -1)
         .attr("height", d => h - y(d.length))
-        .style("fill", "orange")`
+        .style("fill", "darkgreen")`
