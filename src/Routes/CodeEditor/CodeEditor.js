@@ -24,14 +24,12 @@ const CodeEditor = () => {
     // remove the xmp tag
     content = content.replace(/<\/?span[^>]*>/g,"");
     
-    
-    // parse the js
-    // remove the xmp tag and the script tags
-    content = content.replace(/&lt;/g,'<')
-      .replace(/&gt;/g,'>')
-      .replace(/&amp;/g,'&');
+    // content = content.replace(/&lt;/g,'<')
+    //   .replace(/&gt;/g,'>')
+    //   .replace(/&amp;/g,'&');
       window.eval(content)
   }
+
   return (
     <main id="code-editor">
 
@@ -41,28 +39,28 @@ const CodeEditor = () => {
     
       <section id="columns-wrapper" className="flex-row">
         <div id="left-col" className="flex-half-width">
-          <h3>Left Column</h3>
           <div id="code-result" ref={codeResultRef}>
             <div id="chart_res"></div>
           </div>
         </div>
         <div id="right-col" className="flex-half-width">
-          <h3>Right Column</h3>
-          <pre className="language-js" style={{height: '600px', overflowY: 'scroll'}}>
-            <code 
-              ref={textBlockRef} 
-              id="codejs" 
-              className="flex-half-width"
-              contentEditable="true" 
-              onInput={(e) => {
-                myHtmlParser()
-              }} 
-              suppressContentEditableWarning>
-                <SyntaxHighlighter language="javascript">
-                  {renderedText}
-                </SyntaxHighlighter>
-            </code>
-          </pre>
+          <code 
+            ref={textBlockRef} 
+            id="codejs" 
+            className="flex-half-width"
+            contentEditable="true" 
+            onInput={(e) => {
+              myHtmlParser()
+            }} 
+            suppressContentEditableWarning
+          >
+              <SyntaxHighlighter 
+                language="javascript" 
+                className="syntax-highlighter"
+              >
+                {renderedText}
+              </SyntaxHighlighter>
+          </code>
         </div>
       </section>
     </main>
