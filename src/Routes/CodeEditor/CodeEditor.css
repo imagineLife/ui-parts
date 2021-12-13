@@ -19,3 +19,10 @@ body{
   flex: 0 0 var(--col-width);
   max-width: var(--col-width);
 }
+
+.syntax-highlighter{
+  height: 600px;
+  overflow-y: auto;
+  font-size: 1.1rem;
+  line-height: 1.5rem;
+}
