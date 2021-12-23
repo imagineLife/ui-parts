@@ -24,6 +24,7 @@ import TextUploader from './../Routes/TextUploader';
 import FOHChanged from './../Routes/FOHCodeChange';
 import CodeEditor from './../Routes/CodeEditor'
 import Home from './../Routes/Home'
+import MultiPartForm from './../Routes/MultiPartForm'
 
 // data
 import percBelow from './../mockData/percBelowPov.json'
@@ -106,6 +107,10 @@ const RoutesLookup = [
   {
     component: CodeEditor,
     path: '/editor'
+  },
+  {
+    component: MultiPartForm,
+    path: '/multi-part-form'
   },
   {
     component: Home,
