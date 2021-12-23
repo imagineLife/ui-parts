@@ -1,6 +1,11 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import StepWizard from 'react-step-wizard';
 
+import Nav from './Nav'
+import First from './First';
+import Second from './Second';
+import Stats from './Stats';
+import Progress from './Progress';
 import './MultiPartForm.scss'
 
 const Wizard = () => {
@@ -25,8 +30,8 @@ const Wizard = () => {
     };
 
     const setInstance = SW => updateState({
-        ...state,
-        SW,
+      ...state,
+      SW,
     });
 
     const { SW, demo } = state;
@@ -39,7 +44,7 @@ const Wizard = () => {
                     <div className={`col-12 col-sm-6 offset-sm-3 ${'rsw-wrapper'}`}>
                         <StepWizard
                             onStepChange={onStepChange}
-                            // nav={<Nav />}
+                            nav={<Nav />}
                             instance={setInstance}
                             isLazyMount
                         >
@@ -70,112 +75,6 @@ const InstanceDemo = ({ SW }) => (
         <button className={'btn btn-secondary'} onClick={() => SW.goToNamedStep('progress')}>Go to 'progress'</button>
     </Fragment>
 );
-
-/**
- * Stats Component - to illustrate the possible functions
- * Could be used for nav buttons or overview
- */
-const Stats = ({
-    currentStep,
-    firstStep,
-    goToStep,
-    lastStep,
-    nextStep,
-    previousStep,
-    totalSteps,
-    step,
-}) => (
-    <div>
-        <hr />
-        { step > 1 &&
-            <button className='btn btn-default btn-block' onClick={previousStep}>Go Back</button>
-        }
-        { step < totalSteps ?
-            <button className='btn btn-primary btn-block' onClick={nextStep}>Continue</button>
-            :
-            <button className='btn btn-success btn-block' onClick={nextStep}>Finish</button>
-        }
-        <hr />
-        <div style={{ fontSize: '21px', fontWeight: '200' }}>
-            <h4>Other Functions</h4>
-            <div>Current Step: {currentStep}</div>
-            <div>Total Steps: {totalSteps}</div>
-            <button className='btn btn-block btn-default' onClick={firstStep}>First Step</button>
-            <button className='btn btn-block btn-default' onClick={lastStep}>Last Step</button>
-            <button className='btn btn-block btn-default' onClick={() => goToStep(2)}>Go to Step 2</button>
-        </div>
-    </div>
-);
-
-/** Steps */
-
-const First = props => {
-    const update = (e) => {
-        props.update(e.target.name, e.target.value);
-    };
-
-    return (
-        <div>
-            <h3 className='text-center'>Welcome! Have a look around!</h3>
-
-            <label>First Name</label>
-            <input type='text' className='form-control' name='firstname' placeholder='First Name'
-                onChange={update} />
-            <Stats step={1} {...props} />
-        </div>
-    );
-};
-
-const Second = props => {
-    const validate = () => {
-        if (confirm('Are you sure you want to go back?')) { // eslint-disable-line
-            props.previousStep();
-        }
-    };
-
-    return (
-        <div>
-            { props.form.firstname && <h3>Hey {props.form.firstname}! 👋</h3> }
-            I've added validation to the previous button.
-            <Stats step={2} {...props} previousStep={validate} />
-        </div>
-    );
-};
-
-const Progress = (props) => {
-    const [state, updateState] = useState({
-        isActiveClass: '',
-        timeout: null,
-    });
-
-    useEffect(() => {
-        const { timeout } = state;
-
-        if (props.isActive && !timeout) {
-            updateState({
-                isActiveClass: 'loaded',
-                timeout: setTimeout(() => {
-                    props.nextStep();
-                }, 3000),
-            });
-        } else if (!props.isActive && timeout) {
-            clearTimeout(timeout);
-            updateState({
-                isActiveClass: '',
-                timeout: null,
-            });
-        }
-    });
-
-    return (
-        <div className={'progress-wrapper'}>
-            <p className='text-center'>Automated Progress...</p>
-            <div className={`progress ${state.isActiveClass}`}>
-                <div className={`${'progress-bar'} progress-bar-striped`} />
-            </div>
-        </div>
-    );
-};
 
 const Last = (props) => {
     const submit = () => {
