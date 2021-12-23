@@ -4,6 +4,7 @@ import StepWizard from 'react-step-wizard';
 import Nav from './Nav'
 import First from './First';
 import Second from './Second';
+import Last from './Last';
 import Stats from './Stats';
 import Progress from './Progress';
 import './MultiPartForm.scss'
@@ -49,7 +50,7 @@ const Wizard = () => {
                             isLazyMount
                         >
                             <First hashKey={'FirstStep'} update={updateForm} />
-                            <Second form={state.form} />
+                            <Second form={state.form} update={updateForm}/>
                             <Progress stepName='progress' />
                             {null /* will be ignored */}
                             <Last hashKey={'TheEnd!'} />
@@ -75,20 +76,3 @@ const InstanceDemo = ({ SW }) => (
         <button className={'btn btn-secondary'} onClick={() => SW.goToNamedStep('progress')}>Go to 'progress'</button>
     </Fragment>
 );
-
-const Last = (props) => {
-    const submit = () => {
-        alert('You did it! Yay!') // eslint-disable-line
-    };
-
-    return (
-        <div>
-            <div className={'text-center'}>
-                <h3>This is the last step in this example!</h3>
-                <hr />
-                {/* <Plugs /> */}
-            </div>
-            <Stats step={4} {...props} nextStep={submit} />
-        </div>
-    );
-};

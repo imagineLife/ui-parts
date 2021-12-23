@@ -7,7 +7,7 @@ const Nav = ({totalSteps, currentStep, goToStep}) => {
   console.log('currentStep')
   console.log(currentStep)
   console.log('- - - - ')
-  let dots = Array.from(Array(totalSteps - 1).keys()).map((curDot, idx) => (
+  let dots = Array.from(Array(totalSteps).keys()).map((curDot, idx) => (
     <span
         key={`step-${idx + 1}`}
         className={`dot${currentStep === idx + 1 ? " active" : ''}`}
