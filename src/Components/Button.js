@@ -1,16 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 
-const defaultProps = {
-  tag: 'button',
-  color: '',
-  size: '',
-  loading: false,
-  wide: false,
-  wideMobile: false,
-  disabled: false
-}
-
 const Button = ({
   className,
   tag,
