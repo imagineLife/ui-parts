@@ -4,30 +4,24 @@ import * as d3 from 'd3';
 import './CodeEditor.css';
 import startingText from './startingText';
 import mockData from './mockData.json'
-window.d3 = d3;
-window.mockData= mockData;
 
 const CodeEditor = () => {
 
   const codeResultRef = useRef();
   const textBlockRef = useRef();
   const chartResRef = useRef()
-  const [renderedText, setRenderedText] = useState(startingText)
+  const [renderedText, setRenderedText] = useState(startingText(mockData, d3))
   
   useEffect(() => {
-    myHtmlParser()
+    myHtmlParser(textBlockRef.current)
   },[])
-  function myHtmlParser(){
+
+  function myHtmlParser(sourceElement){
     
     // get the content of the origin div (first argument)
-    var content = textBlockRef.current.innerText;
-    // remove the xmp tag
+    var content = sourceElement.innerText;
     content = content.replace(/<\/?span[^>]*>/g,"");
-    
-    // content = content.replace(/&lt;/g,'<')
-    //   .replace(/&gt;/g,'>')
-    //   .replace(/&amp;/g,'&');
-      window.eval(content)
+    window.eval(content)
   }
 
   return (

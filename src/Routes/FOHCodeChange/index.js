@@ -40,7 +40,7 @@ import useInterval from './useInterval';
 import mockFetch from './mockFetch';
 const ConditionalChild = lazy(() => import('./ConditionalChild'))
 const INTERVAL_TIME = 50
-const FETCH_DELAY = 1000
+const FETCH_DELAY = 300
 
 
 export default function FOHCodeChanged(){
@@ -99,7 +99,7 @@ export default function FOHCodeChanged(){
           </Suspense>
         )
       }
-      <input 
+      {/* <input 
         type="button"
         style={{border : '1px solid rgb(125,125,125)'}} 
         id="fetch-hover-two" 
@@ -112,14 +112,14 @@ export default function FOHCodeChanged(){
         value="Hover here to fetch box two"
         onClick={() => {
           if(!boxTwoState.show) setBoxTwoState(cur => ({...cur, show: true}))
-        }}/>
-      {
+        }}/> */}
+      {/* {
         boxTwoState.show && (
           <Suspense fallback={<p></p>}>
             <ConditionalChild data={boxTwoState.data.current} fetching={boxTwoState.fetching}/>
           </Suspense>
         )
-      }
+      } */}
     </section>
   )
 }

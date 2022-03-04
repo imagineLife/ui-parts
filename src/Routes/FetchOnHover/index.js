@@ -1,81 +1,76 @@
-import React, { useRef, useEffect, useState } from 'react'
+/*
+  Fetch-On-Hover Example
+  - PARTS
 
-const mockFetch = (cb) => {
-  setTimeout(() => {
-    cb({thisIs: "an object"})
-  }, 4000)
-}
+    - parent component
+      holds state
+      knows when to show conditional component
+      knows when data is fetching
+  
+    - Conditional child
+      renders after clicking the btn
+  
+    - data in a ref
+      does not re-render when data gets to the dom
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
+    - js interval timer
 
-  // Remember the latest callback.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      let id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
+*/ 
+import React, { useRef, useEffect, useState, Suspense, lazy } from 'react'
+import useInterval from './useInterval';
+import mockFetch from './mockFetch';
+const ConditionalChild = lazy(() => import('./ConditionalChild'))
+const INTERVAL_TIME = 150
+const FETCH_DELAY = 3000
 
 export default function FetchOnHover(){
 
+  // store data in ref
   const data = useRef();
-  const [clicked, setClicked] = useState(false)
-
-  const [delay, setDelay] = useState(1000);
-
-  function getCurrentData(){
-    return data.current
-  }
+  const [showConditionalComponent, setShowConditionalComponent] = useState(false)
+  const [fetching, setFetching] = useState(false)
   
+  /*
+    when 'fetching' && no ref data
+    Check for data in ref
+    when data is present
+      turn-off the 'fetching' state
+  */
   useInterval(() => {
     console.log('running tick in useInterval')
-    console.log('data.current')
-    console.log(data.current)
-    
-  }, getCurrentData() === undefined ? delay : null);
+    if(data.current && fetching){
+      console.log('%c IS DATA, turn-off fetching flag', 'background-color: steelblue; color: white;')
+      setFetching(false)
+    }
+  }, data.current === undefined ? INTERVAL_TIME : null, fetching);
 
   const fetchOnHover = () => {
-    console.log('fetch on hover')
-    mockFetch((d) => data.current = d)
-  }
-
-  function checkForData(){
-    console.log('checking for data in ref')
-    console.log(data.current)
+    if(!fetching && !data.current){
+      console.log('fetching on hover')
+      mockFetch((d) => data.current = d, FETCH_DELAY)
+      setFetching(true)
+    }
   }
   
-  console.log('rendering fetchOnHover')
+  console.log('%c Running the Parent', 'background-color: orange; color: black;')
   
   return(
     <section id="fetch-on-hover">
       <h1>Fetch On Hover</h1>
-      <div 
+      <input 
+        type="button"
         style={{border : '1px solid rgb(125,125,125)'}} 
         id="fetch-hover" 
         onMouseOver={fetchOnHover} 
-        onClick={checkForData}>
-          Hover here to fetch
-      </div>
-      <div 
-        id="show-data">
-          {
-            clicked && 
-            data.current 
-            ? JSON.stringify(data.current) 
-            : 'loading...'
-          }
-      </div>
+        value="Hover here to fetch"
+        onClick={() => setShowConditionalComponent(true)}/>
+      {
+        showConditionalComponent && (
+          <Suspense fallback={<p></p>}>
+            <ConditionalChild data={data.current}/>
+          </Suspense>
+        )
+      }
     </section>
   )
 }

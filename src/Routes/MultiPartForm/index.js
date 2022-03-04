@@ -7,6 +7,7 @@ import Second from './Second';
 import Last from './Last';
 import Stats from './Stats';
 import Progress from './Progress';
+import InstanceDemo from './InstanceDemo'
 import './MultiPartForm.scss'
 
 const Wizard = () => {
@@ -16,6 +17,8 @@ const Wizard = () => {
     });
 
     const updateForm = (key, value) => {
+        console.log('%c Update Form Called', 'background-color: pink; color: white;')
+        
         const { form } = state;
 
         form[key] = value;
@@ -24,11 +27,8 @@ const Wizard = () => {
             form,
         });
     };
-
-    // Do something on step change
-    const onStepChange = (stats) => {
-        // console.log(stats);
-    };
+    console.log('state')
+    console.log(state)
 
     const setInstance = SW => updateState({
       ...state,
@@ -40,11 +40,11 @@ const Wizard = () => {
     return (
         <div className='container'>
             <h3>React Step Wizard</h3>
-            <div className={'jumbotron'}>
+            <div className='jumbotron'>
                 <div className='row'>
-                    <div className={`col-12 col-sm-6 offset-sm-3 ${'rsw-wrapper'}`}>
+                    <div className="col-12 col-sm-6 offset-sm-3 rsw-wrapper">
                         <StepWizard
-                            onStepChange={onStepChange}
+                            onStepChange={(stats) => console.log(stats)} //onStepChange
                             nav={<Nav />}
                             instance={setInstance}
                             isLazyMount
@@ -65,14 +65,7 @@ const Wizard = () => {
 
 export default Wizard;
 
-/** Demo of using instance */
-const InstanceDemo = ({ SW }) => (
-    <Fragment>
-        <h4>Control from outside component</h4>
-        <button className={'btn btn-secondary'} onClick={SW.previousStep}>Previous Step</button>
-        &nbsp;
-        <button className={'btn btn-secondary'} onClick={SW.nextStep}>Next Step</button>
-        &nbsp;
-        <button className={'btn btn-secondary'} onClick={() => SW.goToNamedStep('progress')}>Go to 'progress'</button>
-    </Fragment>
-);
+// Do something on step change
+// const onStepChange = (stats) => {
+    // console.log(stats);
+// };

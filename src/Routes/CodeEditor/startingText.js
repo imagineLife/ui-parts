@@ -1,14 +1,20 @@
-export default `// data fns
+export default (dataVar, d3) => {
+  window.d3 = d3;
+  window.thisData = dataVar;
+  return `// data fns
 const dPrice = d => d.price;
 const dLength = d => d.length;
 
 // VARS
-const w = 500;
-const h = 400;
-const margin = {top: 10, right: 30, bottom: 30, left: 40};
-const svgWidth = w + margin.left + margin.right;
-const svgHeight = h + margin.top + margin.bottom;
-const widthLessMargins = w - margin.left - margin.right;
+const margin = {
+  top: 10, 
+  right: 30, 
+  bottom: 30, 
+  left: 40
+};
+const svgWidth = 500;
+const svgHeight = 400;
+const widthLessMargins = svgWidth - margin.left - margin.right;
 const heightLessMargins = svgHeight - margin.top - margin.bottom;
 const gTransX = margin.left;
 const gTransY = margin.top;
@@ -46,7 +52,7 @@ const histogram = d3.histogram()
     .thresholds(xScale.ticks(70)); // then the numbers of bins
 
 // And apply this function to data to get the bins
-const bins = histogram(mockData);
+const bins = histogram(thisData);
 
 /*
   y-axis:
@@ -67,5 +73,6 @@ svgGroup.selectAll("rect")
     .join("rect")
   .attr("transform", d => "translate("+ xScale(d.x0) +"," + yScale(d.length) + ")")
       .attr("width", d => xScale(d.x1) - xScale(d.x0) -1)
-      .attr("height", d => h - yScale(d.length))
+      .attr("height", d => heightLessMargins - yScale(d.length))
       .style("fill", "darkgreen")`
+}

@@ -6,7 +6,8 @@ const ColorLegend = (props) => {
 			<h1>Color Legend Route</h1>
 			<ColorLegendComp 
 				{...props}
-				size={{h: 600, w: 35}}
+				size={{h: 100, w: 15}}
+				axis
 			/>
 		</div>)		
 };

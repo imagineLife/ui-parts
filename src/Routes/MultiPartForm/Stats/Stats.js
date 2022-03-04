@@ -22,7 +22,7 @@ const Stats = ({
         }
         <hr />
         <div style={{ fontSize: '21px', fontWeight: '200' }}>
-            <h4>Other Functions</h4>
+            <h4>Stats Box</h4>
             <div>Current Step: {currentStep}</div>
             <div>Total Steps: {totalSteps}</div>
             <button className='btn btn-block btn-default' onClick={firstStep}>First Step</button>
