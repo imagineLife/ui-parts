@@ -1,5 +1,4 @@
 function readFile(file, cb) {
-  console.log('READING FILE?!')
   
   // Check if the file is an image.
   if (file.type && !file.type.startsWith('text')) {

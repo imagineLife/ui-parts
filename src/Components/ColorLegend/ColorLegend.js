@@ -52,7 +52,7 @@ const ColorLegendComp = ({size, axis}) => {
 		  	//get rgb color from color-scale
 		  	let {r,g,b} = d3Color.rgb(colorScaledVal)
 
-        //applly rgba to img-data in sets of 4
+        //apply rgba to img-data in sets of 4
         //img data is store as rgba repeated (rgbargbargba)
         // https://www.w3schools.com/tags/canvas_createimagedata.asp
         let i4 = 4*idx
@@ -63,7 +63,6 @@ const ColorLegendComp = ({size, axis}) => {
       })
 
       canvasContext.putImageData(image, 0, 0);
-      console.log('HERE?!');
 		  setColorApplied(true)
 		}
 

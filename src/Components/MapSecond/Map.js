@@ -61,29 +61,29 @@ const Map = () => {
 			<svg 
 				viewBox="0 0 975 610"
 				id="map-box"
-				ref={svgRef}>
-					<g 
-						fill="none" 
-						stroke="#000" 
-						strokeLinejoin="round" 
-						strokeLinecap="round"
-						ref={gRef}
-					>
-					{topofile.objects.states.geometries.map((s,sidx) => (
-						<path
-							key={`state-${sidx}`}
-							strokeWidth={strokeW}
-							stroke={strokeColor}
-							vectorEffect="non-scaling-stroke"
-							d={d3Path(topo.feature(topofile, s))}
-							onMouseMove={() => {
-								console.log(s);
-							}}
-							// fill={`rgba(125,125,250,${Math.random()}`}
-						/>
-					))}
-					</g>
-					}
+				ref={svgRef}
+			>
+				<g 
+					fill="none" 
+					stroke="#000" 
+					strokeLinejoin="round" 
+					strokeLinecap="round"
+					ref={gRef}
+				>
+				{topofile.objects.states.geometries.map((s,sidx) => (
+					<path
+						key={`state-${sidx}`}
+						strokeWidth={strokeW}
+						stroke={strokeColor}
+						vectorEffect="non-scaling-stroke"
+						d={d3Path(topo.feature(topofile, s))}
+						onMouseMove={() => {
+							console.log(s);
+						}}
+					/>
+				))}
+				</g>
+				}
 			</svg>
 			<Rtt />
 		</div>)
