@@ -33,7 +33,7 @@ const SectionHeader = ({
       className={divWrapperClasses}
     >
       <div className="container-xs">
-        {/* All Childre */}
+        {/* All Children */}
         {children}
 
         {/* Section Title */}
