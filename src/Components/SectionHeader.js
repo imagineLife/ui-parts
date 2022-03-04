@@ -1,6 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import classNames from 'classnames';
 
+/*
+  returns
+  - div with props + className
+    - child div with container-xs class
+      - conditional "title" text in customizable element 
+      - conditional paragraph 
+*/ 
 const SectionHeader = ({
   className,
   data,
@@ -8,40 +15,43 @@ const SectionHeader = ({
   tag,
   ...props
 }) => {
+  if(!data.title && !data.paragraph){
+    throw 'Update Section HEader data prop'
+    return;
+  }
 
-  const classes = classNames(
+  const divWrapperClasses = classNames(
     'section-header',
     className
   );
 
-  const Component = tag;
+  const HeaderTextElement = tag || 'h2';
 
   return (
-   <div>sauce</div>
+    <div
+      {...props}
+      className={divWrapperClasses}
+    >
+      <div className="container-xs">
+        {/* All Childre */}
+        {children}
+
+        {/* Section Title */}
+        {data.title &&
+          <HeaderTextElement className={
+            classNames(
+              'mt-0',
+              data.paragraph ? 'mb-16' : 'mb-0'
+            )}>{data.title}</HeaderTextElement>
+        }
+
+        {/* section sub-text */}
+        {data.paragraph &&
+          <p className="m-0">{data.paragraph}</p>
+        }
+      </div>
+    </div>
   );
 }
-/*
-   <>
-      {(data.title || data.paragraph) &&
-        <div
-          {...props}
-          className={classes}
-        >
-          <div className="container-xs">
-            {children}
-            {data.title &&
-              <Component className={
-                classNames(
-                  'mt-0',
-                  data.paragraph ? 'mb-16' : 'mb-0'
-                )}>{data.title}</Component>
-            }
-            {data.paragraph &&
-              <p className="m-0">{data.paragraph}</p>
-            }
-          </div>
-        </div>
-      }
-    </>
-*/ 
+
 export default SectionHeader;
