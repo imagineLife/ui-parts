@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from './../Image';
-const Tile = ({title, body, image}) => {
+const Tile = ({title, body, image, delay}) => {
   // prop validation
   if(!title || !body) throw `Update the Tile component with reqd props`
   
@@ -14,8 +14,12 @@ const Tile = ({title, body, image}) => {
       height: image.h || 64
     }
   }
+  const wrapperProps = {
+    className: "tiles-item reveal-from-bottom",
+    'data-reveal-delay': delay || 0
+  }
   return (
-    <div className="tiles-item reveal-from-bottom">
+    <div {...wrapperProps}>
       <div className="tiles-item-inner">
         <div className="features-tiles-item-header">
           {
