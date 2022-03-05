@@ -5,7 +5,7 @@ import Button from './../Button';
 import Image from './../Image';
 import Modal from './../Modal';
 import SectionHeader from './../SectionHeader'
-const Hero = ({
+const HeroBox = ({
   className,
   topOuterDivider,
   bottomOuterDivider,
@@ -54,7 +54,7 @@ const Hero = ({
             <SectionHeader
             tag="h1"
             data={{
-              title:"Text Insights",
+              title:"Say What",
               paragraph:"See what some simple analytics \"say\" about text: longest words, common words, most-frequent words by letter-count, and more."
             }}
             />
@@ -85,7 +85,7 @@ const Hero = ({
               <Image
                 className="has-shadow"
                 src={require('./../assets/images/video-placeholder.jpg')}
-                alt="Hero"
+                alt="HeroBox"
                 width={896}
                 height={504} />
             </a>
@@ -102,4 +102,4 @@ const Hero = ({
   );
 }
 
-export default Hero;
+export default HeroBox;

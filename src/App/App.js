@@ -15,7 +15,6 @@ import Sidebars from './../Routes/Sidebar';
 // import MapperTwo from './../Routes/Map2';
 // import MapperThree from './../Routes/Map3';
 // import MapperFour from './../Routes/Map4';
-import ResponsiveLander from './../Routes/ResponsiveLander'
 import MapperFive from './../Routes/Map5';
 import MapperSix from './../Routes/Map6';
 import MapperSeven from './../Routes/Map7';
@@ -26,8 +25,9 @@ import FOHChanged from './../Routes/FOHCodeChange';
 import CodeEditor from './../Routes/CodeEditor'
 import Home from './../Routes/Home'
 import MultiPartForm from './../Routes/MultiPartForm'
-import AppRoute from './../Routes/AppRoute';
-import HomeView from './../Components/views/Home';
+import TemplateAppRoute from './../Routes/AppRoute';
+import LandingPage from './../Views/Landing';
+import SayWhatLandingPage from './../Views/SayWhatLanding';
 import Layout from './../Components/Layout/'
 
 // data
@@ -117,10 +117,18 @@ const RoutesLookup = [
     path: '/multi-part-form'
   },
   {
-    component: AppRoute,
+    component: TemplateAppRoute,
     path: '/responsive-lander',
     props: {
-      component: HomeView,
+      component: LandingPage,
+      layout: Layout
+    }
+  },
+  {
+    component: TemplateAppRoute,
+    path: '/say-what-lander',
+    props: {
+      component: SayWhatLandingPage,
       layout: Layout
     }
   },

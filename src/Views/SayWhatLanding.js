@@ -11,8 +11,13 @@ const SayWhatLanding = () => {
 
   return (
     <>
-      <HeroBox className="illustration-section-01" />
-      <FeaturesTiles />
+      <HeroBox 
+        className="illustration-section-01" 
+        invertColor
+      />
+      <FeaturesTiles 
+        invertColor
+      />
       <FeaturesSplit 
         invertMobile 
         topDivider 
