@@ -1,7 +1,7 @@
 import React from 'react';
 // import sections
 import HeroBox from './../Components/HeroBox';
-import FeaturesTiles from './../Components/FeaturesTiles';
+import TilesBox from './../Components/TilesBox';
 import FeaturesSplit from './../Components/FeaturesSplit';
 import Testimonial from './../Components/Testimonial';
 import Cta from './../Components/Cta';
@@ -15,7 +15,7 @@ const SayWhatLanding = () => {
         className="illustration-section-01" 
         invertColor
       />
-      <FeaturesTiles 
+      <TilesBox 
         invertColor
       />
       <FeaturesSplit 
