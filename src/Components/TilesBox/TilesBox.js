@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import SectionHeader from './../SectionHeader';
 import Image from './../Image';
 import Tile from './../Tile/';
+import Img  from './../assets/images/feature-tile-icon-01.svg'
 
 const TilesBox = ({
   className,
@@ -51,7 +52,13 @@ const TilesBox = ({
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={tilesClasses}>
 
-            <Tile title="Horse Robust Workflow" body="Been around the park sometime"/>
+            <Tile 
+              title="Common Words" 
+              body="The go-to language that the author/orator leveraged"
+              image={{
+                src: Img
+              }}
+            />
 
             <div className="tiles-item reveal-from-bottom" data-reveal-delay="200">
               <div className="tiles-item-inner">
