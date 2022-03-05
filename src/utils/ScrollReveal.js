@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useImperativeHandle } from 'react';
+import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
 
 const ScrollReveal = React.forwardRef((props, ref) => {
-  console.log('A')
-  
 
   const [viewportHeight, setViewportheight] = useState(window.innerHeight); 
   const [revealEl, setRevealel] = useState([]);
@@ -79,5 +78,9 @@ const ScrollReveal = React.forwardRef((props, ref) => {
     </>
   );
 });
+
+ScrollReveal.propTypes = {
+  children: PropTypes.func.isRequired
+};
 
 export default ScrollReveal;
