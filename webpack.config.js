@@ -14,6 +14,9 @@ module.exports = {
   },
   module: {
     rules: [
+      /*
+        JS with babel
+      */
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
@@ -21,6 +24,10 @@ module.exports = {
           loader: "babel-loader"
         }
       },
+
+      /*
+        HTML
+      */ 
       {
         test: /\.html$/,
         use: [
@@ -29,12 +36,16 @@ module.exports = {
           }
         ]
       },
+
+      // CSS
       {
         test: /\.css$/,
         use: [MiniCss.loader, "css-loader"]
       },
+
+      // SCSS
       {
-        test: /\.s[ac]ss$/i,
+        test: /\.scss$/i,
         use: [
           // Creates `style` nodes from JS strings
           "style-loader",
@@ -44,9 +55,16 @@ module.exports = {
           "sass-loader",
         ]
       },
+
+      // json 
       {
         test: /\.(geo|topo)json$/,
         loader: 'json-loader'
+      },
+      // files (non-svg-images)
+      {
+        test: /\.(png|jpg|gif|svg)$/i,
+        type: 'asset/resource'
       }
     ]
   },
