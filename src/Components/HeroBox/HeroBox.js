@@ -16,18 +16,6 @@ const HeroBox = ({
   ...props
 }) => {
 
-  const [videoModalActive, setVideomodalactive] = useState(false);
-
-  const openModal = (e) => {
-    e.preventDefault();
-    setVideomodalactive(true);
-  }
-
-  const closeModal = (e) => {
-    e.preventDefault();
-    setVideomodalactive(false);
-  }   
-
   const outerClasses = classNames(
     'hero section center-content',
     topOuterDivider && 'has-top-divider',
@@ -76,20 +64,14 @@ const HeroBox = ({
               </div> */}
           </div>
           <div className="hero-figure reveal-from-bottom illustration-element-01" data-reveal-value="20px" data-reveal-delay="800">
-            <a
-              data-video="https://player.vimeo.com/video/174002812"
-              href="#0"
-              aria-controls="video-modal"
-              onClick={openModal}
-            >
               <Image
                 className="has-shadow"
-                src={require('./../assets/images/video-placeholder.jpg')}
-                alt="HeroBox"
+                src={require('./../assets/images/slice.gif')}
+                alt="SayWhat Animation"
                 width={896}
                 height={504} />
-            </a>
           </div>
+          {/* AVAILABLE modal on-click for above video link */}
           {/* <Modal
             id="video-modal"
             show={videoModalActive}
