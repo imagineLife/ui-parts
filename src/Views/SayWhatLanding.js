@@ -7,6 +7,11 @@ import Testimonial from './../Components/Testimonial';
 import Cta from './../Components/Cta';
 import './SayWhat.scss'
 
+import LandingPageData from './say-what.json';
+console.log('LandingPageData')
+console.log(LandingPageData)
+
+
 const SayWhatLanding = () => {
 
   return (
@@ -17,6 +22,7 @@ const SayWhatLanding = () => {
       />
       <TilesBox 
         invertColor
+        tiles={LandingPageData[0].props.tiles}
       />
       <FeaturesSplit 
         invertMobile 

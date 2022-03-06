@@ -1,0 +1,47 @@
+[
+  {
+    "section": "TilesBox",
+    "props": {
+      "tiles": [
+        {
+          "title": "Common Words",
+          "body": "The go-to language that the author/orator leveraged",
+          "image": {
+            "src": "StarImg"
+          }
+        },
+        {
+          "title": "Longest Words",
+          "body": "The breadth and complexity of the author/orators vocab",
+          "image": {
+            "src": "CardImg"
+          },
+          "delay": 200
+        },
+        {
+          "title": "Frequency of Words by Character-Length",
+          "body": "How often the orator uses 2-letter words, 3-letter words, etc.",
+          "image": {
+            "src": "GlobeImg"
+          },
+          "delay": 400
+        },
+        {
+          "title": "Sentence Lengths",
+          "body": "The variety of character counts and word counts in each sentence",
+          "image": {
+            "src": "HeadImg"
+          }
+        },
+        {
+          "title": "Themes",
+          "body": "Thematic words from a sentence-by-sentence isolated perspective",
+          "image": {
+            "src": "ThumbsupImg"
+          },
+          "delay": 200
+        }
+      ]
+    }
+  }
+]
