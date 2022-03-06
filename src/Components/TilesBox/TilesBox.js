@@ -9,6 +9,8 @@ import GlobeImg from './../assets/images/feature-tile-icon-03.svg'
 import HeadImg from './../assets/images/feature-tile-icon-04.svg'
 import ThumbsupImg from './../assets/images/feature-tile-icon-05.svg'
 
+
+
 const TilesBox = ({
   className,
   topOuterDivider,
@@ -46,6 +48,47 @@ const TilesBox = ({
     paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
   };
 
+  const tilesArr = [
+    {
+      title: "Common Words",
+      body: "The go-to language that the author/orator leveraged",
+      image: {
+        src: StarImg
+      }
+    },
+    {
+      title: "Longest Words",
+      body: "The breadth and complexity of the author/orators vocab",
+      image: {
+        src: CardImg
+      },
+      delay: 200
+    },
+    {
+      title: "Frequency of Words by Character-Length",
+      body: "How often the orator uses 2-letter words, 3-letter words, etc.",
+      image: {
+        src: GlobeImg
+      },
+      delay: 400
+    },
+    {
+      title: "Sentence Lengths",
+      body: "The variety of character counts and word counts in each sentence",
+      image: {
+        src: HeadImg
+      }
+    },
+    {
+      title: "Themes",
+      body: "Thematic words from a sentence-by-sentence isolated perspective",
+      image: {
+        src: ThumbsupImg
+      },
+      delay: 200
+    }
+  ]
+
   return (
     <section
       {...props}
@@ -55,50 +98,7 @@ const TilesBox = ({
         <div className={innerClasses}>
           {/* <SectionHeader data={sectionHeader} className="center-content" /> */}
           <div className={tilesClasses}>
-
-            <Tile 
-              title="Common Words" 
-              body="The go-to language that the author/orator leveraged"
-              image={{
-                src: StarImg
-              }}
-            />
-
-            <Tile 
-              title="Longest Words" 
-              body="The breadth and complexity of the author/orators vocab"
-              image={{
-                src: CardImg
-              }}
-              delay={200}
-            />
-
-            <Tile 
-              title="Frequency of Words by Character-Length" 
-              body="How often the orator uses 2-letter words, 3-letter words, etc."
-              image={{
-                src: GlobeImg
-              }}
-              delay={400}
-            />
-
-            <Tile 
-              title="Sentence Lengths" 
-              body="The variety of character counts and word counts in each sentence"
-              image={{
-                src: HeadImg
-              }}
-            />
-            
-            <Tile 
-              title="Themes" 
-              body="Thematic words from a sentence-by-sentence isolated perspective"
-              image={{
-                src: ThumbsupImg
-              }}
-              delay={200}
-            />
-
+            {tilesArr.map((t,idx) => <Tile {...t} key={`tile-${t.title}`}/>)}
           </div>
         </div>
       </div>
