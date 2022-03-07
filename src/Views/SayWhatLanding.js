@@ -7,26 +7,24 @@ import Testimonial from './../Components/Testimonial';
 import Cta from './../Components/Cta';
 import './SayWhat.scss'
 
-import LandingPageData from './say-what.json';
-console.log('LandingPageData')
-console.log(LandingPageData)
+import landingPageData from './say-what.json';
 
-
+const componentLookup = {
+  'HeroBox': {
+    component: HeroBox,
+  },
+  'TilesBox': {
+    component: TilesBox,
+  }
+}
 const SayWhatLanding = () => {
 
   return (
     <>
-      <HeroBox 
-        className="illustration-section-01" 
-        invertColor
-        title={LandingPageData[0].props.title}
-        subtitle={LandingPageData[0].props.subtitle}
-        image={LandingPageData[0].props.image}
-      />
-      <TilesBox 
-        invertColor
-        tiles={LandingPageData[1].props.tiles}
-      />
+      {landingPageData.map((itm, itmIdx) => {
+        let ThisComponent = componentLookup[itm.section].component
+        return (<ThisComponent key={`say-what-landing-${itmIdx}-${itm.section}`} {...itm.props} />)
+      })}
       <FeaturesSplit 
         invertMobile 
         topDivider 
