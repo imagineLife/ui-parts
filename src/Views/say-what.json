@@ -1,5 +1,13 @@
 [
   {
+    "section": "HeroBox",
+    "props": {
+      "title": "Say What",
+      "subtitle": "See what some simple analytics \"say\" about text: longest words, common words, most-frequent words by letter-count, and more.",
+      "image": "slice"
+    }
+  },
+  {
     "section": "TilesBox",
     "props": {
       "tiles": [

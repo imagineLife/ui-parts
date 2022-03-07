@@ -19,10 +19,13 @@ const SayWhatLanding = () => {
       <HeroBox 
         className="illustration-section-01" 
         invertColor
+        title={LandingPageData[0].props.title}
+        subtitle={LandingPageData[0].props.subtitle}
+        image={LandingPageData[0].props.image}
       />
       <TilesBox 
         invertColor
-        tiles={LandingPageData[0].props.tiles}
+        tiles={LandingPageData[1].props.tiles}
       />
       <FeaturesSplit 
         invertMobile 
