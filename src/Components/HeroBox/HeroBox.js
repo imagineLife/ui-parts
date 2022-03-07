@@ -5,6 +5,7 @@ import Button from './../Button';
 import Image from './../Image';
 import Modal from './../Modal';
 import SectionHeader from './../SectionHeader'
+import sliceGif from './../assets/images/slice.gif'
 const HeroBox = ({
   className,
   topOuterDivider,
@@ -13,9 +14,15 @@ const HeroBox = ({
   bottomDivider,
   hasBgColor,
   invertColor,
+  title,
+  subtitle,
+  image,
   ...props
 }) => {
 
+  const imgLookup = {
+    slice: sliceGif
+  }
   const outerClasses = classNames(
     'hero section center-content',
     topOuterDivider && 'has-top-divider',
@@ -30,6 +37,7 @@ const HeroBox = ({
     topDivider && 'has-top-divider',
     bottomDivider && 'has-bottom-divider'
   );
+  
 
   return (
     <section
@@ -42,8 +50,8 @@ const HeroBox = ({
             <SectionHeader
             tag="h1"
             data={{
-              title:"Say What",
-              paragraph:"See what some simple analytics \"say\" about text: longest words, common words, most-frequent words by letter-count, and more."
+              title,
+              paragraph:subtitle
             }}
             />
 
@@ -66,7 +74,7 @@ const HeroBox = ({
           <div className="hero-figure reveal-from-bottom illustration-element-01" data-reveal-value="20px" data-reveal-delay="800">
               <Image
                 className="has-shadow"
-                src={require('./../assets/images/slice.gif')}
+                src={imgLookup[image]}
                 alt="SayWhat Animation"
                 width={896}
                 height={504} />
