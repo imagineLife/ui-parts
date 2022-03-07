@@ -2,8 +2,8 @@ import React from 'react';
 // import sections
 import HeroBox from './../Components/HeroBox';
 import TilesBox from './../Components/TilesBox';
-import FeaturesSplit from './../Components/FeaturesSplit';
-import Testimonial from './../Components/Testimonial';
+import AltFeaturesBox from './../Components/AltFeaturesBox';
+import TestimonialBox from './../Components/TestimonialBox';
 import Cta from './../Components/Cta';
 import './SayWhat.scss'
 
@@ -25,13 +25,13 @@ const SayWhatLanding = () => {
         let ThisComponent = componentLookup[itm.section].component
         return (<ThisComponent key={`say-what-landing-${itmIdx}-${itm.section}`} {...itm.props} />)
       })}
-      <FeaturesSplit 
+      <AltFeaturesBox 
         invertMobile 
         topDivider 
         imageFill 
-        className="illustration-section-02"
+        // className="illustration-section-02"
       />
-      <Testimonial topDivider />
+      <TestimonialBox topDivider />
       <Cta split />
     </>
   );
