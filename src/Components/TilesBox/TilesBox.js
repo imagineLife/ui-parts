@@ -44,8 +44,8 @@ const TilesBox = ({
 
   const innerClasses = classNames(
     'features-tiles-inner section-inner pt-0',
-    topDivider && 'has-top-divider',
-    bottomDivider && 'has-bottom-divider'
+    // topDivider && 'has-top-divider',
+    // bottomDivider && 'has-bottom-divider'
   );
 
   const tilesClasses = classNames(
