@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import SectionHeader from './../SectionHeader';
 import Image from './../Image';
 import './altFeatures.scss'
+import imgOne from './../assets/images/features-split-image-01.png';
 
 const AltFeatures = ({
   className,
@@ -46,6 +47,33 @@ const AltFeatures = ({
     paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
   };
 
+  const itms = [
+    {
+      title: "Words of Interest",
+      body: "2 interactive lists - 1 selectable list containing categories of words: Common Words, Longest Words, and Action Words. 1 list containing results of the selected word category list.",
+      img: imgOne
+    },
+    {
+      title: "Words By Length",
+      body: "A \"bubble\" comparison of how many words by character-length were spoken",
+      img: imgOne
+    },
+    {
+      title: "Textual Themes",
+      body: "Thematic words from a sentence-by-sentence isolated perspective",
+      img: imgOne
+    },
+    {
+      title: "The Shape of the Speech",
+      body: "Comparing the number of words per sentence against the sentence number, see the \"shape\" of the speech",
+      img: imgOne
+    },
+    {
+      title: "Responsive Analytic Selections",
+      body: "Pick which details are important to consider and see selections reflected with styling in the speech text body",
+      img: imgOne
+    }
+  ]
   return (
     <section
       {...props}
@@ -53,86 +81,41 @@ const AltFeatures = ({
     >
       <div className="container">
         <div className={innerClasses}>
-          <SectionHeader data={sectionHeader} className="center-content" />
+          {/* <SectionHeader data={sectionHeader} className="center-content" /> */}
           <div className={splitClasses}>
-
-            <div className="split-item">
-              <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
-                <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
-                  </div>
-                <h3 className="mt-0 mb-12">
-                  Data-driven insights
-                  </h3>
-                <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </p>
+            {/* 
+              Loop through & render Layout Items
+            */}
+            {itms.map(({subtitle, title, body},itmIdx) => (
+              <div className="split-item" key={`${title}-alt-itm-${itmIdx}`}>
+                <div className={`split-item-content center-content-mobile reveal-from-${itmIdx % 2 === 0 ? 'left' : 'right'}`} data-reveal-container=".split-item">
+                  {
+                    subtitle && 
+                    <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
+                      {subtitle}
+                    </div>
+                  }
+                  <h3 className="mt-0 mb-12">
+                    {title}
+                    </h3>
+                  <p className="m-0">
+                    {body}
+                    </p>
+                </div>
+                <div className={
+                  classNames(
+                    'split-item-image center-content-mobile reveal-from-bottom',
+                    // imageFill && 'split-item-image-fill'
+                  )}
+                  data-reveal-container=".split-item">
+                  <Image
+                    src={imgOne}
+                    alt="Features split 01"
+                    width={528}
+                    height={396} />
+                </div>
               </div>
-              <div className={
-                classNames(
-                  'split-item-image center-content-mobile reveal-from-bottom',
-                  imageFill && 'split-item-image-fill'
-                )}
-                data-reveal-container=".split-item">
-                <Image
-                  src={require('./../assets/images/features-split-image-01.png')}
-                  alt="Features split 01"
-                  width={528}
-                  height={396} />
-              </div>
-            </div>
-
-            <div className="split-item">
-              <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
-                <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
-                  </div>
-                <h3 className="mt-0 mb-12">
-                  Data-driven insights
-                  </h3>
-                <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </p>
-              </div>
-              <div className={
-                classNames(
-                  'split-item-image center-content-mobile reveal-from-bottom',
-                  imageFill && 'split-item-image-fill'
-                )}
-                data-reveal-container=".split-item">
-                <Image
-                  src={require('./../assets/images/features-split-image-02.png')}
-                  alt="Features split 02"
-                  width={528}
-                  height={396} />
-              </div>
-            </div>
-
-            <div className="split-item">
-              <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
-                <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
-                  </div>
-                <h3 className="mt-0 mb-12">
-                  Data-driven insights
-                  </h3>
-                <p className="m-0">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua — Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </p>
-              </div>
-              <div className={
-                classNames(
-                  'split-item-image center-content-mobile reveal-from-bottom',
-                  imageFill && 'split-item-image-fill'
-                )}
-                data-reveal-container=".split-item">
-                <Image
-                  src={require('./../assets/images/features-split-image-03.png')}
-                  alt="Features split 03"
-                  width={528}
-                  height={396} />
-              </div>
-            </div>
+            ))}
 
           </div>
         </div>
