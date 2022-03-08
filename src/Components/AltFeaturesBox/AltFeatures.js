@@ -42,38 +42,42 @@ const AltFeatures = ({
     alignTop && 'align-top'
   );
 
-  const sectionHeader = {
-    title: 'Workflow that just works',
-    paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
-  };
+  const sectionData = {
+    header: {
+      title: 'Workflow that just works',
+      paragraph: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis.'
+    },
+    itms: [
+      {
+        title: "Words of Interest",
+        body: "2 interactive lists - 1 selectable list containing categories of words: Common Words, Longest Words, and Action Words. 1 list containing results of the selected word category list.",
+        img: imgOne
+      },
+      {
+        title: "Words By Length",
+        body: "A \"bubble\" comparison of how many words by character-length were spoken",
+        img: imgOne
+      },
+      {
+        title: "Textual Themes",
+        body: "Thematic words from a sentence-by-sentence isolated perspective",
+        img: imgOne
+      },
+      {
+        title: "The Shape of the Speech",
+        body: "Comparing the number of words per sentence against the sentence number, see the \"shape\" of the speech",
+        img: imgOne
+      },
+      {
+        title: "Responsive Analytic Selections",
+        body: "Pick which details are important to consider and see selections reflected with styling in the speech text body",
+        img: imgOne
+      }
+    ]
+  }
 
-  const itms = [
-    {
-      title: "Words of Interest",
-      body: "2 interactive lists - 1 selectable list containing categories of words: Common Words, Longest Words, and Action Words. 1 list containing results of the selected word category list.",
-      img: imgOne
-    },
-    {
-      title: "Words By Length",
-      body: "A \"bubble\" comparison of how many words by character-length were spoken",
-      img: imgOne
-    },
-    {
-      title: "Textual Themes",
-      body: "Thematic words from a sentence-by-sentence isolated perspective",
-      img: imgOne
-    },
-    {
-      title: "The Shape of the Speech",
-      body: "Comparing the number of words per sentence against the sentence number, see the \"shape\" of the speech",
-      img: imgOne
-    },
-    {
-      title: "Responsive Analytic Selections",
-      body: "Pick which details are important to consider and see selections reflected with styling in the speech text body",
-      img: imgOne
-    }
-  ]
+  if(!sectionData) return <div>horse</div>
+  
   return (
     <section
       {...props}
@@ -81,12 +85,15 @@ const AltFeatures = ({
     >
       <div className="container">
         <div className={innerClasses}>
-          {/* <SectionHeader data={sectionHeader} className="center-content" /> */}
+          {/* Optional Section Header */}
+          {
+            sectionData.header && <SectionHeader data={{...sectionData.header}} className="center-content" />
+          }
           <div className={splitClasses}>
             {/* 
               Loop through & render Layout Items
             */}
-            {itms.map(({subtitle, title, body},itmIdx) => (
+            {sectionData.itms.map(({subtitle, title, body},itmIdx) => (
               <div className="split-item" key={`${title}-alt-itm-${itmIdx}`}>
                 <div className={`split-item-content center-content-mobile reveal-from-${itmIdx % 2 === 0 ? 'left' : 'right'}`} data-reveal-container=".split-item">
                   {
