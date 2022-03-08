@@ -28,7 +28,8 @@ const SayWhatLanding = () => {
       <AltFeaturesBox 
         invertMobile 
         topDivider 
-        imageFill 
+        imageFill
+        invertColor 
         // className="illustration-section-02"
       />
       <TestimonialBox topDivider />
