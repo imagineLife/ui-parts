@@ -10,28 +10,18 @@ import './SayWhat.scss'
 import landingPageData from './say-what.json';
 
 const componentLookup = {
-  'HeroBox': {
-    component: HeroBox,
-  },
-  'TilesBox': {
-    component: TilesBox,
-  }
+  'HeroBox': HeroBox,
+  'TilesBox': TilesBox,
+  'AltFeaturesBox': AltFeaturesBox
 }
 const SayWhatLanding = () => {
 
   return (
     <>
       {landingPageData.map((itm, itmIdx) => {
-        let ThisComponent = componentLookup[itm.section].component
+        let ThisComponent = componentLookup[itm.section]
         return (<ThisComponent key={`say-what-landing-${itmIdx}-${itm.section}`} {...itm.props} />)
       })}
-      <AltFeaturesBox 
-        invertMobile 
-        topDivider 
-        imageFill
-        invertColor 
-        // className="illustration-section-02"
-      />
       <TestimonialBox topDivider />
       <Cta split />
     </>

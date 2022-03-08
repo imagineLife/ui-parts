@@ -53,5 +53,45 @@
         }
       ]
     }
+  },
+  {
+    "section": "AltFeaturesBox",
+    "props": {
+      "invertMobile": true,
+      "topDivider": true,
+      "imageFill": true,
+      "invertColor": true,
+      "header": {
+        "title": "Workflow that just works",
+        "paragraph": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum — semper quis lectus nulla at volutpat diam ut venenatis."
+      },
+      "tiles": [
+        {
+          "title": "Aggregated Vocab Details",
+          "body": "2 interactive lists - 1 selectable list containing categories of words: Common Words, Longest Words, and Action Words. 1 list containing results of the selected word category list.",
+          "image": "woi"
+        },
+        {
+          "title": "Comparison of Word character counts",
+          "body": "A \"bubble\" comparison of how many words by character-length were spoken",
+          "image": "wbl"
+        },
+        {
+          "title": "Reading Between The Lines",
+          "body": "Thematic words from a sentence-by-sentence isolated perspective",
+          "image": "themes"
+        },
+        {
+          "title": "The Shape of the Speech",
+          "body": "Comparing the number of words per sentence against the sentence number, see the \"shape\" of the speech",
+          "image": "glance"
+        },
+        {
+          "title": "Responsive Analytic Selections",
+          "body": "Pick which details are important to consider and see selections reflected with styling in the speech text body",
+          "image": "text"
+        }
+      ]
+    }
   }
 ]
