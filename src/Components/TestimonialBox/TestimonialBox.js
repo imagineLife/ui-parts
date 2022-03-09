@@ -41,6 +41,19 @@ const TestimonialBox = ({
     paragraph: 'Vitae aliquet nec ullamcorper sit amet risus nullam eget felis semper quis lectus nulla at volutpat diam ut venenatis tellus—in ornare.'
   };
 
+  const itm = {
+    section: "TestimonialBox",
+    props: {
+      tiles: [
+        {
+          quote: "This is a testimonial component",
+          person: "Me",
+          personLink: "laursen.tech/folio"
+        }
+      ]
+    }
+  }
+
   return (
     <section
       {...props}
@@ -51,10 +64,9 @@ const TestimonialBox = ({
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={tilesClasses}>
 
-            <Testimonial 
-              quote={"This is a testimonial component"}
-              person={"Me"}
-            />
+            {
+              itm.props.tiles.map((t,tIdx) => <Testimonial key={`Testimonial-${t.quote}-${t.person}`} {...t}/>)
+            }
 
             <div className="tiles-item reveal-from-bottom">
               <div className="tiles-item-inner">
