@@ -22,7 +22,7 @@ const Testimonial = ({quote, person, personLink}) => {
             <Fragment>
               <span className="text-color-low"> / </span>
               <span className="testimonial-item-link">
-                <a href="#0">TEST app name</a>
+                <a href={`http://${personLink}`}>sauce</a>
               </span>
             </Fragment>
           }
