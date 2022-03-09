@@ -102,6 +102,7 @@ const AltFeatures = ({
                   )}
                   data-reveal-container=".split-item">
                   <Image
+                    className="alternating-feature"
                     src={imageLookup[image]}
                     alt="Features split 01"
                     width={528}
