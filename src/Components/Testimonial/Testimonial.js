@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
+// import './Testimonial.scss';
 
-const Testimonial = ({quote, person, personLink}) => {
+const Testimonial = ({quote, person, link}) => {
   // Error Handling
   // ||
-  if(!quote || !person){
+  if(!quote || !person || (link && (!link.url || !link.text))){
     throw new Error('Please review & update the Testimonial Component Props')
   }
 
@@ -18,11 +19,11 @@ const Testimonial = ({quote, person, personLink}) => {
         <div className="testimonial-item-footer text-xs mt-32 mb-0 has-top-divider">
           <span className="testimonial-item-name text-color-high">{person}</span>
           {
-            personLink &&
+            link &&
             <Fragment>
               <span className="text-color-low"> / </span>
               <span className="testimonial-item-link">
-                <a href={`http://${personLink}`}>sauce</a>
+                <a href={`http://${link.url}`}>{link.text}</a>
               </span>
             </Fragment>
           }
