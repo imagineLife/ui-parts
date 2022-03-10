@@ -75,8 +75,7 @@ module.exports = (a, props) => {
       })
     ],
     devServer: {
-      historyApiFallback: true,
-      publicPath: '/'
+      historyApiFallback: true
     }
   }
 };
