@@ -4,7 +4,7 @@ import HeroBox from './../Components/HeroBox';
 import TilesBox from './../Components/TilesBox';
 import AltFeaturesBox from './../Components/AltFeaturesBox';
 import TestimonialBox from './../Components/TestimonialBox';
-import Cta from './../Components/Cta';
+import CtaBox from './../Components/CtaBox';
 import './SayWhat.scss'
 
 import landingPageData from './say-what.json';
@@ -23,7 +23,7 @@ const SayWhatLanding = () => {
         return (<ThisComponent key={`say-what-landing-${itmIdx}-${itm.section}`} {...itm.props} />)
       })}
       <TestimonialBox topDivider />
-      <Cta split />
+      <CtaBox split prompt="water melon"/>
     </>
   );
 }
