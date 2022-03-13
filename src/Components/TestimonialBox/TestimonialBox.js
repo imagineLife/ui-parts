@@ -38,7 +38,7 @@ const TestimonialBox = ({
 
   const sectionHeader = {
     title: 'Customer testimonials',
-    paragraph: 'Vitae aliquet nec ullamcorper sit amet risus nullam eget felis semper quis lectus nulla at volutpat diam ut venenatis tellus—in ornare.'
+    paragraph: 'If this were a product and if I collected testimonials from happy customers...'
   };
 
   const itm = {
@@ -46,21 +46,45 @@ const TestimonialBox = ({
     props: {
       tiles: [
         {
-          quote: "I'm enjoying working on this - working with sass, react, ui details... all great stuff",
-          person: "Me",
+          quote: "It's no use going back to yesterday, because I was a different person then",
+          person: "Alice",
           link: {
-            url: "laursen.tech/folio",
-            text: "Online Portfolio"
+            url: "https://www.gutenberg.org/files/11/11-h/11-h.htm",
+            text: "Alice in Wonderland"
           }
         },
         {
-          quote: "This is great",
-          person: "Me",
+          quote: "The idea is that some designs are intrinsically defect prone; they are to be rejected, not repaired. Such dead ends should be expected in the design activity.",
+          person: "Tom DeMarco & Timothy Lister",
           link: {
-            url: "laursen.tech/folio",
-            text: "Online Portfolio"
+            url: "https://www.amazon.com/Peopleware-Productive-Projects-Tom-DeMarco/dp/0932633439",
+            text: "Peopleware"
           }
         },
+        {
+          quote: "The sin of respectable people reveals itself in flight from responsibility",
+          person: "Dietrich Bonhoeffer",
+          link: {
+            url :"https://www.amazon.com/Life-Together-Exploration-Christian-Community/dp/0060608528/ref=sr_1_1?crid=2UO12CY263Y8G&keywords=life+together&qid=1646916764&sprefix=life+together%2Caps%2C78&sr=8-1",
+            text: "Life Together"
+          }
+        },
+        // {
+        //   quote: "The idea of an all encompassing, all penetrating world of God, interactive at every point with our lives, where we can always be totally at home and safe regardless of what happens in the visible dimension of the universe, is routinely treated as ridiculous",
+        //   person: "Dallas Willard",
+        //   link: {
+        //     url: "https://www.amazon.com/Divine-Conspiracy-Rediscovering-Hidden-Life/dp/0060693339",
+        //     text: "The Divine Conspiracy"
+        //   }
+        // }
+        // {
+        //   quote: "There is, there ought to be, something that we do in life that is not for a return but just because what we are doing is life itself, something a little mad. That is the gift. ",
+        //   person: "John Caputo",
+        //   link: {
+        //     url: "https://www.amazon.com/What-Would-Jesus-Deconstruct-Postmodernism/dp/0801031362/ref=sr_1_1?crid=1HD568XWS1TLJ&keywords=what+would+jesus+deconstruct&qid=1646915463&sprefix=what+would+jesus+deconstruc%2Caps%2C89&sr=8-1",
+        //     text: "What Would Jesus Deconstruct"
+        //   }
+        // },
       ]
     }
   }
