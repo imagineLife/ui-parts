@@ -3,7 +3,7 @@ import React from 'react';
 import Hero from './../Components/Hero';
 import FeaturesTiles from './../Components/FeaturesTiles';
 import FeaturesSplit from './../Components/FeaturesSplit';
-import Testimonial from './../Components/Testimonial';
+import Testimonial from './../Components/TestimonialOld';
 import Cta from './../Components/Cta';
 
 const LandingPage = () => {
