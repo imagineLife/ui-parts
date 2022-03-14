@@ -15,8 +15,9 @@ import Sidebars from './../Routes/Sidebar';
 // import MapperTwo from './../Routes/Map2';
 // import MapperThree from './../Routes/Map3';
 // import MapperFour from './../Routes/Map4';
-import MapperFive from './../Routes/Map5';
-import MapperSix from './../Routes/Map6';
+// import MapperFive from './../Routes/Map5';
+// import MapperSix from './../Routes/Map6';
+import BigList from './../Routes/BigList';
 import MapperSeven from './../Routes/Map7';
 import ColorLegend from './../Routes/ColorLegend';
 import FetchOnHover from './../Routes/FetchOnHover';
@@ -76,6 +77,10 @@ const RoutesLookup = [
   //   path:'/map4'
   // },
   {
+    component: BigList,
+    path: '/big-list',
+  },
+  {
     component: FetchOnHover,
     path:'/fetch-on-hover'
   },
@@ -87,14 +92,14 @@ const RoutesLookup = [
     component: FOHChanged,
     path:'/foh-changed'
   },
-  {
-    component: MapperFive,
-    path:'/map5'
-  },
-  {
-    component: MapperSix,
-    path:'/map6'
-  }, 
+  // {
+  //   component: MapperFive,
+  //   path:'/map5'
+  // },
+  // {
+  //   component: MapperSix,
+  //   path:'/map6'
+  // }, 
   {
     component: MapperSeven,
     path:'/map7'
