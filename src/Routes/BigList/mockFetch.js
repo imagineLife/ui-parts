@@ -5,7 +5,7 @@ const mockFetch = (startIdx, stopIdx, statusTrackingObj) => {
         statusTrackingObj[index] = 1;
       }
       resolve();
-    }, 800)
+    }, 250)
   );
 }
 export default mockFetch;
