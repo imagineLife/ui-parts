@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 // Components
-import Sidebars from './../Routes/Sidebar';
+const Sidebars = lazy(() => import('./../Routes/Sidebar'));
 // import Widgets from './../Routes/Widgets';
 // import DataLoader from './../Routes/DataLoader'
 // import CsvLoader from './../Routes/CsvLoader'
@@ -17,19 +17,20 @@ import Sidebars from './../Routes/Sidebar';
 // import MapperFour from './../Routes/Map4';
 // import MapperFive from './../Routes/Map5';
 // import MapperSix from './../Routes/Map6';
-import BigList from './../Routes/BigList';
-import MapperSeven from './../Routes/Map7';
-import ColorLegend from './../Routes/ColorLegend';
-import FetchOnHover from './../Routes/FetchOnHover';
-import TextUploader from './../Routes/TextUploader';
-import FOHChanged from './../Routes/FOHCodeChange';
-import CodeEditor from './../Routes/CodeEditor'
 import Home from './../Routes/Home'
-import MultiPartForm from './../Routes/MultiPartForm'
-import TemplateAppRoute from './../Routes/AppRoute';
-import LandingPage from './../Views/Landing';
-import SayWhatLandingPage from './../Views/SayWhatLanding';
-import Layout from './../Components/Layout/'
+const BigList = lazy(() => import('./../Routes/BigList'));
+const MapperSeven = lazy(() => import('./../Routes/Map7'));
+const ColorLegend = lazy(() => import('./../Routes/ColorLegend'));
+const FetchOnHover = lazy(() => import('./../Routes/FetchOnHover'));
+const TextUploader = lazy(() => import('./../Routes/TextUploader'));
+const FOHChanged = lazy(() => import('./../Routes/FOHCodeChange'));
+const CodeEditor = lazy(() => import('./../Routes/CodeEditor'))
+const MultiPartForm = lazy(() => import('./../Routes/MultiPartForm'));
+const TemplateAppRoute = lazy(() => import('./../Routes/AppRoute'));
+const LandingPage = lazy(() => import('./../Views/Landing'));
+const SayWhatLandingPage = lazy(() => import('./../Views/SayWhatLanding'));
+const Layout = lazy(() => import('./../Components/Layout/'));
+const Platform = lazy(() => import('./../Components/Platform/'));
 
 // data
 // import percBelow from './../mockData/percBelowPov.json'
@@ -76,6 +77,10 @@ const RoutesLookup = [
   //   component: MapperFour,
   //   path:'/map4'
   // },
+  {
+    component: Platform,
+    path: '/platform',
+  },
   {
     component: BigList,
     path: '/big-list',
@@ -145,29 +150,31 @@ const RoutesLookup = [
 
 export default function App() {
   return (
-    <Router>
-        <Switch>
+    <Suspense fallback={<span />} >
+      <Router>
+          <Switch>
 
-          {/* Loop through above array && render Routes from each */}
-          {
-            RoutesLookup.map((r,idx) => {
-              const ThisRoute = r.component
-              let props = r.props ? r.props : {}
-              if(r.path === '/'){
-                props = {
-                  routes: [...RoutesLookup]
+            {/* Loop through above array && render Routes from each */}
+            {
+            RoutesLookup.map((r, idx) => {
+                const ThisRoute = r.component
+                let props = r.props ? r.props : {}
+                if(r.path === '/'){
+                  props = {
+                    routes: [...RoutesLookup]
+                  }
                 }
-              }
-              return (
-                <Route 
-                  key={`${r.component}-${idx}`}
-                  path={r.path}>
-                  <ThisRoute {...props} />
-                </Route>
-              )
-            })
-          }
-        </Switch>
-    </Router>
+                return (
+                  <Route 
+                    key={`${r.component}-${idx}`}
+                    path={r.path}>
+                    <ThisRoute {...props} />
+                  </Route>
+                )
+              })
+            }
+          </Switch>
+      </Router>
+    </Suspense>
   );
 }
