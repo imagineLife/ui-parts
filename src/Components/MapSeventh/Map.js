@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as dg from 'd3-geo'
-import * as d3Select from 'd3-selection'
+import { select, selectAll } from 'd3-selection'
 import * as d3Z from 'd3-zoom'
 import './Map.css'
 import Rtt from 'react-tooltip'
@@ -64,32 +64,32 @@ const MapComponent = () => {
 		      }
 		  }
 
-		  // const clickedState = async d => {
-		  // 	const gSelection = d3Select.select(gRef.current)
-		  // 	var x, y, k;
-		  //   const didNotClickCurrentState = selectedState !== d
-		  //   if (d && didNotClickCurrentState) {
-		  //     var centroid = d3Path.centroid(d);
+		  const clickedState = async d => {
+		  	const gSelection = select(gRef.current)
+		  	var x, y, k;
+		    const didNotClickCurrentState = selectedState !== d
+		    if (d && didNotClickCurrentState) {
+		      var centroid = d3Path.centroid(d);
 		      
-		  //     x = centroid[0];
-		  //     y = centroid[1];
-		  //     k = 4;
-		  //     selectedState = d;
-		  //   } else {
-		  //     x = divSize.w / 2;
-		  //     y = divSize.h / 2;
-		  //     k = 1;
-		  //     selectedState = null;
-		  //   }
+		      x = centroid[0];
+		      y = centroid[1];
+		      k = 4;
+		      selectedState = d;
+		    } else {
+		      x = divSize.w / 2;
+		      y = divSize.h / 2;
+		      k = 1;
+		      selectedState = null;
+		    }
 
-		  //   //set class, pick-up orange color
-		  //   gSelection.selectAll("path")
-		  //     .classed("active", selectedState ? d => d === selectedState : false);
+		    //set class, pick-up orange color
+		    gSelection.selectAll("path")
+		      .classed("active", selectedState ? d => d === selectedState : false);
 
-		  //   gSelection.transition()
-		  //       .duration(550)
-		  //       .attr("transform", `translate(${ centerX },${centerY}) scale(${k}) translate(${-x},${-y})`)
-		  // }
+		    gSelection.transition()
+		        .duration(550)
+		        .attr("transform", `translate(${ centerX },${centerY}) scale(${k}) translate(${-x},${-y})`)
+		  }
 
 			const enterCountries = e => {
 		    e.append("path")
@@ -97,7 +97,7 @@ const MapComponent = () => {
 		    .attr("id", d => d.id)
 		    .style('vector-effect', 'non-scaling-stroke')
 		    .attr('class', 'boundary')
-		  	// .on('click', clickedState)
+				.on('click', clickedState)
 		  }
 
 			const enterStates = e => {
@@ -109,52 +109,52 @@ const MapComponent = () => {
 		  		let num = parseInt(d.id)
 		  		return `rgba(25,100,25,${Math.random(num / 100)})`
 		  	})
-		    // .attr('class', 'boundary')
+		    .attr('class', 'boundary')
 		  	// .on('click', clickedState)
 		  }
 
 		  const updateStates = u => {
 		  	//zoom fn
-				const zoomed = () => {
-		      d3Select.selectAll('path')
-		        .attr('transform', d3Select.event.transform);
+				// const zoomed = () => {
+		    //   selectAll('path')
+		    //     .attr('transform', d3Select.event.transform);
 
-		      //get zoomed 'scale'
-			    let {event: { transform: { k : s }}} = d3Select; 
+		    //   //get zoomed 'scale'
+			  //   let {event: { transform: { k : s }}} = d3Select; 
 			  
-			  	let statesElements = d3Select.selectAll('.state');
-			  	let usa = d3Select.select('#USA');
-			  	let canada = d3Select.select('#CAN');
+			  // 	let statesElements = selectAll('.state');
+			  // 	let usa = select('#USA');
+			  // 	let canada = select('#CAN');
 
-			    //toggle state/USA visability
-			    if(s > 3.5) {
-			      statesElements
-			        .classed('hidden', false);
-			      usa
-			        .classed('hidden', true);
-			      canada
-			        .classed('hidden', true);
-			    } else {
-			      statesElements
-			        .classed('hidden', true);
-			      usa
-			        .classed('hidden', false);
-			      canada
-			        .classed('hidden', false);
-			    }
-		    }
+			  //   //toggle state/USA visability
+			  //   if(s > 3.5) {
+			  //     statesElements
+			  //       .classed('hidden', false);
+			  //     usa
+			  //       .classed('hidden', true);
+			  //     canada
+			  //       .classed('hidden', true);
+			  //   } else {
+			  //     statesElements
+			  //       .classed('hidden', true);
+			  //     usa
+			  //       .classed('hidden', false);
+			  //     canada
+			  //       .classed('hidden', false);
+			  //   }
+		    // }
 
-				const zoom = d3Z.zoom()
-		      .scaleExtent([1, 8])
-		      .on('zoom', zoomed);
+				// const zoom = d3Z.zoom()
+		    //   .scaleExtent([1, 8])
+		    //   .on('zoom', zoomed);
 
-		    d3Select.select('#map-box').call(zoom);
+		    // select('#map-box').call(zoom);
 		  }
 
 
 			//get svg && g elements in d3-land
-			const d3SVG = d3Select.select('#map-box')
-			const d3g = d3Select.select('#g-wrapper')
+			const d3SVG = select('#map-box')
+			const d3g = select('#g-wrapper')
 			
 			//destructure countries && states from data
   		const {objects: {countries, states}} = mapData

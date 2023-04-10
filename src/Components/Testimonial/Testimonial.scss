@@ -1,0 +1,173 @@
+@use './../assets/scss/core/abstracts/include-media' as m;
+@use './../assets/scss/core/abstracts/functions' as f;
+@use './../assets/scss/settings/base/colors' as c;
+
+// Testimonial (core/sections/_testimonial.scss) ---------------
+$testimonial--padding-t__mobile: 		null;		// testimonial, top padding (mobile)
+$testimonial--padding-b__mobile: 		null;		// testimonial, bottom padding (mobile)
+$testimonial--padding-t__desktop: 		null;		// testimonial, top padding (desktop)
+$testimonial--padding-b__desktop: 		null;		// testimonial, bottom padding (desktop)
+$testimonial-header--padding__mobile: 	null;		// testimonial header, bottom padding (mobile)
+$testimonial-header--padding__desktop:	null;		// testimonial header, bottom padding (desktop)
+$testimonial-items--padding__mobile: 	null;		// padding between testimonial items (mobile)
+$testimonial-items--padding__desktop: 	null;		// padding between testimonial items (desktop)
+$testimonial-item--width: 				344px;		// testimonial item, width
+$testimonial-item--inner-padding-v: 	24px;		// testimonial item, inner top and bottom padding (it inherits $tiles-item--inner-padding-v unless you replace null with a new value)
+$testimonial-item--inner-padding-h: 	32px;		// testimonial item, inner left and right padding (it inherits $tiles-item--inner-padding-h unless you replace null with a new value)
+
+.testimonial {
+
+	.section-inner {
+		padding-top: $testimonial--padding-t__mobile;
+		padding-bottom: $testimonial--padding-b__mobile;
+	}
+
+	.section-header {
+		padding-bottom: $testimonial-header--padding__mobile;
+	}
+
+	.tiles-wrap {
+		@if ( $testimonial-items--padding__mobile != null ) {
+			margin-right: -($testimonial-items--padding__mobile * 0.5);
+			margin-left: -($testimonial-items--padding__mobile * 0.5);
+			margin-top: -($testimonial-items--padding__mobile * 0.5);
+
+			&:last-of-type {
+				margin-bottom: -($testimonial-items--padding__mobile * 0.5);
+			}
+
+			&:not(:last-of-type) {
+				margin-bottom: ($testimonial-items--padding__mobile * 0.5);
+			}
+		}
+
+		&.push-left {
+
+			&::after {
+				flex-basis: $testimonial-item--width;
+				max-width: $testimonial-item--width;
+				@if ( $testimonial-items--padding__mobile != null ) {
+					padding-left: $testimonial-items--padding__mobile * 0.5;
+					padding-right: $testimonial-items--padding__mobile * 0.5;
+				}
+			}
+		}
+	}
+
+	.tiles-item {
+		flex-basis: $testimonial-item--width;
+		max-width: $testimonial-item--width;
+		@if ( $testimonial-items--padding__mobile != null ) {
+			padding: $testimonial-items--padding__mobile * 0.5;
+		}
+	}
+
+	.tiles-item-inner {
+		padding-top: $testimonial-item--inner-padding-v;
+		padding-bottom: $testimonial-item--inner-padding-v;
+		padding-left: $testimonial-item--inner-padding-h;
+		padding-right: $testimonial-item--inner-padding-h;
+	}
+}
+
+.testimonial-item-content {
+	flex-grow: 1;
+}
+
+.testimonial-item-source {
+	display: inline-flex; // to allow centering when using .content-center on a parent tag
+	flex-wrap: wrap;
+	align-items: center;
+}
+
+@include m.media( '>medium' ) {
+
+	.testimonial {
+
+		.section-inner {
+			padding-top: $testimonial--padding-t__desktop;
+			padding-bottom: $testimonial--padding-b__desktop;
+		}
+
+		.section-header {
+			padding-bottom: $testimonial-header--padding__desktop;
+		}
+
+		@if ( $testimonial-items--padding__desktop != null ) {
+
+			.tiles-wrap {
+				margin-right: -($testimonial-items--padding__desktop * 0.5);
+				margin-left: -($testimonial-items--padding__desktop * 0.5);
+				margin-top: -($testimonial-items--padding__desktop * 0.5);
+
+				&:last-of-type {
+					margin-bottom: -($testimonial-items--padding__desktop * 0.5);
+				}
+
+				&:not(:last-of-type) {
+					margin-bottom: ($testimonial-items--padding__desktop * 0.5);
+				}
+
+				&.push-left {
+
+					&::after {
+						padding-left: $testimonial-items--padding__desktop * 0.5;
+						padding-right: $testimonial-items--padding__desktop * 0.5;
+					}
+				}
+			}
+
+			.tiles-item {
+				padding: $testimonial-items--padding__desktop * 0.5;
+			}
+		}
+	}
+}
+
+
+.testimonial {
+
+	.tiles-item-inner {
+		background: f.get-color(dark, 2);		
+	}
+}
+
+.testimonial-item-content {
+    position: relative;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 24px;
+        height: 18px;
+        margin-top: 12px;
+        margin-bottom: 16px;
+        background-image: inline-svg('<svg width="24" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M0 13.481c0-2.34.611-4.761 1.833-7.263C3.056 3.716 4.733 1.643 6.865 0L11 2.689C9.726 4.382 8.777 6.093 8.152 7.824c-.624 1.73-.936 3.578-.936 5.545V18H0v-4.519zm13 0c0-2.34.611-4.761 1.833-7.263 1.223-2.502 2.9-4.575 5.032-6.218L24 2.689c-1.274 1.693-2.223 3.404-2.848 5.135-.624 1.73-.936 3.578-.936 5.545V18H13v-4.519z" fill="' + f.get-color(primary, 1) + '" fill-rule="nonzero"/></svg>');
+        background-repeat: no-repeat;
+    }		
+}
+
+.testimonial-item-footer {
+    font-weight: 600;
+    padding-top: 20px;
+
+    &.has-top-divider {
+
+        &::before {
+            background: f.get-color(dark, 3);
+        }
+    }
+}
+
+.testimonial-item-link {
+	color: f.get-color(secondary, 3);
+
+	a {
+        color: f.get-color(secondary, 3);
+        text-decoration: none;
+
+        &:hover {
+            color: f.get-color(secondary, 2);
+        }
+	}
+}
