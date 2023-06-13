@@ -69,56 +69,6 @@ async function getMsgs() {
 
 
 
-const usePollingMessages = () => {
-  const timeToMakeNextPoll = useRef(0);
-  const BACKOFF_TIME = 2000;
-  // const [msgs] = useState(); //setMsgs
-  const [count, setCount] = useState(0);
-  const requestRef = useRef();
-  const previousTimeRef = useRef();
-
-  // const animate = (time) => {
-  //   if (previousTimeRef.current != undefined) {
-  //     const deltaTime = time - previousTimeRef.current;
-
-  //     // Pass on a function to the setter of the state
-  //     // to make sure we always have the latest state
-  //     setCount((prevCount) => (prevCount + deltaTime * 0.001));
-  //   }
-  //   previousTimeRef.current = time;
-  //   requestRef.current = requestAnimationFrame(animate);
-  // };
-
-  async function animate(s) {
-    console.log('animate s',s)
-    
-    if (timeToMakeNextPoll.current <= s) {
-      console.log('calling getMsgs')
-      
-      await getMsgs();
-      timeToMakeNextPoll.current = s + POLL_INTERVAL + failedPollingCount * BACKOFF_TIME;
-    }
-    
-    requestRef.current = requestAnimationFrame(animate);
-  }
-
-  useEffect(() => {
-    requestRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(requestRef.current);
-  }, []); // Make sure the effect runs only once
-
-  return { messages: count, error: false };
-};
-
-
-
-
-
-
-
-
-
-
 const PollingUi = () => {
   return (
     <div>
