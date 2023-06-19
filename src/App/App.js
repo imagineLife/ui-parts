@@ -31,6 +31,7 @@ const LandingPage = lazy(() => import('./../Views/Landing'));
 const SayWhatLandingPage = lazy(() => import('./../Views/SayWhatLanding'));
 const Layout = lazy(() => import('./../Components/Layout/'));
 const Platform = lazy(() => import('./../Components/Platform/'));
+const PollingUi = lazy(() => import('./../Components/PollingUi/'));
 
 // data
 // import percBelow from './../mockData/percBelowPov.json'
@@ -39,7 +40,7 @@ const Platform = lazy(() => import('./../Components/Platform/'));
 const RoutesLookup = [
   {
     component: Sidebars,
-    path: '/sidebars'
+    path: '/sidebars',
   },
   // {
   //   component: Widgets,
@@ -87,15 +88,15 @@ const RoutesLookup = [
   },
   {
     component: FetchOnHover,
-    path:'/fetch-on-hover'
+    path: '/fetch-on-hover',
   },
   {
     component: TextUploader,
-    path:'/upload-text'
+    path: '/upload-text',
   },
   {
     component: FOHChanged,
-    path:'/foh-changed'
+    path: '/foh-changed',
   },
   // {
   //   component: MapperFive,
@@ -104,49 +105,56 @@ const RoutesLookup = [
   // {
   //   component: MapperSix,
   //   path:'/map6'
-  // }, 
+  // },
   {
     component: MapperSeven,
-    path:'/map7'
-  },  
+    path: '/map7',
+  },
   {
     component: ColorLegend,
     path: '/colorLegend',
     props: {
       color: 'red',
       axis: 'bottom',
-      ticks: 4
-    }
+      ticks: 4,
+    },
   },
   {
     component: CodeEditor,
-    path: '/editor'
+    path: '/editor',
   },
   {
     component: MultiPartForm,
-    path: '/multi-part-form'
+    path: '/multi-part-form',
   },
   {
     component: TemplateAppRoute,
     path: '/responsive-lander',
     props: {
       component: LandingPage,
-      layout: Layout
-    }
+      layout: Layout,
+    },
   },
   {
     component: TemplateAppRoute,
     path: '/say-what-lander',
     props: {
       component: SayWhatLandingPage,
-      layout: Layout
-    }
+      layout: Layout,
+    },
+  },
+  {
+    component: PollingUi,
+    path: '/polling',
+    props: {
+      layout: Layout,
+    },
   },
   {
     component: Home,
     path: '/',
-  }
-]
+  },
+];
 
 export default function App() {
   return (
