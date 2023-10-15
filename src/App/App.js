@@ -32,6 +32,7 @@ const SayWhatLandingPage = lazy(() => import('./../Views/SayWhatLanding'));
 const Layout = lazy(() => import('./../Components/Layout/'));
 const Platform = lazy(() => import('./../Components/Platform/'));
 const PollingUi = lazy(() => import('./../Components/PollingUi/'));
+const NlpDash = lazy(() => import('./../Components/NlpDash/'));
 
 // data
 // import percBelow from './../mockData/percBelowPov.json'
@@ -146,6 +147,13 @@ const RoutesLookup = [
   {
     component: PollingUi,
     path: '/polling',
+    props: {
+      layout: Layout,
+    },
+  },
+  {
+    component: NlpDash,
+    path: '/nlp-dash',
     props: {
       layout: Layout,
     },

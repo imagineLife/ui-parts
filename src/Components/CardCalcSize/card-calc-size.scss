@@ -1,0 +1,35 @@
+.card-stats{
+    &.card-body{
+        padding: 15px 15px 0px;
+
+        .numbers{
+            font-size: 1.8rem;
+            text-align: right;
+
+            p{
+                margin-bottom: 0;
+            }
+        }
+    }
+    .card-footer{
+        padding: 0px 15px 10px 15px;
+
+
+    }
+    .icon-big {
+        font-size: 3em;
+        i{
+            font-weight: 700;
+            line-height: 59px;
+        }
+    }
+
+    .numbers {
+      font-size: 2em;
+      text-align: right; 
+
+      p {
+        margin: 0; 
+      }
+    }
+}
