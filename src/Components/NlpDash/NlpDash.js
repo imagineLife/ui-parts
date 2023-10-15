@@ -6,11 +6,14 @@ import { Container } from 'react-bootstrap';
 import CardCalcSize from './../CardCalcSize'
 import CardSmall from './../CardSmall'
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const smallBoxes = [
   {
     key: '1',
     className: 'text',
-    title: 'small-1',
+    title: 'Word Count',
+    value: '321',
     size: 'sm'
   },
   {
